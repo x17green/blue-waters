@@ -57,21 +57,27 @@ export const colors = {
   // Semantic Colors
   success: {
     900: 'hsl(142, 70%, 20%)',   // #0F5229 - Dark green
+    800: 'hsl(142, 70%, 28%)',   // #166E38 - Darker green
     700: 'hsl(142, 70%, 35%)',   // #1A8F47 - Medium green
+    600: 'hsl(142, 70%, 42%)',   // #1FA653 - Medium-light green
     500: 'hsl(142, 70%, 45%)',   // #22B35C - Primary success
     300: 'hsl(142, 70%, 70%)',   // #7FE0A5 - Light green
   },
 
   warning: {
     900: 'hsl(38, 90%, 25%)',    // #733D0A - Dark orange
+    800: 'hsl(38, 90%, 32%)',    // #944F0D - Darker orange
     700: 'hsl(38, 90%, 40%)',    // #BF6610 - Medium orange
+    600: 'hsl(38, 90%, 46%)',    // #E87312 - Medium-light orange
     500: 'hsl(38, 90%, 50%)',    // #F28314 - Primary warning
     300: 'hsl(38, 90%, 70%)',    // #FFC480 - Light orange
   },
 
   error: {
     900: 'hsl(0, 70%, 25%)',     // #6B1313 - Dark red
+    800: 'hsl(0, 70%, 32%)',     // #8A1A1A - Darker red
     700: 'hsl(0, 70%, 40%)',     // #AD1F1F - Medium red
+    600: 'hsl(0, 70%, 46%)',     // #C62525 - Medium-light red
     500: 'hsl(0, 70%, 50%)',     // #D92929 - Primary error
     300: 'hsl(0, 70%, 70%)',     // #FF8080 - Light red
   },

@@ -53,21 +53,27 @@ const config: Config = {
         },
         success: {
           900: 'hsl(var(--success-900))',
+          800: 'hsl(var(--success-800))',
           700: 'hsl(var(--success-700))',
+          600: 'hsl(var(--success-600))',
           500: 'hsl(var(--success-500))',
           300: 'hsl(var(--success-300))',
           DEFAULT: 'hsl(var(--success-500))',
         },
         warning: {
           900: 'hsl(var(--warning-900))',
+          800: 'hsl(var(--warning-800))',
           700: 'hsl(var(--warning-700))',
+          600: 'hsl(var(--warning-600))',
           500: 'hsl(var(--warning-500))',
           300: 'hsl(var(--warning-300))',
           DEFAULT: 'hsl(var(--warning-500))',
         },
         error: {
           900: 'hsl(var(--error-900))',
+          800: 'hsl(var(--error-800))',
           700: 'hsl(var(--error-700))',
+          600: 'hsl(var(--error-600))',
           500: 'hsl(var(--error-500))',
           300: 'hsl(var(--error-300))',
           DEFAULT: 'hsl(var(--error-500))',
@@ -214,10 +220,19 @@ const config: Config = {
             height: '0',
           },
         },
+        shimmer: {
+          '0%': {
+            backgroundPosition: '-200% 0',
+          },
+          '100%': {
+            backgroundPosition: '200% 0',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        shimmer: 'shimmer 2s ease-in-out infinite',
       },
     },
   },
