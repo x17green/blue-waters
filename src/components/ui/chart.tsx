@@ -1,3 +1,75 @@
+/**
+ * Chart - Recharts integration with glassmorphism tooltips
+ * 
+ * Built on Recharts with glassmorphism design system.
+ * Flexible charting library for creating bars, lines, areas, pies, and more.
+ * Color palette automatically adapts to theme with CSS custom properties.
+ * 
+ * @example
+ * ```tsx
+ * import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
+ * import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
+ * 
+ * const chartData = [
+ *   { month: 'Jan', desktop: 186, mobile: 80 },
+ *   { month: 'Feb', desktop: 305, mobile: 200 },
+ *   { month: 'Mar', desktop: 237, mobile: 120 },
+ * ]
+ * 
+ * const chartConfig = {
+ *   desktop: {
+ *     label: 'Desktop',
+ *     color: 'hsl(var(--accent-500))',
+ *   },
+ *   mobile: {
+ *     label: 'Mobile',
+ *     color: 'hsl(var(--accent-700))',
+ *   },
+ * } satisfies ChartConfig
+ * 
+ * function MyChart() {
+ *   return (
+ *     <ChartContainer config={chartConfig}>
+ *       <BarChart accessibilityLayer data={chartData}>
+ *         <CartesianGrid vertical={false} />
+ *         <XAxis
+ *           dataKey="month"
+ *           tickLine={false}
+ *           tickMargin={10}
+ *           axisLine={false}
+ *         />
+ *         <ChartTooltip content={<ChartTooltipContent />} />
+ *         <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+ *         <Bar dataKey="mobile" fill="var(--color-mobile)" radius={8} />
+ *       </BarChart>
+ *     </ChartContainer>
+ *   )
+ * }
+ * ```
+ * 
+ * @features
+ * - Multiple chart types: Bar, Line, Area, Pie, Radar, Scatter
+ * - Responsive sizing with aspect-video wrapper
+ * - Glassmorphism tooltip with backdrop blur
+ * - Theme-aware color palette
+ * - Custom legend and tooltip content
+ * - Grid lines with glass-01 color
+ * - Accessible chart labels
+ * 
+ * @accessibility
+ * - accessibilityLayer prop for Recharts components
+ * - ARIA labels for data points
+ * - Keyboard navigation support
+ * - Screen reader friendly
+ * 
+ * @components
+ * - ChartContainer: Responsive wrapper with config provider
+ * - ChartTooltip: Recharts Tooltip wrapper
+ * - ChartTooltipContent: Glassmorphism tooltip content
+ * - ChartLegend: Recharts Legend wrapper
+ * - ChartLegendContent: Custom legend with icons
+ * - ChartStyle: CSS custom properties for color theming
+ */
 'use client'
 
 import * as React from 'react'
@@ -52,7 +124,7 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-fg-muted [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-glass-01 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-glass-01 [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-glass-01 [&_.recharts-radial-bar-background-sector]:fill-glass-01 [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-glass-01 [&_.recharts-reference-line_[stroke='#ccc']]:stroke-glass-01 [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
           className,
         )}
         {...props}
@@ -179,7 +251,7 @@ const ChartTooltipContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          'grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl',
+          'grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-glass bg-glass-03 px-2.5 py-1.5 text-xs shadow-xl backdrop-blur-base',
           className,
         )}
       >
@@ -194,7 +266,7 @@ const ChartTooltipContent = React.forwardRef<
               <div
                 key={item.dataKey}
                 className={cn(
-                  'flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground',
+                  'flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-fg-muted',
                   indicator === 'dot' && 'items-center',
                 )}
               >
@@ -234,12 +306,12 @@ const ChartTooltipContent = React.forwardRef<
                     >
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="text-muted-foreground">
+                        <span className="text-fg-muted">
                           {itemConfig?.label || item.name}
                         </span>
                       </div>
                       {item.value && (
-                        <span className="font-mono font-medium tabular-nums text-foreground">
+                        <span className="font-mono font-medium tabular-nums text-fg-DEFAULT">
                           {item.value.toLocaleString()}
                         </span>
                       )}
@@ -293,7 +365,7 @@ const ChartLegendContent = React.forwardRef<
             <div
               key={item.value}
               className={cn(
-                'flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground',
+                'flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-fg-muted',
               )}
             >
               {itemConfig?.icon && !hideIcon ? (
