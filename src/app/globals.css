@@ -175,11 +175,6 @@
   --chart-5: var(--info-300);
 }
 
-.dark {
-  /* Dark mode uses same tokens - design is dark-first */
-  /* Light mode overrides below if needed in future */
-}
-
 * {
   border-color: hsl(var(--border));
 }

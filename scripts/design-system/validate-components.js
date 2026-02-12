@@ -345,8 +345,9 @@ function main() {
   process.exit(0);
 }
 
-if (require.main === module) {
+const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMainModule) {
   main();
 }
 
-module.exports = { main, checkDesignTokens, checkAccessibility };
+export { main, checkDesignTokens, checkAccessibility };

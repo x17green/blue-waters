@@ -113,9 +113,8 @@ export default function Search() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button
-              as={Link}
               href="/login"
-              variant="light"
+              variant="ghost"
               className="text-primary"
             >
               Sign In
@@ -132,12 +131,11 @@ export default function Search() {
           className="mb-8"
         >
           <Button
-            as={Link}
             href="/"
-            variant="light"
-            startContent={<ArrowLeft className="w-4 h-4" />}
-            className="mb-4 text-primary"
+            variant="ghost"
+            className="mb-4 text-primary flex items-center gap-2"
           >
+            <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Button>
           <h1 className="text-4xl font-bold text-primary mb-2">Search Trips</h1>
@@ -316,7 +314,6 @@ export default function Search() {
                             </div>
 
                             <Button
-                              as={Link}
                               href={`/book/${trip.id}`}
                               className="bg-gradient-to-r from-primary to-accent text-white font-semibold"
                             >

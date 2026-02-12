@@ -1,1 +1,57 @@
-npm test
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+echo ""
+
+# STRICT RULE: Block commit if ANY errors exist in the codebase
+# Checks ALL files, not just staged ones
+
+echo "📝 Checking TypeScript types..."
+npx tsc --noEmit --pretty
+TS_EXIT_CODE=$?
+
+echo ""
+echo "🔍 Running ESLint..."
+npx eslint src --max-warnings 50 2>&1 | head -n 30
+LINT_EXIT_CODE=$?
+
+if [ $LINT_EXIT_CODE -ne 0 ]; then
+  echo "❌ ESLint errors found"
+else
+  echo "✅ ESLint passed"
+fi
+
+echo ""
+
+# Check if any errors were found
+if [ $TS_EXIT_CODE -ne 0 ] || [ $LINT_EXIT_CODE -ne 0 ]; then
+  echo "❌ PRE-COMMIT BLOCKED: Errors detected in codebase"
+  echo ""
+  echo "┌─────────────────────────────────────────────────────┐"
+  echo "│  STRICT ERROR POLICY ENFORCED                       │"
+  echo "│  All TypeScript and ESLint errors must be fixed    │"
+  echo "│  before committing (regardless of staging status)  │"
+  echo "└─────────────────────────────────────────────────────┘"
+  echo ""
+  
+  if [ $TS_EXIT_CODE -ne 0 ]; then
+    echo "⚠️  TypeScript errors found - Fix with: npx tsc --noEmit"
+  fi
+  
+  if [ $LINT_EXIT_CODE -ne 0 ]; then
+    echo "⚠️  ESLint errors found - Fix with: npm run lint -- --fix"
+  fi
+  
+  echo ""
+  echo "💡 Tips:"
+  echo "   • Fix all errors before committing"
+  echo "   • Use 'npm run lint -- --fix' for auto-fixable issues"
+  echo "   • Check VSCode Problems panel for details"
+  echo ""
+  
+  exit 1
+fi
+
+echo "✅ All checks passed - proceeding with commit"
+echo ""

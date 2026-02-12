@@ -112,9 +112,8 @@ export default function Book() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button
-              as={Link}
               href="/login"
-              variant="light"
+              variant="ghost"
               className="text-primary"
             >
               Sign In
@@ -132,12 +131,11 @@ export default function Book() {
           className="mb-8"
         >
           <Button
-            as={Link}
             href="/"
-            variant="light"
-            startContent={<ArrowLeft className="w-4 h-4" />}
-            className="mb-4 text-primary"
+            variant="ghost"
+            className="mb-4 text-primary flex items-center gap-2"
           >
+            <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Button>
           <h1 className="text-4xl font-bold text-primary mb-2">Book Your Journey</h1>
@@ -366,7 +364,6 @@ export default function Book() {
                     </div>
 
                     <Button
-                      as={Link}
                       href={`/checkout?trip=${selectedTrip.id}&passengers=${passengers}`}
                       className="w-full bg-gradient-to-r from-primary to-accent text-white font-bold text-lg py-3"
                       size="lg"

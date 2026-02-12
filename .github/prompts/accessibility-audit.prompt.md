@@ -1,6 +1,6 @@
 ---
 name: Accessibility Audit Prompt Template
-purpose: Systematic accessibility review following WCAG 2.1 AA standards
+description: Systematic accessibility review following WCAG 2.1 AA standards
 enforceMode: strict
 source_of_truth: docs/design-architecture.md#9-accessibility-aria-implementation-guide
 wcag_level: AA-minimum

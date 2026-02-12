@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardBody, CardHeader, Button, Tabs, TabsContent, TabsList, TabsTrigger, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+import { Card, CardBody, CardHeader, Button as NextUIButton, Tabs as NextUITabs, Tab, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
+import { Button } from '@/src/components/ui/button'
 import Link from 'next/link'
 import { LogOut, Bookmark, MapPin, Users, Calendar } from 'lucide-react'
 import { supabase } from '@/src/lib/supabase'
@@ -99,7 +101,6 @@ export default function Dashboard() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button
-              as={Link}
               href="/book"
               className="bg-accent text-white font-semibold"
             >
@@ -108,10 +109,10 @@ export default function Dashboard() {
           </NavbarItem>
           <NavbarItem>
             <Button
-              variant="light"
+              variant="ghost"
               onClick={handleLogout}
               className="text-primary"
-              startContent={<LogOut className="w-4 h-4" />}
+              startIcon={<LogOut className="w-4 h-4" />}
             >
               Logout
             </Button>
@@ -211,7 +212,6 @@ export default function Dashboard() {
                     You haven't booked any trips yet
                   </p>
                   <Button
-                    as={Link}
                     href="/book"
                     className="bg-gradient-to-r from-primary to-accent text-white font-semibold"
                   >

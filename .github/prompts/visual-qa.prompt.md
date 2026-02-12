@@ -1,6 +1,6 @@
 ---
 name: Visual QA & Glassmorphism Validation Prompt
-purpose: Visual quality assurance and glass effect implementation review
+description: Visual quality assurance and glass effect implementation review
 enforceMode: strict
 source_of_truth: docs/design-architecture.md#6-glassmorphism-system
 ---

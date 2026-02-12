@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardBody, CardHeader, Button, Tabs, TabsContent, TabsList, TabsTrigger, Navbar, NavbarBrand, NavbarContent, NavbarItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react'
+import { Card, CardBody, CardHeader, Button as NextUIButton, Tabs as NextUITabs, Tab, Navbar, NavbarBrand, NavbarContent, NavbarItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
+import { Button } from '@/src/components/ui/button'
 import Link from 'next/link'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts'
-import { LogOut, Boat, MapPin, DollarSign, Users, TrendingUp } from 'lucide-react'
+import { LogOut, Ship, MapPin, DollarSign, Users, TrendingUp } from 'lucide-react'
 
 const operatorData = {
   name: 'Captain Ocean Cruises',
@@ -131,10 +133,10 @@ export default function OperatorDashboard() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button
-              variant="light"
+              variant="ghost"
               onClick={handleLogout}
               className="text-primary"
-              startContent={<LogOut className="w-4 h-4" />}
+              startIcon={<LogOut className="w-4 h-4" />}
             >
               Logout
             </Button>
@@ -175,7 +177,7 @@ export default function OperatorDashboard() {
                       {operatorData.totalTrips}
                     </p>
                   </div>
-                  <Boat className="w-10 h-10 text-primary/30" />
+                  <Ship className="w-10 h-10 text-primary/30" />
                 </div>
               </CardBody>
             </Card>
@@ -296,7 +298,6 @@ export default function OperatorDashboard() {
             <CardHeader className="flex flex-row items-center justify-between border-b border-primary/10">
               <h2 className="text-2xl font-bold text-primary">Upcoming Trips</h2>
               <Button
-                as={Link}
                 href="/operator/trips/new"
                 className="bg-accent text-white font-semibold"
               >

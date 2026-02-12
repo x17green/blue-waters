@@ -1,6 +1,6 @@
 ---
 name: Design Token Extraction & Migration Prompt
-purpose: Identify and replace hardcoded values with design tokens
+description: Identify and replace hardcoded values with design tokens
 enforceMode: strict
 source_of_truth: docs/design-architecture.md#3-design-tokens
 ---

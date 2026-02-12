@@ -14,7 +14,7 @@
     "migration:report": "node scripts/design-system/update-tracker.js --report",
     "design-system:check-tokens": "node scripts/design-system/validate-tokens.js",
     "design-system:check-tokens:filter": "node scripts/design-system/validate-tokens.js --filter",
-    "design-system:validate-component": "node scripts/design-system/validate-component.js",
+    "design-system:validate-component": "node scripts/design-system/validate-components.js",
     "design-system:validate-all": "npm run design-system:check-tokens && echo '✅ All design system validations passed'"
   },
   "dependencies": {
@@ -83,9 +83,15 @@
     "@types/node": "^22",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^16.1.6",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
     "husky": "^9.1.7",
     "postcss": "^8.5",
-    "prisma": "^7.4.0",
+    "prisma": "^6.19.2",
     "tailwindcss": "^3.4.17",
     "typescript": "5.7.3"
   },

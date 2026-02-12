@@ -1,6 +1,6 @@
 ---
 name: Component Migration Prompt Template
-purpose: Guide AI or developer through systematic component migration
+description: Guide AI or developer through systematic component migration
 enforceMode: strict
 source_of_truth: docs/design-architecture.md, .github/instructions/design-system/02-component-migration.instructions.md
 ---

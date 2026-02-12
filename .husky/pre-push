@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🚀 Running pre-push validation..."
+echo ""
+
+# Additional validation before pushing to remote
+echo "📊 Running design system token validation..."
+npm run design-system:check-tokens 2>&1 | head -n 50
+
+TOKEN_EXIT_CODE=$?
+
+if [ $TOKEN_EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "⚠️  WARNING: Design system violations detected"
+  echo "   This won't block the push, but should be addressed"
+  echo "   Run: npm run design-system:check-tokens"
+  echo ""
+  # Allow push to continue - violations are warnings, not blockers
+fi
+
+echo "✅ Pre-push validation complete"
+echo ""

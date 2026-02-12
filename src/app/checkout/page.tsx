@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Card, CardBody, CardHeader, Button, Input, Select, SelectItem, Tabs, TabsContent, TabsList, TabsTrigger, Checkbox, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+import { Card, CardBody, CardHeader, Button as NextUIButton, Input, Select, SelectItem, Tabs as NextUITabs, Tab, Checkbox, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
+import { Button } from '@/src/components/ui/button'
 import Link from 'next/link'
 import { ArrowLeft, CreditCard, Smartphone, Building2, CheckCircle } from 'lucide-react'
 import { supabase } from '@/src/lib/supabase'
@@ -166,7 +168,6 @@ export default function Checkout() {
                 A confirmation email has been sent to your registered email address.
               </p>
               <Button
-                as={Link}
                 href="/dashboard"
                 className="w-full bg-gradient-to-r from-primary to-accent text-white font-bold text-lg py-3"
                 size="lg"
@@ -174,9 +175,8 @@ export default function Checkout() {
                 View My Bookings
               </Button>
               <Button
-                as={Link}
                 href="/"
-                variant="bordered"
+                variant="outline"
                 className="w-full border-primary text-primary font-bold text-lg py-3"
                 size="lg"
               >
@@ -211,10 +211,9 @@ export default function Checkout() {
           className="mb-8"
         >
           <Button
-            as={Link}
             href="/book"
-            variant="light"
-            startContent={<ArrowLeft className="w-4 h-4" />}
+            variant="ghost"
+            startIcon={<ArrowLeft className="w-4 h-4" />}
             className="mb-4 text-primary"
           >
             Back to Booking
