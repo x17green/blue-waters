@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "blue-waters",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,13 @@
     "start": "next start",
     "lint": "next lint",
     "test": "echo 'No tests specified yet'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "migration:update-tracker": "node scripts/design-system/update-tracker.js",
+    "migration:report": "node scripts/design-system/update-tracker.js --report",
+    "design-system:check-tokens": "node scripts/design-system/validate-tokens.js",
+    "design-system:check-tokens:filter": "node scripts/design-system/validate-tokens.js --filter",
+    "design-system:validate-component": "node scripts/design-system/validate-component.js",
+    "design-system:validate-all": "npm run design-system:check-tokens && echo '✅ All design system validations passed'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
