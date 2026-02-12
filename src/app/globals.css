@@ -1,82 +1,183 @@
 @import 'tailwindcss';
-@import 'uniwind';
 
-@import 'heroui-native/styles';
+/**
+ * Blue Waters Design System - Global Styles
+ * 
+ * Source: src/design-system/tokens.ts
+ * Philosophy: Dark-first glassmorphism with conservative government aesthetic
+ */
 
 :root {
-  /* Blue Waters Theme - 40% Primary Blue, 10% Accent (Sunset/Coral), 60% Neutral (White/Light) */
-  --background: 205 100% 97%;
-  --foreground: 207 33% 15%;
-  --card: 0 0% 100%;
-  --card-foreground: 207 33% 15%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 207 33% 15%;
-  /* Primary: Deep Ocean Blue */
-  --primary: 207 89% 34%;
-  --primary-foreground: 0 0% 100%;
-  /* Secondary: Light Sky Blue */
-  --secondary: 200 100% 86%;
-  --secondary-foreground: 207 33% 15%;
-  /* Muted: Soft Gray */
-  --muted: 210 40% 85%;
-  --muted-foreground: 207 20% 50%;
-  /* Accent: Calypso Orange/Coral */
-  --accent: 18 100% 54%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 205 50% 88%;
-  --input: 205 50% 92%;
-  --ring: 207 89% 34%;
-  /* Chart colors - Ocean themed */
-  --chart-1: 207 89% 34%;
-  --chart-2: 184 80% 45%;
-  --chart-3: 18 100% 54%;
-  --chart-4: 210 100% 72%;
-  --chart-5: 190 70% 60%;
-  --radius: 0.75rem;
-  --sidebar-background: 207 89% 34%;
-  --sidebar-foreground: 0 0% 100%;
-  --sidebar-primary: 18 100% 54%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 200 100% 86%;
-  --sidebar-accent-foreground: 207 33% 15%;
-  --sidebar-border: 207 70% 50%;
-  --sidebar-ring: 18 100% 54%;
+  /* ========================================================================
+     BACKGROUND LAYERS (Dark-first)
+     ======================================================================== */
+  --bg-950: 207 40% 8%;    /* Deepest */
+  --bg-900: 207 40% 12%;   /* App background (dark mode default) */
+  --bg-800: 207 40% 16%;   /* Elevated panels */
+  --bg-700: 207 40% 24%;   /* Hover states */
+  --bg-600: 207 40% 32%;   /* Active states */
+
+  /* ========================================================================
+     FOREGROUND / TEXT COLORS
+     ======================================================================== */
+  --fg: 205 100% 97%;      /* Primary text (dark mode) */
+  --fg-muted: 205 50% 70%; /* Secondary text */
+  --fg-subtle: 205 30% 50%; /* Tertiary text */
+
+  /* ========================================================================
+     ACCENT COLORS (Muted Nautical Blue)
+     ======================================================================== */
+  --accent-900: 207 70% 20%;
+  --accent-800: 207 70% 28%;
+  --accent-700: 207 70% 36%;
+  --accent-600: 207 80% 44%;
+  --accent-500: 207 80% 50%;  /* Primary accent */
+  --accent-400: 207 80% 60%;  /* Hover */
+  --accent-300: 207 80% 70%;  /* Active */
+  --accent-200: 207 80% 80%;
+  --accent-100: 207 80% 90%;
+
+  /* ========================================================================
+     SEMANTIC COLORS
+     ======================================================================== */
+  --success-900: 142 70% 20%;
+  --success-700: 142 70% 35%;
+  --success-500: 142 70% 45%;
+  --success-300: 142 70% 70%;
+
+  --warning-900: 38 90% 25%;
+  --warning-700: 38 90% 40%;
+  --warning-500: 38 90% 50%;
+  --warning-300: 38 90% 70%;
+
+  --error-900: 0 70% 25%;
+  --error-700: 0 70% 40%;
+  --error-500: 0 70% 50%;
+  --error-300: 0 70% 70%;
+
+  --info-900: 200 80% 25%;
+  --info-700: 200 80% 40%;
+  --info-500: 200 80% 50%;
+  --info-300: 200 80% 70%;
+
+  /* ========================================================================
+     BORDER COLORS
+     ======================================================================== */
+  --border-subtle: 207 30% 25%;
+  --border-default: 207 30% 35%;
+  --border-emphasis: 207 30% 45%;
+
+  /* ========================================================================
+     NEUTRAL COLORS
+     ======================================================================== */
+  --neutral-900: 207 20% 20%;
+  --neutral-800: 207 20% 30%;
+  --neutral-700: 207 20% 40%;
+  --neutral-600: 207 20% 50%;
+  --neutral-500: 207 20% 60%;
+  --neutral-400: 207 20% 70%;
+  --neutral-300: 207 20% 80%;
+  --neutral-200: 207 20% 90%;
+  --neutral-100: 207 20% 95%;
+
+  /* ========================================================================
+     GLASSMORPHISM TOKENS
+     ======================================================================== */
+  --glass-01: rgba(255, 255, 255, 0.03);
+  --glass-02: rgba(255, 255, 255, 0.05);
+  --glass-03: rgba(255, 255, 255, 0.08);
+  --glass-04: rgba(255, 255, 255, 0.12);
+
+  --blur-subtle: 4px;
+  --blur-base: 8px;
+  --blur-strong: 12px;
+  --blur-modal: 16px;
+
+  /* ========================================================================
+     SHADOWS
+     ======================================================================== */
+  --shadow-soft: 0 6px 20px rgba(4, 8, 16, 0.6);
+  --shadow-medium: 0 10px 40px rgba(4, 8, 16, 0.7);
+  --shadow-strong: 0 20px 60px rgba(4, 8, 16, 0.8);
+
+  /* ========================================================================
+     BORDER RADIUS
+     ======================================================================== */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.75rem;    /* 12px */
+  --radius-lg: 1.25rem;    /* 20px */
+  --radius-xl: 1.5rem;     /* 24px */
+  --radius-2xl: 2rem;      /* 32px */
+  --radius-full: 9999px;
+
+  /* ========================================================================
+     Z-INDEX LAYERING
+     ======================================================================== */
+  --z-base: 0;
+  --z-default: 1;
+  --z-elevated: 200;
+  --z-overlay: 400;
+  --z-sticky: 600;
+  --z-header: 800;
+  --z-dropdown: 1000;
+  --z-popover: 1200;
+  --z-modal: 1400;
+  --z-tooltip: 1600;
+
+  /* ========================================================================
+     TRANSITIONS
+     ======================================================================== */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 350ms;
+
+  /* ========================================================================
+     LEGACY COMPATIBILITY (for existing components)
+     These map old tokens to new design system tokens
+     TODO: Remove after migration complete
+     ======================================================================== */
+  --background: var(--bg-900);
+  --foreground: var(--fg);
+  --card: var(--bg-800);
+  --card-foreground: var(--fg);
+  --popover: var(--bg-800);
+  --popover-foreground: var(--fg);
+  --primary: var(--accent-500);
+  --primary-foreground: var(--fg);
+  --secondary: var(--accent-300);
+  --secondary-foreground: var(--bg-900);
+  --muted: var(--neutral-700);
+  --muted-foreground: var(--fg-muted);
+  --accent: var(--accent-500);
+  --accent-foreground: var(--fg);
+  --destructive: var(--error-500);
+  --destructive-foreground: var(--fg);
+  --border: var(--border-default);
+  --input: var(--bg-700);
+  --ring: var(--accent-500);
+  --radius: var(--radius-md);
+  
+  /* Sidebar compatibility */
+  --sidebar-background: var(--bg-900);
+  --sidebar-foreground: var(--fg);
+  --sidebar-primary: var(--accent-500);
+  --sidebar-primary-foreground: var(--fg);
+  --sidebar-accent: var(--accent-400);
+  --sidebar-accent-foreground: var(--fg);
+  --sidebar-border: var(--border-default);
+  --sidebar-ring: var(--accent-500);
+  
+  /* Chart compatibility */
+  --chart-1: var(--accent-500);
+  --chart-2: var(--info-500);
+  --chart-3: var(--success-500);
+  --chart-4: var(--accent-300);
+  --chart-5: var(--info-300);
 }
+
 .dark {
-  --background: 207 33% 12%;
-  --foreground: 205 100% 97%;
-  --card: 207 40% 18%;
-  --card-foreground: 205 100% 97%;
-  --popover: 207 40% 18%;
-  --popover-foreground: 205 100% 97%;
-  --primary: 207 100% 55%;
-  --primary-foreground: 207 33% 12%;
-  --secondary: 184 80% 45%;
-  --secondary-foreground: 205 100% 97%;
-  --muted: 207 40% 30%;
-  --muted-foreground: 205 50% 70%;
-  --accent: 18 100% 54%;
-  --accent-foreground: 207 33% 12%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 207 40% 28%;
-  --input: 207 40% 25%;
-  --ring: 18 100% 54%;
-  --chart-1: 207 100% 55%;
-  --chart-2: 184 80% 45%;
-  --chart-3: 18 100% 54%;
-  --chart-4: 200 80% 60%;
-  --chart-5: 190 70% 65%;
-  --sidebar-background: 207 33% 12%;
-  --sidebar-foreground: 205 100% 97%;
-  --sidebar-primary: 207 100% 55%;
-  --sidebar-primary-foreground: 207 33% 12%;
-  --sidebar-accent: 18 100% 54%;
-  --sidebar-accent-foreground: 205 100% 97%;
-  --sidebar-border: 207 40% 28%;
-  --sidebar-ring: 18 100% 54%;
+  /* Dark mode uses same tokens - design is dark-first */
+  /* Light mode overrides below if needed in future */
 }
 
 * {

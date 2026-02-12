@@ -9,9 +9,13 @@
  * Usage: node scripts/design-system/validate-tokens.js [--filter=component-name]
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Regex patterns for detecting hardcoded colors
 const PATTERNS = {
@@ -237,8 +241,6 @@ function printReport(violations) {
     console.log('╔══════════════════════════════════════════════════════════════╗');
     console.log('║           DESIGN TOKEN VALIDATION REPORT                     ║');
     console.log('╚══════════════════════════════════════════════════════════════╝\n');
-    console.log('Files scanned: ', execSync('find src -name "*.tsx" -o -name "*.ts" -o -name "*.css" | wc -l', { encoding: 'utf-8' }).trim());
-    console.log('Violations found: 0\n');
     console.log('✅ ALL CHECKS PASSED — Design token system is compliant.\n');
     return;
   }
@@ -304,8 +306,9 @@ function main() {
 }
 
 // Run if called directly
-if (require.main === module) {
+const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMainModule) {
   main();
 }
 
-module.exports = { scanDirectory, scanFile, printReport };
+export { scanDirectory, scanFile, printReport };

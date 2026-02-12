@@ -9,9 +9,13 @@
  * Usage: node scripts/design-system/update-tracker.js
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const TRACKER_FILE = '.github/instructions/design-system/00-MASTER-TRACKER.instructions.md';
 const COMPONENT_FILE = '.github/instructions/design-system/02-component-migration.instructions.md';
@@ -252,8 +256,9 @@ function main() {
 }
 
 // Run if called directly
-if (require.main === module) {
+const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMainModule) {
   main();
 }
 
-module.exports = { main, analyzeComponents, analyzePages, analyzeTokens };
+export { main, analyzeComponents, analyzePages, analyzeTokens };
