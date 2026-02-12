@@ -1,3 +1,90 @@
+/**
+ * Sidebar - Collapsible navigation sidebar
+ * 
+ * Built with glassmorphism design system and custom CSS variables.
+ * Responsive sidebar with mobile sheet, keyboard shortcuts, and state persistence.
+ * Integrates with Sheet, Button, Input, Separator, Tooltip, and Skeleton components.
+ * 
+ * @example
+ * ```tsx
+ * import {
+ *   Sidebar,
+ *   SidebarContent,
+ *   SidebarGroup,
+ *   SidebarGroupContent,
+ *   SidebarMenu,
+ *   SidebarMenuItem,
+ *   SidebarMenuButton,
+ *   SidebarProvider,
+ * } from '@/components/ui/sidebar'
+ * 
+ * function AppSidebar() {
+ *   return (
+ *     <Sidebar>
+ *       <SidebarContent>
+ *         <SidebarGroup>
+ *           <SidebarGroupLabel>Application</SidebarGroupLabel>
+ *           <SidebarGroupContent>
+ *             <SidebarMenu>
+ *               <SidebarMenuItem>
+ *                 <SidebarMenuButton asChild>
+ *                   <a href="/dashboard">
+ *                     <Home className="mr-2 h-4 w-4" />
+ *                     <span>Dashboard</span>
+ *                   </a>
+ *                 </SidebarMenuButton>
+ *               </SidebarMenuItem>
+ *             </SidebarMenu>
+ *           </SidebarGroupContent>
+ *         </SidebarGroup>
+ *       </SidebarContent>
+ *     </Sidebar>
+ *   )
+ * }
+ * 
+ * // In your layout
+ * function Layout({ children }) {
+ *   return (
+ *     <SidebarProvider>
+ *       <AppSidebar />
+ *       <main>{children}</main>
+ *     </SidebarProvider>
+ *   )
+ * }
+ * ```
+ * 
+ * @features
+ * - Collapsible sidebar with icon-only mode
+ * - Mobile sheet overlay for small screens
+ * - Keyboard shortcut (Ctrl+B) to toggle
+ * - State persistence via cookies
+ * - Floating, inset, and sidebar variants
+ * - Responsive design with custom widths
+ * - Tooltip support in collapsed mode
+ * - Nested menu groups and sub-menus
+ * - Custom CSS variables for theming
+ * 
+ * @accessibility
+ * - ARIA complementary landmark
+ * - Keyboard navigation support
+ * - Focus visible indicators
+ * - Screen reader announcements
+ * - Button role for interactive elements
+ * 
+ * @components
+ * - SidebarProvider: Context provider with state management
+ * - Sidebar: Main sidebar container
+ * - SidebarContent: Scrollable content wrapper
+ * - SidebarGroup: Menu group container
+ * - SidebarGroupLabel: Group heading
+ * - SidebarGroupContent: Group content wrapper
+ * - SidebarMenu: Menu list container
+ * - SidebarMenuItem: Individual menu item
+ * - SidebarMenuButton: Clickable menu button
+ * - SidebarTrigger: Toggle button component
+ * - SidebarRail: Resize handle
+ * - SidebarInset: Main content area
+ */
 'use client'
 
 import { Slot } from '@radix-ui/react-slot'
@@ -332,7 +419,7 @@ const SidebarInset = React.forwardRef<
     <main
       ref={ref}
       className={cn(
-        'relative flex min-h-svh flex-1 flex-col bg-background',
+        'relative flex min-h-svh flex-1 flex-col bg-bg-DEFAULT',
         'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow',
         className,
       )}
@@ -528,7 +615,7 @@ const sidebarMenuButtonVariants = cva(
       variant: {
         default: 'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
         outline:
-          'bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]',
+          'bg-glass-02 shadow-[0_0_0_1px_hsl(var(--glass-01))] hover:bg-glass-03 hover:text-fg-DEFAULT hover:shadow-[0_0_0_1px_hsl(var(--accent-500))]',
       },
       size: {
         default: 'h-8 text-sm',
