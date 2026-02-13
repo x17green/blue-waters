@@ -93,9 +93,44 @@ Look for your user in the `User` table with:
 - ✅ Correct role (CUSTOMER or OPERATOR)
 - ✅ UUID from Supabase Auth
 
+### 7. Test Password Reset Flow
+
+1. Visit http://localhost:3000/forgot-password
+2. Enter your email address
+3. Check your email (or Supabase logs in development)
+4. Click the reset link in the email
+5. Should land on `/reset-password?code=...`
+6. Enter new password (min 8 characters)
+7. Confirm password matches
+8. Click "Reset Password"
+9. Should redirect to `/login`
+10. Login with new password
+
+### 8. Test Profile Update
+
+1. Login to your account
+2. Navigate to http://localhost:3000/profile
+3. Update your full name or phone number
+4. Click "Save Changes"
+5. Should see success message
+6. Verify changes in:
+   - Page display (revalidated)
+   - Database (Prisma Studio)
+   - Supabase Auth metadata
+
+### 9. Test Security Features
+
+| Action | Expected Result |
+|--------|----------------|
+| Change password from profile | Redirects to forgot password page |
+| View account status | Shows role, member since, verification status |
+| Try to delete account | Button disabled (requires support) |
+| Update profile while logged out | Redirects to `/login` |
+
 ## 📂 File Structure
 
 ```
+src/
 src/
 ├── lib/
 │   ├── supabase/
@@ -105,13 +140,21 @@ src/
 │   └── supabase.ts            # ⚠️ Deprecated (legacy)
 ├── app/
 │   ├── auth/
-│   │   ├── actions.ts         # Server actions (login, signup, signOut)
+│   │   ├── actions.ts         # Server actions (login, signup, signOut, password reset, profile)
 │   │   └── callback/
 │   │       └── route.ts       # OAuth callback handler
 │   ├── login/
 │   │   └── page.tsx           # Login page
 │   ├── signup/
 │   │   └── page.tsx           # Signup page
+│   ├── forgot-password/
+│   │   └── page.tsx           # Request password reset
+│   ├── reset-password/
+│   │   └── page.tsx           # Confirm password reset
+│   ├── profile/
+│   │   ├── page.tsx           # Profile page (server)
+│   │   ├── profile-client.tsx # Profile UI (client)
+│   │   └── profile-form.tsx   # Profile form (client)
 │   └── dashboard/
 │       ├── page.tsx           # Dashboard (server component)
 │       └── dashboard-client.tsx  # Dashboard UI (client component)
@@ -149,13 +192,14 @@ If redirects aren't working:
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| "User not found" | Check if trigger creates user in database |
-| Redirect loop | Clear cookies, verify middleware config |
-| Email not sent | Check Supabase email settings (Auth → Email Templates) |
-| "Invalid JWT" | Token expired, try logging out and back in |
-
+| Ix] **Password Reset** - Forgot password flow
+- [x] **Profile Update** - Edit user profile
+- [ ] **Email Verification** - Require email confirmation
+- [ ] **OAuth Providers** - Google, GitHub login
+- [ ] **2FA** - Two-factor authentication
+- [ ] **Account Settings** - Manage account preferences
+- [ ] **Session Management** - View/revoke active sessions
+- [ ] **Avatar Upload** - Profile picture support
 ## 🎯 Next Features to Implement
 
 - [ ] **Password Reset** - Forgot password flow
@@ -213,6 +257,18 @@ Your authentication system is production-ready with:
 - ✅ Automatic session refresh
 - ✅ Route protection
 - ✅ Database synchronization
-- ✅ TypeScript type safety
+- ✅ Password reset flow
+- ✅ Profile management
+- ✅ Email confirmation support
 
+Go ahead and test the complete auth flow! 🚀
+
+**Testing Checklist:**
+- [ ] Create account at `/signup`
+- [ ] Login at `/login`
+- [ ] Test protected route access
+- [ ] Reset password at `/forgot-password`
+- [ ] Update profile at `/profile`
+- [ ] Sign out and verify redirect
+- [ ] Verify database sync in Prisma Studio
 Go ahead and test the login/signup flow! 🚀

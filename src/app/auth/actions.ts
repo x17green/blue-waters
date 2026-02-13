@@ -78,3 +78,79 @@ export async function signOut() {
   revalidatePath('/', 'layout')
   redirect('/login')
 }
+
+export async function requestPasswordReset(formData: FormData) {
+  const supabase = await createClient()
+
+  const email = formData.get('email') as string
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`,
+  })
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  return { success: true }
+}
+
+export async function resetPassword(formData: FormData) {
+  const supabase = await createClient()
+
+  const password = formData.get('password') as string
+
+  const { error } = await supabase.auth.updateUser({
+    password,
+  })
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  return { success: true }
+}
+
+export async function updateProfile(formData: FormData) {
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return { error: 'Not authenticated' }
+  }
+
+  const fullName = formData.get('fullName') as string
+  const phone = formData.get('phone') as string
+
+  // Update auth metadata
+  const { error: authError } = await supabase.auth.updateUser({
+    data: {
+      full_name: fullName,
+      phone,
+    },
+  })
+
+  if (authError) {
+    return { error: authError.message }
+  }
+
+  // Update public.users table
+  const { error: dbError } = await supabase
+    .from('users')
+    .update({
+      fullName,
+      phone,
+      updatedAt: new Date().toISOString(),
+    })
+    .eq('id', user.id)
+
+  if (dbError) {
+    return { error: dbError.message }
+  }
+
+  revalidatePath('/dashboard')
+  return { success: true }
+}

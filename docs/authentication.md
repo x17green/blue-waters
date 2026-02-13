@@ -298,6 +298,116 @@ function LoginWithGoogle() {
 }
 ```
 
+## Password Reset Flow
+
+### 1. Request Password Reset
+
+**Route:** `/forgot-password`  
+**File:** [`src/app/forgot-password/page.tsx`](src/app/forgot-password/page.tsx)
+
+Features:
+- Email input form
+- Success state with instructions
+- Error handling
+- Sends password reset email with secure token
+
+User flow:
+1. User enters email address
+2. System sends password reset email
+3. Email contains link: `{SITE_URL}/reset-password?code={TOKEN}`
+
+### 2. Reset Password
+
+**Route:** `/reset-password`  
+**File:** [`src/app/reset-password/page.tsx`](src/app/reset-password/page.tsx)
+
+Features:
+- New password input
+- Password confirmation
+- Password strength requirements display
+- Secure token validation
+- Automatic redirect to login on success
+
+User flow:
+1. User clicks reset link from email
+2. Enters new password (min 8 chars)
+3. Confirms password matches
+4. Password updated in Supabase Auth
+5. Redirects to login page
+
+### Server Actions
+
+```tsx
+// Request password reset
+export async function requestPasswordReset(formData: FormData) {
+  const email = formData.get('email') as string
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`,
+  })
+  return error ? { error: error.message } : { success: true }
+}
+
+// Update password
+export async function resetPassword(formData: FormData) {
+  const password = formData.get('password') as string
+  const { error } = await supabase.auth.updateUser({ password })
+  return error ? { error: error.message } : { success: true }
+}
+```
+
+## Profile Management
+
+### Profile Page
+
+**Route:** `/profile`  
+**File:** [`src/app/profile/page.tsx`](src/app/profile/page.tsx)
+
+Features:
+- View and edit personal information
+- Update full name and phone number
+- Change password link
+- Account status display (role, member since, email verification)
+- Account deletion option (disabled, requires support contact)
+
+### Update Profile Action
+
+```tsx
+export async function updateProfile(formData: FormData) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  
+  if (!user) return { error: 'Not authenticated' }
+  
+  const fullName = formData.get('fullName') as string
+  const phone = formData.get('phone') as string
+  
+  // Update Supabase Auth metadata
+  await supabase.auth.updateUser({
+    data: { full_name: fullName, phone }
+  })
+  
+  // Update public.users table
+  await supabase
+    .from('users')
+    .update({ fullName, phone, updatedAt: new Date().toISOString() })
+    .eq('id', user.id)
+  
+  revalidatePath('/profile')
+  return { success: true }
+}
+```
+
+### Profile Update Flow
+
+1. User navigates to `/profile` from dashboard
+2. Form pre-filled with current data
+3. User edits full name or phone number
+4. Submit updates both:
+   - Supabase Auth user metadata
+   - Public `users` table in database
+5. Success message displayed
+6. Page data revalidated
+
 ## Security Best Practices
 
 ✅ **Never expose service role key in client code**  
@@ -307,6 +417,8 @@ function LoginWithGoogle() {
 ✅ **Enable email confirmation in production**  
 ✅ **Implement rate limiting for auth endpoints**  
 ✅ **Use strong password policies**  
+✅ **Always verify token validity in password reset**  
+✅ **Update both auth metadata and database tables**  
 
 ## Troubleshooting
 
@@ -336,14 +448,16 @@ function LoginWithGoogle() {
 
 ## Next Steps
 
-- [ ] Add password reset flow
+- [x] Add password reset flow
+- [x] Add profile update page
 - [ ] Implement email change functionality
-- [ ] Add profile update page
 - [ ] Set up OAuth providers
 - [ ] Add two-factor authentication
 - [ ] Implement account deletion
 - [ ] Add session management page
 - [ ] Set up email notifications
+- [ ] Add profile avatar upload
+- [ ] Implement remember me functionality
 
 ## Resources
 
