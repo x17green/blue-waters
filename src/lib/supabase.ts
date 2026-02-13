@@ -1,3 +1,11 @@
+/**
+ * @deprecated Use the new client utilities instead:
+ * - For Client Components: import { createClient } from '@/src/lib/supabase/client'
+ * - For Server Components/Actions: import { createClient } from '@/src/lib/supabase/server'
+ * - For Middleware: import { updateSession } from '@/src/lib/supabase/middleware'
+ *
+ * This file is kept for backward compatibility only.
+ */
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL

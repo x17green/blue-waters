@@ -4,80 +4,36 @@ import { Button, Card, CardBody, Checkbox, Input, Select, SelectItem } from '@ne
 import { motion } from 'framer-motion'
 import { Lock, Mail, Phone, User } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 
-import { supabase } from '@/src/lib/supabase'
+import { signup } from '@/src/app/auth/actions'
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    userType: 'customer',
-  })
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const [agreeToTerms, setAgreeToTerms] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
-    setLoading(true)
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match')
-      setLoading(false)
-      return
-    }
+    setSuccess('')
 
     if (!agreeToTerms) {
       setError('Please agree to terms and conditions')
-      setLoading(false)
       return
     }
 
-    try {
-      const { error: signUpError, data } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-      })
+    const formData = new FormData(e.currentTarget)
 
-      if (signUpError) throw signUpError
-
-      if (data.user) {
-        // Create user profile
-        const { error: profileError } = await supabase
-          .from('users')
-          .insert([
-            {
-              id: data.user.id,
-              email: formData.email,
-              full_name: formData.fullName,
-              phone: formData.phone,
-              user_type: formData.userType,
-            },
-          ])
-
-        if (profileError) throw profileError
-
-        // Redirect to dashboard or verification page
-        window.location.href = '/dashboard'
+    startTransition(async () => {
+      const result = await signup(formData)
+      if (result?.error) {
+        setError(result.error)
+      } else if (result?.message) {
+        setSuccess(result.message)
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred during signup')
-    } finally {
-      setLoading(false)
-    }
+    })
   }
 
   return (
@@ -114,12 +70,20 @@ export default function SignUp() {
                 </motion.div>
               )}
 
+              {success && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm"
+                >
+                  {success}
+                </motion.div>
+              )}
+
               {/* Full Name */}
               <Input
                 label="Full Name"
                 name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
                 placeholder="Enter your full name"
                 startContent={<User className="w-4 h-4 text-primary" />}
                 required
@@ -130,8 +94,6 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleChange}
                 placeholder="you@example.com"
                 startContent={<Mail className="w-4 h-4 text-primary" />}
                 required
@@ -141,8 +103,6 @@ export default function SignUp() {
               <Input
                 label="Phone Number"
                 name="phone"
-                value={formData.phone}
-                onChange={handleChange}
                 placeholder="+234 (0) 800 000 0000"
                 startContent={<Phone className="w-4 h-4 text-primary" />}
               />
@@ -151,8 +111,6 @@ export default function SignUp() {
               <Select
                 label="I am a"
                 name="userType"
-                value={formData.userType}
-                onChange={handleChange}
                 defaultSelectedKeys={['customer']}
               >
                 <SelectItem key="customer" value="customer">
@@ -168,8 +126,6 @@ export default function SignUp() {
                 label="Password"
                 name="password"
                 type="password"
-                value={formData.password}
-                onChange={handleChange}
                 placeholder="Create a strong password"
                 startContent={<Lock className="w-4 h-4 text-primary" />}
                 required
@@ -180,8 +136,6 @@ export default function SignUp() {
                 label="Confirm Password"
                 name="confirmPassword"
                 type="password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
                 placeholder="Confirm your password"
                 startContent={<Lock className="w-4 h-4 text-primary" />}
                 required
@@ -208,11 +162,11 @@ export default function SignUp() {
               {/* Sign Up Button */}
               <Button
                 type="submit"
-                disabled={loading}
+                disabled={isPending}
                 className="w-full bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 mt-6"
                 size="lg"
               >
-                {loading ? 'Creating Account...' : 'Create Account'}
+                {isPending ? 'Creating Account...' : 'Create Account'}
               </Button>
             </form>
 

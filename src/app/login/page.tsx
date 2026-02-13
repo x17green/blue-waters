@@ -3,47 +3,27 @@
 import { motion } from 'framer-motion'
 import { Lock, Mail } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 
-import { supabase } from '@/src/lib/supabase'
+import { login } from '@/src/app/auth/actions'
 
 export default function LogIn() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
-    setLoading(true)
 
-    try {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      })
+    const formData = new FormData(e.currentTarget)
 
-      if (signInError) throw signInError
-
-      // Redirect to dashboard
-      window.location.href = '/dashboard'
-    } catch (err: any) {
-      setError(err.message || 'Invalid email or password')
-    } finally {
-      setLoading(false)
-    }
+    startTransition(async () => {
+      const result = await login(formData)
+      if (result?.error) {
+        setError(result.error)
+      }
+    })
   }
 
   return (
@@ -89,8 +69,6 @@ export default function LogIn() {
                 <input
                   name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   placeholder="you@example.com"
                   className="w-full bg-transparent outline-none text-foreground placeholder:text-foreground/40"
                   required
@@ -108,8 +86,6 @@ export default function LogIn() {
                 <input
                   name="password"
                   type="password"
-                  value={formData.password}
-                  onChange={handleChange}
                   placeholder="Enter your password"
                   className="w-full bg-transparent outline-none text-foreground placeholder:text-foreground/40"
                   required
@@ -139,10 +115,10 @@ export default function LogIn() {
             {/* Sign In Button */}
             <button
               type="submit"
-              disabled={loading}
+              disabled={isPending}
               className="w-full bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 mt-6 rounded-lg hover:shadow-lg transition-all disabled:opacity-70"
             >
-              {loading ? 'Signing In...' : 'Sign In'}
+              {isPending ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 
