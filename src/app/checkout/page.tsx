@@ -9,7 +9,8 @@ import { Suspense, useState } from 'react'
 
 import { Button } from '@/src/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
-import { supabase } from '@/src/lib/supabase'
+import { useAuth } from '@/src/hooks/use-auth'
+import { createClient } from '@/src/lib/supabase/client'
 
 const mockTrips: any = {
   '1': { name: 'Express Commute', price: 3500 },
@@ -20,6 +21,7 @@ const mockTrips: any = {
 
 function CheckoutContent() {
   const searchParams = useSearchParams()
+  const { user } = useAuth()
   const tripId = searchParams.get('trip')
   const passengersCount = Number(searchParams.get('passengers')) || 1
   const [paymentMethod, setPaymentMethod] = useState('card')
@@ -64,9 +66,6 @@ function CheckoutContent() {
     setLoading(true)
 
     try {
-      // Get current user or create anonymous booking
-      const { data: { user } } = await supabase.auth.getUser()
-
       const bookingRef = generateBookingReference()
       // TODO: Insert booking into database when backend is ready
       const _bookingData = {

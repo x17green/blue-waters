@@ -1,14 +1,14 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Navbar, NavbarBrand, NavbarContent, NavbarItem, Button as NextUIButton, Tabs as NextUITabs, Tab } from '@nextui-org/react'
+import { Card, CardBody, CardHeader, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
 import { motion } from 'framer-motion'
 import { Bookmark, Calendar, LogOut, MapPin, Users } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { Button } from '@/src/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
-import { supabase } from '@/src/lib/supabase'
+import { useAuth } from '@/src/hooks/use-auth'
+import { createClient } from '@/src/lib/supabase/client'
 
 interface Booking {
   id: string
@@ -21,40 +21,38 @@ interface Booking {
 }
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null)
+  const { user, loading: authLoading, signOut } = useAuth()
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const getUser = async () => {
+    const fetchBookings = async () => {
+      if (!user) {
+        setLoading(false)
+        return
+      }
+
       try {
-        const { data, error } = await supabase.auth.getUser()
-        if (error) throw error
-        setUser(data.user)
+        const supabase = createClient()
+        const { data: bookingsData } = await supabase
+          .from('bookings')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
 
-        // Fetch user bookings
-        if (data.user) {
-          const { data: bookingsData } = await supabase
-            .from('bookings')
-            .select('*')
-            .eq('user_id', data.user.id)
-            .order('created_at', { ascending: false })
-
-          setBookings(bookingsData || [])
-        }
+        setBookings(bookingsData || [])
       } catch (err) {
-        console.error('Error fetching user:', err)
+        console.error('Error fetching bookings:', err)
       } finally {
         setLoading(false)
       }
     }
 
-    getUser()
-  }, [])
+    fetchBookings()
+  }, [user])
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    window.location.href = '/'
+    await signOut()
   }
 
   const containerVariants = {
@@ -76,7 +74,7 @@ export default function Dashboard() {
     },
   }
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 flex items-center justify-center">
         <div className="text-center">
