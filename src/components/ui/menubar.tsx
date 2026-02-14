@@ -208,7 +208,7 @@ const MenubarContent = React.forwardRef<
           // Glassmorphism
           'bg-glass-03 backdrop-blur-base',
           'border border-glass',
-          'shadow-[0_8px_32px_rgba(0,0,0,0.3)]',
+          'shadow-large',
           // Typography
           'text-fg-DEFAULT',
           // Animations - entry
