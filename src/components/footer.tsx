@@ -138,7 +138,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="py-6 border-t border-border-subtle text-center text-fg-subtle text-sm">
           <p>
-            © {currentYear} Blue Waters. Ministry of Blue Waters. All rights reserved.
+            © {currentYear} Blue Waters. Ministry of Marine and Blue Economy. All rights reserved.
           </p>
           <p className="mt-2">
             Committed to safe, sustainable, and inclusive water transportation in Bayelsa.

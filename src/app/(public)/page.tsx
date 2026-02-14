@@ -8,18 +8,17 @@ import Link from 'next/link'
 import FeaturedTrips from '@/src/components/featured-trips'
 import Hero from '@/src/components/hero'
 import HowItWorks from '@/src/components/how-it-works'
-import PublicLayout from '@/src/components/layouts/public-layout'
 import Testimonials from '@/src/components/testimonials'
 import { Button } from '@/src/components/ui/button'
 
 /**
  * Home Page
  * Public-facing landing page with hero, featured trips, and CTAs
- * Uses PublicLayout for consistent navigation and footer
+ * Layout provided by (public)/layout.tsx
  */
 export default function Home() {
   return (
-    <PublicLayout>
+    <>
       {/* Hero Section */}
       <Hero />
 
@@ -81,6 +80,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-    </PublicLayout>
+    </>
   )
 }

@@ -39,6 +39,18 @@ const config: Config = {
           DEFAULT: 'hsl(var(--accent-500))',
           foreground: 'hsl(var(--fg))',
         },
+        'accent-gold': {
+          900: 'hsl(var(--accent-gold-900))',
+          800: 'hsl(var(--accent-gold-800))',
+          700: 'hsl(var(--accent-gold-700))',
+          600: 'hsl(var(--accent-gold-600))',
+          500: 'hsl(var(--accent-gold-500))',
+          400: 'hsl(var(--accent-gold-400))',
+          300: 'hsl(var(--accent-gold-300))',
+          200: 'hsl(var(--accent-gold-200))',
+          100: 'hsl(var(--accent-gold-100))',
+          DEFAULT: 'hsl(var(--accent-gold-500))',
+        },
         neutral: {
           900: 'hsl(var(--neutral-900))',
           800: 'hsl(var(--neutral-800))',
@@ -153,6 +165,10 @@ const config: Config = {
         xl: 'var(--radius-xl)',
         '2xl': 'var(--radius-2xl)',
         full: 'var(--radius-full)',
+      },
+      fontFamily: {
+        sans: 'var(--font-sans)',
+        marketing: 'var(--font-marketing)',
       },
       spacing: {
         0.5: '0.125rem',  // 2px

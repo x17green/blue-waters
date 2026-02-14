@@ -27,19 +27,18 @@ const meta = {
 } satisfies Meta<typeof InputOTP>
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof InputOTP>
 
 /**
  * Default 6-digit OTP with separator (3-3 pattern)
  */
 export const Default: Story = {
-  args: {} as any,
-  render: (args: any) => (
+  render: () => (
     <div className="space-y-2">
       <label htmlFor="otp-default" className="text-sm font-medium text-fg-DEFAULT">
         Enter verification code
       </label>
-      <InputOTP id="otp-default" maxLength={6} {...args}>
+      <InputOTP id="otp-default" maxLength={6}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
@@ -60,13 +59,12 @@ export const Default: Story = {
  * 4-digit PIN code (2-2 pattern)
  */
 export const FourDigit: Story = {
-  args: {} as any,
-  render: (args: any) => (
+  render: () => (
     <div className="space-y-2">
       <label htmlFor="otp-pin" className="text-sm font-medium text-fg-DEFAULT">
         Enter PIN
       </label>
-      <InputOTP id="otp-pin" maxLength={4} {...args}>
+      <InputOTP id="otp-pin" maxLength={4}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
@@ -85,13 +83,12 @@ export const FourDigit: Story = {
  * Single group without separator (common for short codes)
  */
 export const SingleGroup: Story = {
-  args: {} as any,
-  render: (args: any) => (
+  render: () => (
     <div className="space-y-2">
       <label htmlFor="otp-single" className="text-sm font-medium text-fg-DEFAULT">
         Verification code
       </label>
-      <InputOTP id="otp-single" maxLength={4} {...args}>
+      <InputOTP id="otp-single" maxLength={4}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
@@ -107,13 +104,12 @@ export const SingleGroup: Story = {
  * Disabled state
  */
 export const Disabled: Story = {
-  args: {} as any,
-  render: (args: any) => (
+  render: () => (
     <div className="space-y-2">
       <label htmlFor="otp-disabled" className="text-sm font-medium text-fg-DEFAULT">
         Code (disabled)
       </label>
-      <InputOTP id="otp-disabled" maxLength={6} disabled {...args}>
+      <InputOTP id="otp-disabled" maxLength={6} disabled>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />

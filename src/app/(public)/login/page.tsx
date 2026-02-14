@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { useState, useTransition } from 'react'
 
 import { login } from '@/src/app/auth/actions'
-import PublicLayout from '@/src/components/layouts/public-layout'
 import { Button } from '@/src/components/ui/button'
 
 /**
@@ -15,6 +14,7 @@ import { Button } from '@/src/components/ui/button'
  * 
  * Professional authentication page with glassmorphic design
  * Following design system: dark-first, muted nautical, design tokens
+ * Layout provided by (public)/layout.tsx
  */
 export default function LogIn() {
   const [error, setError] = useState('')
@@ -36,8 +36,7 @@ export default function LogIn() {
   }
 
   return (
-    <PublicLayout>
-      <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -214,6 +213,5 @@ export default function LogIn() {
           </div>
         </motion.div>
       </div>
-    </PublicLayout>
   )
 }

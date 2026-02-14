@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { useState, useTransition } from 'react'
 
 import { signup } from '@/src/app/auth/actions'
-import PublicLayout from '@/src/components/layouts/public-layout'
 import { Button } from '@/src/components/ui/button'
 
 /**
@@ -15,6 +14,7 @@ import { Button } from '@/src/components/ui/button'
  * 
  * Professional registration page with glassmorphic design
  * Following design system: dark-first, muted nautical, design tokens
+ * Layout provided by (public)/layout.tsx
  */
 export default function SignUp() {
   const [error, setError] = useState('')
@@ -45,8 +45,7 @@ export default function SignUp() {
   }
 
   return (
-    <PublicLayout>
-      <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -293,6 +292,5 @@ export default function SignUp() {
           </div>
         </motion.div>
       </div>
-    </PublicLayout>
   )
 }

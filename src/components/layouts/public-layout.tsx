@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { type ReactNode } from 'react'
 
+import { BayelsaCoatOfArms, BlueWatersWordmark, MinistryBlueSeal, FooterLogoSuite } from '@/src/components/brand'
 import { Button } from '@/src/components/ui/button'
 import { Icon } from '@/src/components/ui/icon'
 import { useAuth } from '@/src/hooks/use-auth'
@@ -52,52 +53,57 @@ function PublicHeader() {
 
   return (
     <header className="sticky top-0 z-[var(--z-header)] glass backdrop-blur-[var(--blur-strong)] border-b border-border-subtle">
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center ring-2 ring-accent-700 ring-offset-2 ring-offset-bg-900 transition-transform duration-300 group-hover:scale-105">
-              <Icon path={mdiWaves} size={0.8} className="text-white" aria-hidden={true} />
-            </div>
-            <div className="absolute inset-0 bg-accent-500 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-30" />
+      <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4">
+        {/* Partnership Logo Header - Per branding.md spec */}
+        <div className="flex items-center justify-between gap-4 mb-4">
+          {/* Ministry Seal - Left */}
+          <div className="flex-shrink-0">
+            <MinistryBlueSeal size="sm" priority />
           </div>
-          <div>
-            <p className="font-bold text-xl text-fg tracking-tight">
-              Blue Waters
-            </p>
-            <p className="text-xs text-fg-muted -mt-0.5">
-              Bayelsa Boat Booking
-            </p>
-          </div>
-        </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors duration-200 ${
-                isActive(link.href)
-                  ? 'text-accent-400'
-                  : 'text-fg-muted hover:text-fg'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {/* Blue Waters Wordmark - Center */}
+          <Link href="/" className="flex-1 flex justify-center">
+            <BlueWatersWordmark size="sm" />
+          </Link>
+
+          {/* Bayelsa Coat of Arms - Right */}
+          <Link href="/" className="flex-shrink-0">
+            <BayelsaCoatOfArms size="sm" priority />
+          </Link>
         </div>
 
-        {/* Auth Buttons */}
-        <div className="flex items-center gap-3">
-          {user ? (
-            <Button
-              onClick={handleDashboardClick}
-              className="glass-strong border border-accent-700 text-accent-300 hover:text-accent-200 hover:border-accent-600 transition-all duration-200"
-            >
-              <Icon path={mdiAnchor} size={0.6} className="mr-2" aria-hidden={true} />
-              {appUser?.role === 'operator' || appUser?.role === 'staff' || appUser?.role === 'admin' 
-                ? 'Operator Portal' 
+        {/* Navigation & Auth */}
+        <div className="flex items-center justify-between">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8 flex-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  isActive(link.href)
+                    ? 'text-accent-400'
+                    : 'text-fg-muted hover:text-fg'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Navigation Placeholder */}
+          <div className="md:hidden flex-1" />
+
+          {/* Auth Buttons */}
+          <div className="flex items-center gap-3">
+            {user ? (
+              <Button
+                onClick={handleDashboardClick}
+                className="glass-strong border border-accent-700 text-accent-300 hover:text-accent-200 hover:border-accent-600 transition-all duration-200"
+              >
+                <Icon path={mdiAnchor} size={0.6} className="mr-2" aria-hidden={true} />
+                {appUser?.role === 'operator' || appUser?.role === 'staff' || appUser?.role === 'admin' 
+                  ? 'Operator Portal' 
                 : 'My Dashboard'}
             </Button>
           ) : (
@@ -119,6 +125,7 @@ function PublicHeader() {
               </Link>
             </>
           )}
+        </div>
         </div>
       </nav>
     </header>
@@ -159,11 +166,8 @@ function PublicFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand & Description */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
-                <Icon path={mdiWaves} size={0.8} className="text-white" aria-hidden={true} />
-              </div>
-              <p className="font-bold text-xl text-fg">Blue Waters</p>
+            <div className="flex items-center gap-3 mb-4">
+              <BlueWatersWordmark size="sm" showText={true} />
             </div>
             <p className="text-sm text-fg-muted mb-4 leading-relaxed">
               Safe, reliable, and affordable boat booking across Bayelsa waterways. 
@@ -174,7 +178,7 @@ function PublicFooter() {
             <div className="space-y-2 text-sm">
               <div className="flex items-start gap-2 text-fg-muted">
                 <Icon path={mdiMapMarker} size={0.6} className="mt-0.5 text-accent-500" aria-hidden={true} />
-                <span>Ministry of Blue Waters<br />Yenagoa, Bayelsa State</span>
+              <span>Ministry of Marine and Blue Economy<br />Yenagoa, Bayelsa State</span>
               </div>
               <div className="flex items-center gap-2 text-fg-muted">
                 <Icon path={mdiPhone} size={0.6} className="text-accent-500" aria-hidden={true} />
@@ -240,18 +244,25 @@ function PublicFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-fg-muted">
-            © {currentYear} Blue Waters. Ministry of Blue Waters, Bayelsa State. All rights reserved.
-          </p>
+        <div className="pt-8 border-t border-border-subtle">
+          {/* Ministry Seal - Per branding.md spec */}
+          <div className="mb-6 flex justify-center">
+            <FooterLogoSuite />
+          </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-subtle p-2 rounded-full hover:glass-strong transition-all duration-200 group"
+          {/* Copyright & Social */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-fg-muted">
+              © {currentYear} Blue Waters. Ministry of Marine and Blue Economy, Bayelsa State. All rights reserved.
+            </p>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
+              <Link
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-subtle p-2 rounded-full hover:glass-strong transition-all duration-200 group"
               aria-label="Facebook"
             >
               <Icon path={mdiFacebook} size={0.8} className="text-fg-muted group-hover:text-accent-400 transition-colors duration-200" aria-hidden={true} />
@@ -275,6 +286,7 @@ function PublicFooter() {
               <Icon path={mdiInstagram} size={0.8} className="text-fg-muted group-hover:text-accent-400 transition-colors duration-200" aria-hidden={true} />
             </Link>
           </div>
+        </div>
         </div>
       </div>
     </footer>
