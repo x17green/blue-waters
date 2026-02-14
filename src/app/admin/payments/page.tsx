@@ -6,43 +6,41 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Icon from "@mdi/react"
 import { mdiCheckCircle, mdiCloseCircle, mdiClock, mdiAlert, mdiDownload, mdiRefresh } from "@mdi/js"
 
-export default function AdminPaymentsPage() {
-  // Mock data - replace with real payment data
-  const payments = [
-    {
-      id: "PAY-001",
-      bookingId: "BK-12345",
-      customer: "John Doe",
-      amount: 25000,
-      currency: "NGN",
-      method: "card",
-      status: "completed",
-      date: "2024-02-14",
-      reference: "REF-ABC123"
-    },
-    {
-      id: "PAY-002",
-      bookingId: "BK-12346",
-      customer: "Jane Smith",
-      amount: 18000,
-      currency: "NGN",
-      method: "bank_transfer",
-      status: "pending",
-      date: "2024-02-14",
-      reference: "REF-DEF456"
-    },
-    {
-      id: "PAY-003",
-      bookingId: "BK-12347",
-      customer: "Bob Wilson",
-      amount: 32000,
-      currency: "NGN",
-      method: "card",
-      status: "failed",
-      date: "2024-02-13",
-      reference: "REF-GHI789"
+async function getPayments(status?: string) {
+  try {
+    const params = new URLSearchParams()
+    if (status) params.set('status', status)
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/admin/payments?${params}`, {
+      cache: 'no-store'
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch payments')
     }
-  ]
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching payments:', error)
+    return {
+      payments: [],
+      summary: {
+        totalRevenue: 0,
+        successfulPayments: 0,
+        pendingPayments: 0,
+        failedPayments: 0
+      }
+    }
+  }
+}
+
+interface AdminPaymentsPageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function AdminPaymentsPage({ searchParams }: AdminPaymentsPageProps) {
+  const status = typeof searchParams.status === 'string' ? searchParams.status : undefined
+  const { payments, summary } = await getPayments(status)
 
   const getStatusBadge = (status: string) => {
     const configs = {
@@ -98,8 +96,8 @@ export default function AdminPaymentsPage() {
             <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₦750,000</div>
-            <p className="text-xs text-muted-foreground">+12% from last month</p>
+            <div className="text-2xl font-bold">₦{summary.totalRevenue.toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground">Last 30 days</p>
           </CardContent>
         </Card>
 
@@ -108,7 +106,7 @@ export default function AdminPaymentsPage() {
             <CardTitle className="text-sm font-medium">Successful Payments</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">1,247</div>
+            <div className="text-2xl font-bold text-green-600">{summary.successfulPayments}</div>
             <p className="text-xs text-muted-foreground">98.5% success rate</p>
           </CardContent>
         </Card>
@@ -118,7 +116,7 @@ export default function AdminPaymentsPage() {
             <CardTitle className="text-sm font-medium">Pending</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-yellow-600">23</div>
+            <div className="text-2xl font-bold text-yellow-600">{summary.pendingPayments}</div>
             <p className="text-xs text-muted-foreground">Requires attention</p>
           </CardContent>
         </Card>
@@ -128,7 +126,7 @@ export default function AdminPaymentsPage() {
             <CardTitle className="text-sm font-medium">Failed</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-red-600">18</div>
+            <div className="text-2xl font-bold text-red-600">{summary.failedPayments}</div>
             <p className="text-xs text-muted-foreground">Needs investigation</p>
           </CardContent>
         </Card>
@@ -137,7 +135,7 @@ export default function AdminPaymentsPage() {
       {/* Payment Tabs */}
       <Tabs defaultValue="all" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="all">All Payments</TabsTrigger>
+          <TabsTrigger value="all">All Payments ({payments.length})</TabsTrigger>
           <TabsTrigger value="completed">Completed</TabsTrigger>
           <TabsTrigger value="pending">Pending</TabsTrigger>
           <TabsTrigger value="failed">Failed</TabsTrigger>
@@ -164,16 +162,16 @@ export default function AdminPaymentsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {payments.map((payment) => (
+                  {payments.map((payment: any) => (
                     <TableRow key={payment.id}>
-                      <TableCell className="font-mono text-sm">{payment.id}</TableCell>
-                      <TableCell className="font-mono text-sm">{payment.bookingId}</TableCell>
+                      <TableCell className="font-mono text-sm">{payment.id.slice(0, 8)}...</TableCell>
+                      <TableCell className="font-mono text-sm">{payment.bookingId.slice(0, 8)}...</TableCell>
                       <TableCell>{payment.customer}</TableCell>
                       <TableCell>₦{payment.amount.toLocaleString()}</TableCell>
                       <TableCell>{getMethodBadge(payment.method)}</TableCell>
                       <TableCell>{getStatusBadge(payment.status)}</TableCell>
                       <TableCell>{new Date(payment.date).toLocaleDateString()}</TableCell>
-                      <TableCell className="font-mono text-sm">{payment.reference}</TableCell>
+                      <TableCell className="font-mono text-sm">{payment.reference.slice(0, 8)}...</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
