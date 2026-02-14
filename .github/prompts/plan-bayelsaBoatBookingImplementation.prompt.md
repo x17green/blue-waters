@@ -1,4 +1,4 @@
-# Blue Waters: Bayelsa Boat Booking Platform - Implementation Plan
+# Yenagoa Boat Club: Bayelsa Boat Booking Platform - Implementation Plan
 
 ## Executive Summary
 

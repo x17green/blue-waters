@@ -16,6 +16,8 @@
     "design-system:check-tokens:filter": "node scripts/design-system/validate-tokens.js --filter",
     "design-system:validate-component": "node scripts/design-system/validate-components.js",
     "design-system:validate-all": "npm run design-system:check-tokens && echo '✅ All design system validations passed'",
+    "admin:create-user": "node scripts/create-admin-user.js",
+    "admin:verify-user": "node scripts/verify-admin-user.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static"
   },

@@ -4,12 +4,12 @@ import { type User } from '@supabase/supabase-js'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Icon } from '@/src/components/ui/icon'
+import Icon from '@mdi/react'
 import { mdiChevronLeft, mdiLock, mdiLogout, mdiShieldAccount } from '@mdi/js'
 
 import { signOut } from '@/src/app/auth/actions'
-import { Button } from '@/src/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 import ProfileForm from './profile-form'
 

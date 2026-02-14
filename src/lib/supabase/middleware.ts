@@ -46,7 +46,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Protected routes that require authentication
-  const protectedPaths = ['/dashboard', '/checkout', '/book', '/operator', '/profile']
+  const protectedPaths = ['/dashboard', '/checkout', '/book', '/operator', '/profile', '/admin']
   const isProtectedRoute = protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
 
   // Redirect to login if accessing protected route without auth
@@ -61,7 +61,16 @@ export async function updateSession(request: NextRequest) {
   if (user && userRole) {
     const isOperatorRoute = request.nextUrl.pathname.startsWith('/operator')
     const isCustomerDashboard = request.nextUrl.pathname.startsWith('/dashboard')
+    const isAdminRoute = request.nextUrl.pathname.startsWith('/admin')
     const isOperatorRole = ['operator', 'staff', 'admin'].includes(userRole)
+    const isAdminRole = userRole === 'admin'
+
+    // Redirect non-admin users trying to access admin routes
+    if (isAdminRoute && !isAdminRole) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
 
     // Redirect customers trying to access operator routes
     if (isOperatorRoute && !isOperatorRole) {
@@ -86,7 +95,15 @@ export async function updateSession(request: NextRequest) {
     const url = request.nextUrl.clone()
     // Role-based redirect for authenticated users
     const isOperatorRole = ['operator', 'staff', 'admin'].includes(userRole)
-    url.pathname = isOperatorRole ? '/operator/dashboard' : '/dashboard'
+    const isAdminRole = userRole === 'admin'
+    
+    if (isAdminRole) {
+      url.pathname = '/admin'
+    } else if (isOperatorRole) {
+      url.pathname = '/operator/dashboard'
+    } else {
+      url.pathname = '/dashboard'
+    }
     return NextResponse.redirect(url)
   }
 

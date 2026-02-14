@@ -13,7 +13,6 @@ import {
   mdiCog,
   mdiFerry,
   mdiAccountGroup,
-  mdiWaves,
   mdiClose
 } from '@mdi/js'
 import Link from 'next/link'
@@ -24,6 +23,7 @@ import { Button } from '@/src/components/ui/button'
 import { Icon } from '@/src/components/ui/icon'
 import { useAuth } from '@/src/contexts/auth-context'
 import { Badge } from '@/src/components/ui/badge'
+import { BlueWatersWordmark } from '@/src/components/brand'
 
 /**
  * Operator Dashboard Header
@@ -46,14 +46,19 @@ function OperatorDashboardHeader() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
 
   return (
-    <header className="sticky top-0 z-[800] glass backdrop-blur-2xl border-b border-accent-900">
+    <header className="sticky top-0 z-[800] glass backdrop-blur-[var(--blur-strong)] border-b border-accent-900">
       <nav className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo & Branding */}
         <Link href="/operator/dashboard" className="flex items-center gap-3 group">
           <div className="relative">
             <div className="absolute inset-0 bg-accent-500 opacity-20 blur-xl rounded-full" />
-            <div className="relative glass-strong rounded-lg p-2">
-              <Icon path={mdiFerry} size={0.8} className="text-accent-300" aria-hidden={true} />
+            <div className="relative glass-strong rounded-lg p-1.5">
+              <BlueWatersWordmark 
+                size="xs" 
+                showText={false}
+                priority
+                className="transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
           </div>
           <div>
@@ -227,14 +232,14 @@ function OperatorDashboardFooter() {
           {/* Brand & Copyright */}
           <div className="flex items-center gap-3">
             <div className="glass-subtle rounded-lg p-2">
-              <Icon path={mdiWaves} size={0.8} className="text-accent-400" aria-hidden={true} />
+              <BlueWatersWordmark size="xs" showText={false} />
             </div>
             <div>
               <p className="text-sm font-semibold text-fg">
-                Blue Waters Operator Portal
+                Yenagoa Boat Club Operator Portal
               </p>
               <p className="text-xs text-fg-muted">
-                © {currentYear} Ministry of Blue Waters
+                © {currentYear} Ministry of Marine and Blue Economy
               </p>
             </div>
           </div>

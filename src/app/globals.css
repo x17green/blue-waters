@@ -1,23 +1,38 @@
+/* ============================================================================
+   TYPOGRAPHY - Brand Fonts
+   Must be imported first per CSS spec
+   ============================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 /**
- * Blue Waters Design System - Global Styles
+ * Yenagoa Boat Club Design System - Global Styles
  * 
  * Source: src/design-system/tokens.ts
  * Philosophy: Dark-first glassmorphism with conservative government aesthetic
+ * Brand: Aligned to branding.md (AstroMANIA + Bayelsa State partnership)
  */
 
 :root {
   /* ========================================================================
-     BACKGROUND LAYERS (Dark-first)
+     TYPOGRAPHY
      ======================================================================== */
-  --bg-950: 207 40% 8%;    /* Deepest */
-  --bg-900: 207 40% 12%;   /* App background (dark mode default) */
-  --bg-800: 207 40% 16%;   /* Elevated panels */
-  --bg-700: 207 40% 24%;   /* Hover states */
-  --bg-600: 207 40% 32%;   /* Active states */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-marketing: 'DM Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* ========================================================================
+     BACKGROUND LAYERS (Dark-first) - Deep Ocean Blue (#0A2A3A)
+     Aligned to branding.md specification
+     ======================================================================== */
+  --bg-950: 197 70% 8%;    /* Deepest ocean */
+  --bg-900: 197 70% 13%;   /* App background (#0A2A3A - Brand primary) */
+  --bg-800: 197 70% 16%;   /* Elevated panels */
+  --bg-700: 197 70% 24%;   /* Hover states */
+  --bg-600: 197 70% 32%;   /* Active states */
 
   /* ========================================================================
      FOREGROUND / TEXT COLORS
@@ -27,27 +42,42 @@
   --fg-subtle: 205 30% 50%; /* Tertiary text */
 
   /* ========================================================================
-     ACCENT COLORS (Muted Nautical Blue)
+     ACCENT COLORS - Muted Teal (#3E7E8C)
+     Aligned to branding.md specification
      ======================================================================== */
-  --accent-900: 207 70% 20%;
-  --accent-800: 207 70% 28%;
-  --accent-700: 207 70% 36%;
-  --accent-600: 207 80% 44%;
-  --accent-500: 207 80% 50%;  /* Primary accent */
-  --accent-400: 207 80% 60%;  /* Hover */
-  --accent-300: 207 80% 70%;  /* Active */
-  --accent-200: 207 80% 80%;
-  --accent-100: 207 80% 90%;
+  --accent-900: 191 39% 20%;
+  --accent-800: 191 39% 28%;
+  --accent-700: 191 39% 35%;
+  --accent-600: 191 39% 38%;
+  --accent-500: 191 39% 40%;  /* Primary accent (#3E7E8C - Brand CTA) */
+  --accent-400: 191 39% 50%;  /* Hover */
+  --accent-300: 191 39% 60%;  /* Active */
+  --accent-200: 191 39% 70%;
+  --accent-100: 191 39% 85%;
+
+  /* ========================================================================
+     ACCENT GOLD - Soft Gold (#CBB26A)
+     New: Aligned to branding.md specification for highlights/icons
+     ======================================================================== */
+  --accent-gold-900: 45 47% 30%;
+  --accent-gold-800: 45 47% 38%;
+  --accent-gold-700: 45 47% 45%;
+  --accent-gold-600: 45 47% 55%;
+  --accent-gold-500: 45 47% 61%;  /* Soft Gold (#CBB26A - Brand accent) */
+  --accent-gold-400: 45 47% 70%;  /* Hover */
+  --accent-gold-300: 45 47% 80%;  /* Active */
+  --accent-gold-200: 45 47% 90%;
+  --accent-gold-100: 45 47% 95%;
 
   /* ========================================================================
      SEMANTIC COLORS
      ======================================================================== */
-  --success-900: 142 70% 20%;
-  --success-800: 142 70% 28%;
-  --success-700: 142 70% 35%;
-  --success-600: 142 70% 42%;
-  --success-500: 142 70% 45%;
-  --success-300: 142 70% 70%;
+  --success-900: 142 54% 25%;
+  --success-800: 142 54% 35%;
+  --success-700: 142 54% 45%;
+  --success-600: 142 54% 55%;
+  --success-500: 142 54% 59%;  /* Emerald Green (#65C489 - Brand exact) */
+  --success-300: 142 54% 75%;
 
   --warning-900: 38 90% 25%;
   --warning-800: 38 90% 32%;
@@ -189,7 +219,7 @@
 
 body {
   background-color: hsl(var(--background));
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   color: hsl(var(--foreground));
 }
 
@@ -286,5 +316,123 @@ body {
   
   .glass-hover {
     transition: none;
+  }
+}
+
+/* ============================================================================
+   GLASS EMBLEM EFFECTS
+   Production-grade CSS effects inspired by Photoshop glass emblem recipe
+   ============================================================================ */
+
+/**
+ * Glass surface for emblem center plate
+ * Recreates Photoshop inner glow + subtle blur effect
+ */
+.glass-surface {
+  /* Inner glow simulation */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.06));
+  
+  /* Subtle animation for interactive emblems */
+  transition: all var(--transition-normal) ease;
+}
+
+.glass-surface:hover {
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.08));
+}
+
+/**
+ * Metallic trim effect
+ * Simulates gold bevel & emboss from PSD recipe
+ */
+.metallic-trim {
+  filter: drop-shadow(0 1px 2px rgba(203, 178, 106, 0.4))
+          drop-shadow(0 -1px 2px rgba(255, 255, 255, 0.1));
+}
+
+/**
+ * Soft shadow for depth
+ * Recreates Photoshop soft shadow with Gaussian blur
+ */
+.emblem-shadow {
+  filter: drop-shadow(0 4px 12px rgba(3, 6, 10, 0.65));
+}
+
+/**
+ * Water ripple effect (animation)
+ * Subtle wave motion for animated emblems
+ */
+@keyframes ripple {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.water-ripple {
+  animation: ripple 3s ease-in-out infinite;
+}
+
+/**
+ * Sun glow pulse (animation)
+ * Gentle pulsing for sun element in glass crest
+ */
+@keyframes sun-pulse {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/**
+ * Glass sheen shimmer (animation)
+ * Subtle shimmer effect for premium feel
+ */
+@keyframes shimmer {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.glass-shimmer {
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/**
+ * Emblem hover lift
+ * Subtle 3D lift effect on hover
+ */
+.emblem-lift {
+  transition: transform var(--transition-normal) ease,
+              filter var(--transition-normal) ease;
+}
+
+.emblem-lift:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 6px 16px rgba(3, 6, 10, 0.75));
+}
+
+/**
+ * Accessibility - disable animations for reduced motion
+ */
+@media (prefers-reduced-motion: reduce) {
+  .water-ripple,
+  .glass-shimmer {
+    animation: none;
+  }
+  
+  .emblem-lift:hover {
+    transform: none;
   }
 }

@@ -6,8 +6,7 @@ import {
   mdiCalendar,
   mdiLogout,
   mdiMapMarker,
-  mdiAccount,
-  mdiWaves
+  mdiAccount
 } from '@mdi/js'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -16,6 +15,7 @@ import { type ReactNode } from 'react'
 import { Button } from '@/src/components/ui/button'
 import { Icon } from '@/src/components/ui/icon'
 import { useAuth } from '@/src/contexts/auth-context'
+import { BlueWatersWordmark } from '@/src/components/brand'
 
 /**
  * User Dashboard Header
@@ -39,13 +39,15 @@ function UserDashboardHeader() {
       <nav className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2 group">
-          <div className="relative">
-            <Icon path={mdiWaves} size={1} className="text-accent-400 transition-transform duration-300 group-hover:scale-110" aria-hidden={true} />
-            <div className="absolute inset-0 bg-accent-500 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-30" />
-          </div>
+          <BlueWatersWordmark 
+            size="sm" 
+            showText={false}
+            priority
+            className="transition-transform duration-300 group-hover:scale-110"
+          />
           <div>
             <h1 className="text-lg font-semibold text-fg tracking-tight">
-              Blue Waters
+              Yenagoa Boat Club
             </h1>
             <p className="text-xs text-fg-muted -mt-1">
               My Dashboard
@@ -135,9 +137,9 @@ function UserDashboardFooter() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Icon path={mdiWaves} size={0.9} className="text-accent-400" aria-hidden={true} />
+              <BlueWatersWordmark size="xs" showText={false} />
               <span className="font-semibold text-fg">
-                Blue Waters
+                Yenagoa Boat Club
               </span>
             </div>
             <p className="text-sm text-fg-muted max-w-xs">
@@ -181,7 +183,7 @@ function UserDashboardFooter() {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-border-subtle text-center text-sm text-fg-subtle">
           <p>
-            © {currentYear} Blue Waters - Ministry of Blue Waters, Bayelsa State. 
+            © {currentYear} Yenagoa Boat Club - Ministry of Marine and Blue Economy, Bayelsa State. 
             All rights reserved.
           </p>
         </div>

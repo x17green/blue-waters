@@ -39,14 +39,14 @@ export async function verifyAuth(request: NextRequest): Promise<AuthUser> {
   // Get user role from database
   const { data: profile } = await supabase
     .from('users')
-    .select('user_type')
+    .select('role')
     .eq('id', user.id)
     .single()
 
   return {
     id: user.id,
     email: user.email || '',
-    role: profile?.user_type || 'customer',
+    role: profile?.role || 'customer',
   }
 }
 

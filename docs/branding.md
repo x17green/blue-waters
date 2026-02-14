@@ -1,4 +1,4 @@
-# 🌊 Blue Waters — Brand Identity & Product Alignment Document
+# 🌊 Yenagoa Boat Club — Brand Identity & Product Alignment Document
 
 **Company:** AstroMANIA Enterprises  
 **Developer:** Precious Okoyen (x17green)  
@@ -21,7 +21,7 @@ Build a seamless booking and management ecosystem for boat cruises, private char
 
 ### 🧭 Core Promise
 
-Blue Waters connects citizens, tourists, and operators to **safe, authentic, and sustainable water experiences**.  
+Yenagoa Boat Club connects citizens, tourists, and operators to **safe, authentic, and sustainable water experiences**.  
 It represents a bridge between the **heritage of Bayelsa’s waters** and the **future of its digital economy**.
 
 ---
@@ -30,14 +30,14 @@ It represents a bridge between the **heritage of Bayelsa’s waters** and the **
 
 |Attribute|Detail|
 |---|---|
-|**Product Name**|Blue Waters|
+|**Product Name**|Yenagoa Boat Club|
 |**Intellectual Property Owner**|AstroMANIA Enterprises|
 |**Developer / Architect**|Precious Okoyen (x17green)|
 |**Affiliated Partners**|Bayelsa State Government · Ministry of Marine and Blue Economy|
 |**License**|MIT License (open innovation, public contribution allowed)|
 |**Repository**|[https://github.com/x17green/blue-waters](https://github.com/x17green/blue-waters)|
 
-> Blue Waters operates as an **AstroMANIA Enterprise public project** in partnership with the Bayelsa marine initiative.  
+> Yenagoa Boat Club operates as an **AstroMANIA Enterprise public project** in partnership with the Bayelsa marine initiative.  
 > The project’s visuals and usage of official seals follow **government collaboration guidelines** for non-exclusive, co-branded platforms.
 
 ---
@@ -49,15 +49,15 @@ It represents a bridge between the **heritage of Bayelsa’s waters** and the **
 1. **Bayelsa State Government Coat of Arms**  
     Used top-left on homepage and press materials — represents state partnership and governance.
     
-    ![Bayelsa State Government Logo](https://chatgpt.com/assets/logos/bayelsa-gov.png)
+    ![Bayelsa State Government Logo](/public/assets/logos/bayelsa-coat-of-arms.png)
     
 2. **Ministry of Marine and Blue Economy Seal**  
     Used beside Bayelsa logo on homepage footer and about section — symbolizes the state’s Blue Economy initiative.
     
-    ![Ministry of Marine and Blue Economy Logo](https://chatgpt.com/assets/logos/blue-economy.png)
+    ![Ministry of Marine and Blue Economy Logo](/public/assets/logos/ministry-blue-economy-seal.png)
     
-3. **Blue Waters Wordmark / App Icon**  
-    The Blue Waters logo will evolve as a modern-glass emblem, with muted aquatic gradients and minimalist typography.
+3. **Yenagoa Boat Club Wordmark / App Icon**  
+    The Yenagoa Boat Club logo will evolve as a modern-glass emblem, with muted aquatic gradients and minimalist typography.
     
 
 ---
@@ -66,17 +66,17 @@ It represents a bridge between the **heritage of Bayelsa’s waters** and the **
 
 |Placement|Logo(s)|Description|
 |---|---|---|
-|**Homepage Header**|Bayelsa Coat of Arms + Blue Waters Logo|Signifies joint initiative|
-|**Homepage Hero Section**|Blue Waters logo (centered) with water-reflection glassmorphic overlay|Branding anchor|
+|**Homepage Header**|Bayelsa Coat of Arms + Yenagoa Boat Club Logo|Signifies joint initiative|
+|**Homepage Hero Section**|Yenagoa Boat Club logo (centered) with water-reflection glassmorphic overlay|Branding anchor|
 |**Footer**|Ministry of Marine & Blue Economy Seal|Institutional backing|
-|**Mobile App Splash Screen**|Blue Waters logo (primary), co-brand marks faded underneath|App identity|
-|**Documents & PDFs**|AstroMANIA + Blue Waters + Ministry Seals (aligned horizontally, equal scale)|Official materials|
+|**Mobile App Splash Screen**|Yenagoa Boat Club logo (primary), co-brand marks faded underneath|App identity|
+|**Documents & PDFs**|AstroMANIA + Yenagoa Boat Club + Ministry Seals (aligned horizontally, equal scale)|Official materials|
 
 **Mockup Guide (Homepage Placement):**
 
 ```
 +--------------------------------------------------------------+
-| [Bayelsa Logo]     BLUE WATERS (Wordmark)     [Ministry Seal] |
+| [Bayelsa Logo]     Yenagoa Boat Club (Wordmark)     [Ministry Seal] |
 +--------------------------------------------------------------+
 |  Hero Image / Glass Overlay / CTA Buttons                    |
 |                                                              |
@@ -118,7 +118,7 @@ A **professional marine-grade palette** derived from Bayelsa’s marine environm
 
 ## 6. Design Style — Glassmorphism (Dark-first)
 
-Blue Waters embodies a **glass-on-water** aesthetic:
+Yenagoa Boat Club embodies a **glass-on-water** aesthetic:
 
 - Translucent panels on deep navy backgrounds.
     
@@ -168,7 +168,7 @@ Interactive icons → `role="img"` + `aria-label="…"`.
 
 ## 8. Accessibility Standards
 
-Blue Waters fully adheres to **WCAG 2.1 AA** and ARIA design principles.  
+Yenagoa Boat Club fully adheres to **WCAG 2.1 AA** and ARIA design principles.  
 Accessibility is embedded in every screen.
 
 ### Core Practices
@@ -229,11 +229,11 @@ Accessibility is embedded in every screen.
 ## 10. Co-branding & Placement Rules
 
 - **Homepage Hero Section:**  
-    Bayelsa State Government Coat of Arms (left) + Blue Waters logo (center) + Ministry Seal (right).  
+    Bayelsa State Government Coat of Arms (left) + Yenagoa Boat Club logo (center) + Ministry Seal (right).  
     → All logos equal height, aligned on baseline.
     
 - **App Splash / Loading Screen:**  
-    Blue Waters emblem foreground, Ministry Seal watermark background.
+    Yenagoa Boat Club emblem foreground, Ministry Seal watermark background.
     
 - **Partnership or media materials:**  
     “In partnership with the Bayelsa State Ministry of Marine and Blue Economy” (caption below official seals).
@@ -246,7 +246,7 @@ Accessibility is embedded in every screen.
 
 ## 11. Ethical Design Commitment
 
-Blue Waters commits to:
+Yenagoa Boat Club commits to:
 
 - **Data Transparency:** users own their booking data.
     
@@ -268,13 +268,13 @@ Blue Waters commits to:
 |**State Partner**|Ministry of Marine and Blue Economy|Regulatory compliance & operational oversight|
 |**Brand Custodian**|AstroMANIA Design Core|Brand consistency, updates, and co-branding reviews|
 
-All brand updates must be reviewed jointly between **AstroMANIA Design Core** and **Blue Waters Product Council** to ensure consistency across digital and print environments.
+All brand updates must be reviewed jointly between **AstroMANIA Design Core** and **Yenagoa Boat Club Product Council** to ensure consistency across digital and print environments.
 
 ---
 
 ## 13. Legal Statement
 
-> **Blue Waters** is a proprietary software developed and maintained by **AstroMANIA Enterprises**, licensed under the **MIT License (2026)**.  
+> **Yenagoa Boat Club** is a proprietary software developed and maintained by **AstroMANIA Enterprises**, licensed under the **MIT License (2026)**.  
 > It operates under an official partnership with the **Bayelsa State Government** and the **Ministry of Marine and Blue Economy**.  
 > All visual assets belonging to the Government of Bayelsa and its ministries are used **for identification and partnership representation only** and remain their respective intellectual properties.
 
@@ -282,6 +282,6 @@ All brand updates must be reviewed jointly between **AstroMANIA Design Core** an
 
 ## 14. Brand Manifesto
 
-> _“Blue Waters embodies the spirit of Bayelsa — where innovation meets the tide.  
+> _“Yenagoa Boat Club embodies the spirit of Bayelsa — where innovation meets the tide.  
 > We sail with integrity, guided by truth, justice, and service.  
 > Our platform connects people to their state, their culture, and their future on water.”_

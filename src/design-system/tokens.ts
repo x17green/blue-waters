@@ -1,5 +1,5 @@
 /**
- * Blue Waters Design System - Design Tokens
+ * Yenagoa Boat Club Design System - Design Tokens
  * 
  * Central token definitions for colors, spacing, typography, effects.
  * Source of truth: docs/design-architecture.md

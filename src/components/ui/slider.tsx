@@ -7,7 +7,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Slider Component - Blue Waters Design System
+ * Slider Component - Yenagoa Boat Club Design System
  * 
  * Glassmorphism-enhanced range slider with design token integration.
  * Supports semantic variants, sizing, and full WCAG AA compliance.

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="bwTitle">
+  <title id="bwTitle">Yenagoa Boat Club emblem</title>
+  <defs>
+    <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#6DA7C8" />
+      <stop offset="100%" stop-color="#154A57" />
+    </linearGradient>
+  </defs>
+  <!-- circle bg -->
+  <circle cx="60" cy="60" r="56" fill="#0A2A3A"/>
+  <!-- waves -->
+  <path d="M12 80 Q32 68 52 78 T92 78" fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M12 86 Q32 74 52 84 T92 84" fill="none" stroke="#89B6D2" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+  <!-- boat -->
+  <g transform="translate(0,-6)" fill="#E8ECEF">
+    <path d="M60 55 L48 55 L44 60 L76 60 L72 55 Z" />
+    <rect x="52" y="45" width="16" height="6" rx="1.2" />
+    <path d="M58 45 L62 40 L66 45" stroke="#0A2A3A" stroke-width="1" fill="none"/>
+  </g>
+</svg>

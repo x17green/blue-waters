@@ -5,7 +5,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Blue Waters Input Component
+ * Yenagoa Boat Club Input Component
  * 
  * Glassmorphism dark-first design with accessibility features.
  * Design Source: docs/design-architecture.md#8-component-system

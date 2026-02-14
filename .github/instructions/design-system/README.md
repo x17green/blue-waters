@@ -7,7 +7,7 @@
 
 ## 🎯 Overview
 
-This directory contains the complete infrastructure for migrating Blue Waters from a **hybrid shadcn/NextUI system with vibrant ocean theming** to a **sophisticated dark-first glassmorphism design system** built on HeroUI, Pictogrammers icons, and WCAG AA accessibility standards.
+This directory contains the complete infrastructure for migrating Yenagoa Boat Club from a **hybrid shadcn/NextUI system with vibrant ocean theming** to a **sophisticated dark-first glassmorphism design system** built on HeroUI, Pictogrammers icons, and WCAG AA accessibility standards.
 
 ### What's Changing
 
@@ -15,7 +15,7 @@ This directory contains the complete infrastructure for migrating Blue Waters fr
 |--------|---------------|--------------|
 | **Component Library** | shadcn/ui + NextUI (hybrid) | HeroUI v2 (unified) |
 | **Visual Style** | Vibrant gradients, ocean blues/oranges | Dark glassmorphism, muted nautical |
-| **Icon System** | Lucide React + Emojis (⛵🌊) | Pictogrammers MDI (professional) |
+| **Icon System** | @mdi/react and @mdi/js | Pictogrammers MDI (professional) |
 | **Accessibility** | Partial (known issues) | WCAG AA compliant (≥95 Lighthouse) |
 | **Design Tokens** | Hardcoded colors/spacing | CSS variables + Tailwind tokens |
 | **Color Philosophy** | Bright, consumer-facing | Conservative, operator-focused |
@@ -216,7 +216,7 @@ Every pull request is automatically validated by GitHub Actions:
 - Hardcoded colors found (hex, rgb, hsl, arbitrary Tailwind)
 - Component missing required accessibility attributes
 - Glassmorphism implemented without reduced-motion fallback
-- Lucide icons or emojis used instead of Pictogrammers
+- React MDI and @mdi/js icons or emojis used instead of Pictogrammers
 
 **PR will pass if:**
 - All design tokens used correctly

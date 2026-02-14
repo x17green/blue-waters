@@ -9,7 +9,7 @@ import { Icon } from '@/src/components/ui/icon'
 import { mdiCircle } from '@mdi/js'
 
 /**
- * RadioGroup Component - Blue Waters Design System
+ * RadioGroup Component - Yenagoa Boat Club Design System
  * 
  * Glassmorphism-enhanced radio group with design token integration.
  * Supports semantic variants, sizing, and full WCAG AA compliance.
