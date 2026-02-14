@@ -3,12 +3,12 @@
 import { type User } from '@supabase/supabase-js'
 import { motion } from 'framer-motion'
 import { useState, useTransition } from 'react'
-import { Icon } from '@/src/components/ui/icon'
+import Icon from '@mdi/react'
 import { mdiEmail, mdiPhone, mdiContentSave, mdiAccount } from '@mdi/js'
 
 import { updateProfile } from '@/src/app/auth/actions'
-import { Button } from '@/src/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface ProfileFormProps {
   user: User

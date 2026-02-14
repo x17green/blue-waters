@@ -7,8 +7,9 @@
 
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
+
+import { apiError, apiResponse, UnauthorizedError, verifyAuth, verifyRole } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
-import { verifyAuth, verifyRole, apiResponse, apiError, UnauthorizedError } from '@/src/lib/api-auth'
 
 const createTripSchema = z.object({
   title: z.string().min(5).max(200),
@@ -108,7 +109,7 @@ export async function GET(request: NextRequest) {
         })
 
         const allPrices = schedules.flatMap((s) =>
-          s.priceTiers.map((pt) => Number(pt.amountKobo))
+          s.priceTiers.map((pt) => Number(pt.amountKobo)),
         )
         const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : 0
         const maxPrice = allPrices.length > 0 ? Math.max(...allPrices) : 0
@@ -134,7 +135,7 @@ export async function GET(request: NextRequest) {
           } : undefined,
           createdAt: trip.createdAt,
         }
-      })
+      }),
     )
 
     return apiResponse({

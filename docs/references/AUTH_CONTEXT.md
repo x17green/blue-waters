@@ -2,7 +2,7 @@
 
 ## Overview
 
-Blue Waters now uses a **centralized authentication context** with **role-aware layouts** for different user types. This document explains the architecture and usage patterns.
+Yenagoa Boat Club now uses a **centralized authentication context** with **role-aware layouts** for different user types. This document explains the architecture and usage patterns.
 
 ## Architecture
 
@@ -115,7 +115,7 @@ export default function OperatorDashboardPage() {
 
 ### 3. Design System Integration
 
-Both layouts use **Blue Waters Design Tokens** from `src/design-system/tokens.ts`:
+Both layouts use **Yenagoa Boat Club Design Tokens** from `src/design-system/tokens.ts`:
 
 #### Colors:
 - `--bg-950`: Deepest background (app background)

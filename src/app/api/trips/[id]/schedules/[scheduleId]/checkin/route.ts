@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
+
 import { verifyAuth } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
 
@@ -58,7 +59,7 @@ interface BoardingPassData {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; scheduleId: string }> }
+  { params }: { params: Promise<{ id: string; scheduleId: string }> },
 ): Promise<NextResponse> {
   try {
     // 1. Verify authentication (operator/staff only)
@@ -167,7 +168,7 @@ export async function POST(
     if (booking.status !== 'confirmed') {
       return apiError(
         `Booking status is ${booking.status}, check-in only allowed for confirmed bookings`,
-        400
+        400,
       )
     }
 
@@ -229,7 +230,7 @@ export async function POST(
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; scheduleId: string }> }
+  { params }: { params: Promise<{ id: string; scheduleId: string }> },
 ): Promise<NextResponse> {
   try {
     // Verify authentication
@@ -269,7 +270,7 @@ export async function GET(
           checkedIn: true,
           checkin,
         },
-        200
+        200,
       )
     } else {
       // Get all check-ins for this trip schedule
@@ -319,7 +320,7 @@ export async function GET(
             remaining: totalPassengers - checkins.length,
           },
         },
-        200
+        200,
       )
     }
   } catch (error) {

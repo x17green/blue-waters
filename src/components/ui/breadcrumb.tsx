@@ -7,7 +7,7 @@ import { Icon } from '@/src/components/ui/icon'
 import { mdiChevronRight, mdiDotsHorizontal } from '@mdi/js'
 
 /**
- * Breadcrumb Component - Blue Waters Design System
+ * Breadcrumb Component - Yenagoa Boat Club Design System
  * 
  * Glassmorphism-enhanced breadcrumb navigation with design token integration.
  * Provides hierarchical navigation with semantic HTML and full WCAG AA compliance.

@@ -1,6 +1,5 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Navbar, NavbarBrand, NavbarContent, NavbarItem, Button as NextUIButton, Tabs as NextUITabs, Tab, useDisclosure } from '@nextui-org/react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -9,6 +8,7 @@ import { Icon } from '@/src/components/ui/icon'
 import { mdiCurrencyUsd, mdiLogout, mdiMapMarker, mdiFerry, mdiTrendingUp, mdiAccountGroup } from '@mdi/js'
 
 import { Button } from '@/src/components/ui/button'
+import { Card, CardContent, CardHeader } from '@/src/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
 
 const operatorData = {
@@ -73,7 +73,6 @@ const upcomingTrips = [
 
 export default function OperatorDashboard() {
   const [user, setUser] = useState<any>(null)
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   useEffect(() => {
     // In a real app, fetch user data
@@ -105,47 +104,6 @@ export default function OperatorDashboard() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
-      {/* Navigation */}
-      <Navbar className="bg-primary/10 backdrop-blur-lg border-b border-primary/20">
-        <NavbarBrand>
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="text-white font-bold text-lg">⛵</span>
-            </div>
-            <p className="font-bold text-xl text-primary">Blue Waters</p>
-          </Link>
-        </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem>
-            <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
-              My Boats
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
-              Bookings
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
-              Earnings
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button
-              variant="ghost"
-              onClick={handleLogout}
-              className="text-primary"
-              startIcon={<Icon path={mdiLogout} size={0.6} aria-hidden={true} />}
-            >
-              Logout
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
-
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -171,7 +129,7 @@ export default function OperatorDashboard() {
         >
           <motion.div variants={itemVariants}>
             <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-              <CardBody className="p-6">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-foreground/60 text-sm mb-2">Total Trips</p>
@@ -181,13 +139,13 @@ export default function OperatorDashboard() {
                   </div>
                   <Icon path={mdiFerry} size={1.66} className="text-primary/30" aria-hidden={true} />
                 </div>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <Card className="bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/20">
-              <CardBody className="p-6">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-foreground/60 text-sm mb-2">Total Revenue</p>
@@ -197,13 +155,13 @@ export default function OperatorDashboard() {
                   </div>
                   <Icon path={mdiCurrencyUsd} size={1.66} className="text-accent/30" aria-hidden={true} />
                 </div>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <Card className="bg-gradient-to-br from-blue-400/10 to-blue-400/5 border border-blue-400/20">
-              <CardBody className="p-6">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-foreground/60 text-sm mb-2">Rating</p>
@@ -213,13 +171,13 @@ export default function OperatorDashboard() {
                   </div>
                   <Icon path={mdiTrendingUp} size={1.66} className="text-blue-600/30" aria-hidden={true} />
                 </div>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <Card className="bg-gradient-to-br from-green-400/10 to-green-400/5 border border-green-400/20">
-              <CardBody className="p-6">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-foreground/60 text-sm mb-2">Active Boats</p>
@@ -227,7 +185,7 @@ export default function OperatorDashboard() {
                   </div>
                   <Icon path={mdiAccountGroup} size={1.66} className="text-green-600/30" aria-hidden={true} />
                 </div>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
         </motion.div>
@@ -245,7 +203,7 @@ export default function OperatorDashboard() {
               <CardHeader className="border-b border-primary/10">
                 <h2 className="text-xl font-bold text-primary">Revenue Trend</h2>
               </CardHeader>
-              <CardBody className="p-6">
+              <CardContent className="p-6">
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={revenueData}>
                     <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
@@ -261,7 +219,7 @@ export default function OperatorDashboard() {
                     />
                   </LineChart>
                 </ResponsiveContainer>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
 
@@ -275,7 +233,7 @@ export default function OperatorDashboard() {
               <CardHeader className="border-b border-primary/10">
                 <h2 className="text-xl font-bold text-primary">Weekly Bookings</h2>
               </CardHeader>
-              <CardBody className="p-6">
+              <CardContent className="p-6">
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={bookingsData}>
                     <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
@@ -285,7 +243,7 @@ export default function OperatorDashboard() {
                     <Bar dataKey="bookings" className="fill-accent-500" radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
         </div>
@@ -306,7 +264,7 @@ export default function OperatorDashboard() {
                 Create Trip
               </Button>
             </CardHeader>
-            <CardBody className="p-6">
+            <CardContent className="p-6">
               <div className="space-y-4">
                 {upcomingTrips.map((trip, idx) => (
                   <motion.div
@@ -350,7 +308,7 @@ export default function OperatorDashboard() {
                   </motion.div>
                 ))}
               </div>
-            </CardBody>
+            </CardContent>
           </Card>
         </motion.div>
       </div>

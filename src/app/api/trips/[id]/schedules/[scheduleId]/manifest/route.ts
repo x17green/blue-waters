@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
+
 import { verifyAuth } from '@/src/lib/api-auth'
 import {
   fetchManifestData,
@@ -23,7 +24,7 @@ function apiError(message: string, status = 500) {
 
 export async function GET(
   request: NextRequest,
-  context: { params: Promise<{ id: string; scheduleId: string }> }
+  context: { params: Promise<{ id: string; scheduleId: string }> },
 ) {
   try {
     // 1. Verify authentication
@@ -59,7 +60,7 @@ export async function GET(
           warnings: validation.errors,
           canGenerate: true, // Allow generation with warnings
         },
-        400
+        400,
       )
     }
 
@@ -108,7 +109,7 @@ export async function GET(
  */
 export async function HEAD(
   request: NextRequest,
-  context: { params: Promise<{ id: string; scheduleId: string }> }
+  context: { params: Promise<{ id: string; scheduleId: string }> },
 ) {
   try {
     const user = await verifyAuth(request)

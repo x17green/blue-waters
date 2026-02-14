@@ -7,14 +7,16 @@
  * Events: charge.success, charge.failed, refund.processed
  */
 
-import { NextRequest } from 'next/server'
 import crypto from 'crypto'
-import { apiResponse, apiError } from '@/src/lib/api-auth'
+
+import { NextRequest } from 'next/server'
+
+import { apiError, apiResponse } from '@/src/lib/api-auth'
 import {
-  processPaymentSuccess,
-  processPaymentFailure,
-  storeWebhookEvent,
   markWebhookProcessed,
+  processPaymentFailure,
+  processPaymentSuccess,
+  storeWebhookEvent,
 } from '@/src/lib/payment-webhooks'
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || ''
@@ -112,7 +114,7 @@ export async function POST(request: NextRequest) {
         case 'charge.failed':
           await processPaymentFailure(
             bookingReference,
-            payload.data.gateway_response || 'Payment failed'
+            payload.data.gateway_response || 'Payment failed',
           )
 
           await markWebhookProcessed(webhookEvent.id, true)

@@ -7,8 +7,9 @@
 
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
+
+import { apiError, apiResponse, UnauthorizedError, verifyAuth, verifyRole } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
-import { verifyAuth, verifyRole, apiResponse, apiError, UnauthorizedError } from '@/src/lib/api-auth'
 import { getAvailableSeats } from '@/src/lib/seat-lock'
 
 interface RouteParams {
@@ -37,7 +38,7 @@ const createScheduleSchema = z.object({
  */
 export async function GET(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const { id } = await context.params
@@ -109,7 +110,7 @@ export async function GET(
             vessel: schedule.trip.vessel?.name,
           },
         }
-      })
+      }),
     )
 
     return apiResponse({
@@ -128,7 +129,7 @@ export async function GET(
  */
 export async function POST(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const user = await verifyRole(request, ['operator', 'admin'])
@@ -158,7 +159,7 @@ export async function POST(
     if (validatedData.capacity > (trip.vessel?.capacity || 0)) {
       return apiError(
         `Capacity (${validatedData.capacity}) exceeds vessel capacity (${trip.vessel?.capacity})`,
-        400
+        400,
       )
     }
 

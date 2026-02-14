@@ -6,7 +6,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Blue Waters Button Component
+ * Yenagoa Boat Club Button Component
  * 
  * Glassmorphism dark-first design with accessibility features.
  * Design Source: docs/design-architecture.md#8-component-system
@@ -344,6 +344,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ...props,
         }
     
+    // When using asChild, pass children directly without wrappers (Slot requires single child)
+    if (asChild) {
+      return (
+        <Comp
+          ref={ref as any}
+          {...componentProps}
+        >
+          {children}
+        </Comp>
+      )
+    }
+
     return (
       <Comp
         ref={ref as any}

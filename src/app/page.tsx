@@ -5,12 +5,12 @@ import Icon from '@mdi/react'
 import { mdiArrowRight } from '@mdi/js'
 import Link from 'next/link'
 
-import FeaturedTrips from '@/src/components/featured-trips'
-import Hero from '@/src/components/hero'
-import HowItWorks from '@/src/components/how-it-works'
-import PublicLayout from '@/src/components/layouts/public-layout'
-import Testimonials from '@/src/components/testimonials'
-import { Button } from '@/src/components/ui/button'
+import FeaturedTrips from '@/components/featured-trips'
+import Hero from '@/components/hero'
+import HowItWorks from '@/components/how-it-works'
+import PublicLayout from '@/components/layouts/public-layout'
+import Testimonials from '@/components/testimonials'
+import { Button } from '@/components/ui/button'
 
 /**
  * Home Page

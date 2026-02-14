@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Blue Waters - Boat Booking Platform | Ministry of Blue Waters',
-  description: 'Book safe, reliable, and affordable boat trips across Bayelsa waterways. Experience the beauty of water travel with Blue Waters.',
+  title: 'Yenagoa Boat Club - Boat Booking Platform | Ministry of Marine and Blue Economy',
+  description: 'Book safe, reliable, and affordable boat trips across Bayelsa waterways. Experience the beauty of water travel with Yenagoa Boat Club.',
   keywords: 'boat booking, bayelsa, water transport, cruise, boat rental',
   openGraph: {
-    title: 'Blue Waters - Boat Booking Platform',
+    title: 'Yenagoa Boat Club - Boat Booking Platform',
     description: 'Book safe, reliable, and affordable boat trips across Bayelsa waterways',
     type: 'website',
   },

@@ -7,8 +7,9 @@
 
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
+
+import { apiError, apiResponse, UnauthorizedError, verifyAuth } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
-import { verifyAuth, apiResponse, apiError, UnauthorizedError } from '@/src/lib/api-auth'
 import { lockSeats } from '@/src/lib/seat-lock'
 
 // Validation schemas
@@ -78,7 +79,7 @@ export async function POST(request: NextRequest) {
     const lockResult = await lockSeats(
       validatedData.tripScheduleId,
       user.id,
-      validatedData.numberOfPassengers
+      validatedData.numberOfPassengers,
     )
 
     if (!lockResult.success) {

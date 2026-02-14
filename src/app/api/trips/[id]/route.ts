@@ -8,8 +8,9 @@
 
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
+
+import { apiError, apiResponse, UnauthorizedError, verifyAuth, verifyRole } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
-import { verifyAuth, verifyRole, apiResponse, apiError, UnauthorizedError } from '@/src/lib/api-auth'
 
 interface RouteParams {
   params: Promise<{
@@ -34,7 +35,7 @@ const updateTripSchema = z.object({
  */
 export async function GET(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const { id } = await context.params
@@ -153,7 +154,7 @@ export async function GET(
  */
 export async function PATCH(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const user = await verifyRole(request, ['operator', 'admin'])
@@ -227,7 +228,7 @@ export async function PATCH(
  */
 export async function DELETE(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const user = await verifyRole(request, ['operator', 'admin'])
@@ -264,7 +265,7 @@ export async function DELETE(
     if (activeBookings > 0) {
       return apiError(
         `Cannot delete trip with ${activeBookings} active bookings`,
-        400
+        400,
       )
     }
 

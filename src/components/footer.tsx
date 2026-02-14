@@ -50,7 +50,7 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-500 to-accent-400 flex items-center justify-center">
                 <span className="text-2xl">⛵</span>
               </div>
-              <span className="text-2xl font-bold">Blue Waters</span>
+              <span className="text-2xl font-bold">Yenagoa Boat Club</span>
             </div>
             <p className="text-fg-muted mb-6">
               Your trusted partner for safe, convenient, and affordable boat travel across Bayelsa waterways.
@@ -138,7 +138,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="py-6 border-t border-border-subtle text-center text-fg-subtle text-sm">
           <p>
-            © {currentYear} Blue Waters. Ministry of Blue Waters. All rights reserved.
+            © {currentYear} Yenagoa Boat Club. Ministry of Marine and Blue Economy. All rights reserved.
           </p>
           <p className="mt-2">
             Committed to safe, sustainable, and inclusive water transportation in Bayelsa.

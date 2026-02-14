@@ -8,8 +8,9 @@
 
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
+
+import { apiError, apiResponse, UnauthorizedError, verifyAuth } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
-import { verifyAuth, apiResponse, apiError, UnauthorizedError } from '@/src/lib/api-auth'
 import { releaseSeats } from '@/src/lib/seat-lock'
 
 interface RouteParams {
@@ -24,7 +25,7 @@ interface RouteParams {
  */
 export async function GET(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const user = await verifyAuth(request)
@@ -134,7 +135,7 @@ const updateBookingSchema = z.object({
  */
 export async function PATCH(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const user = await verifyAuth(request)
@@ -208,7 +209,7 @@ export async function PATCH(
  */
 export async function DELETE(
   request: NextRequest,
-  context: RouteParams
+  context: RouteParams,
 ) {
   try {
     const user = await verifyAuth(request)

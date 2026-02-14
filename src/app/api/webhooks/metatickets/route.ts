@@ -8,13 +8,14 @@
  */
 
 import { NextRequest } from 'next/server'
-import { apiResponse, apiError } from '@/src/lib/api-auth'
+
+import { apiError, apiResponse } from '@/src/lib/api-auth'
 import {
-  verifyWebhookSignature,
-  processPaymentSuccess,
-  processPaymentFailure,
-  storeWebhookEvent,
   markWebhookProcessed,
+  processPaymentFailure,
+  processPaymentSuccess,
+  storeWebhookEvent,
+  verifyWebhookSignature,
 } from '@/src/lib/payment-webhooks'
 
 const METATICKETS_WEBHOOK_SECRET = process.env.METATICKETS_WEBHOOK_SECRET || ''
@@ -91,7 +92,7 @@ export async function POST(request: NextRequest) {
         case 'payment.failed':
           await processPaymentFailure(
             payload.data.booking_reference,
-            payload.data.failure_reason || 'Payment failed'
+            payload.data.failure_reason || 'Payment failed',
           )
 
           await markWebhookProcessed(webhookEvent.id, true)
