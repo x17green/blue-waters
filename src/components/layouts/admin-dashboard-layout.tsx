@@ -46,7 +46,7 @@ function AdminDashboardHeader() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
 
   return (
-    <header className="sticky top-0 z-[800] glass backdrop-blur-2xl border-b border-accent-900">
+    <header className="sticky top-0 z-[800] glass backdrop-blur-[var(--blur-strong)] border-b border-accent-900">
       <nav className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo & Branding */}
         <Link href="/admin" className="flex items-center gap-3 group">
