@@ -12,7 +12,8 @@ import UserDashboardLayout from '@/src/components/layouts/user-dashboard-layout'
  * 
  * Security:
  * - Server-side authentication check (no race condition)
- * - Operators/staff/admins are redirected to /operator/dashboard
+ * - Admins are redirected to /admin
+ * - Operators/staff are redirected to /operator/dashboard
  * - Only customers can access this layout
  * 
  * Routes covered:
@@ -46,8 +47,10 @@ export default async function DashboardLayout({
   
   const userRole = userData?.role || 'customer'
   
-  // Redirect operators BEFORE any client code runs
-  if (['operator', 'staff', 'admin'].includes(userRole)) {
+  // Redirect based on role BEFORE any client code runs
+  if (userRole === 'admin') {
+    redirect('/admin')
+  } else if (['operator', 'staff'].includes(userRole)) {
     redirect('/operator/dashboard')
   }
   

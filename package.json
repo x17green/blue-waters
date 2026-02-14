@@ -16,12 +16,12 @@
     "design-system:check-tokens:filter": "node scripts/design-system/validate-tokens.js --filter",
     "design-system:validate-component": "node scripts/design-system/validate-components.js",
     "design-system:validate-all": "npm run design-system:check-tokens && echo '✅ All design system validations passed'",
+    "admin:create-user": "node scripts/create-admin-user.js",
+    "admin:verify-user": "node scripts/verify-admin-user.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static"
   },
   "dependencies": {
-    "@heroui/react": "^2.8.9",
-    "@heroui/theme": "^2.4.26",
     "@hookform/resolvers": "^3.9.1",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
