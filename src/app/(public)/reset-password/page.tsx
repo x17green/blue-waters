@@ -8,6 +8,9 @@ import { useSearchParams } from 'next/navigation'
 import { Suspense, useState, useTransition } from 'react'
 
 import { resetPassword } from '@/src/app/auth/actions'
+import { Button } from '@/src/components/ui/button'
+import { Input } from '@/src/components/ui/input'
+import { Label } from '@/src/components/ui/label'
 
 function ResetPasswordForm() {
   const searchParams = useSearchParams()
@@ -39,7 +42,7 @@ function ResetPasswordForm() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-secondary/20 flex items-center justify-center px-4 py-8">
+    <main className="min-h-screen bg-bg-900 flex items-center justify-center px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -48,39 +51,33 @@ function ResetPasswordForm() {
       >
         {/* Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="text-white font-bold">⛵</span>
-            </div>
-            <p className="font-bold text-xl text-primary">Yenagoa Boat Club</p>
-          </Link>
-          <h1 className="text-4xl font-bold text-primary mb-2">Create New Password</h1>
-          <p className="text-foreground/60">Enter your new password below</p>
+          <h1 className="text-4xl font-bold text-fg mb-2">Create New Password</h1>
+          <p className="text-fg-muted">Enter your new password below</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-lg border border-primary/10 shadow-xl p-8">
+        <div className="glass rounded-lg shadow-soft p-8">
           {success ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Icon path={mdiLock} size={1.33} className="text-green-600" aria-hidden={true} />
+              <div className="w-16 h-16 bg-success-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Icon path={mdiLock} size={1.33} className="text-success-500" aria-hidden={true} />
               </div>
-              <h2 className="text-xl font-semibold text-foreground mb-2">
+              <h2 className="text-xl font-semibold text-fg mb-2">
                 Password Reset Successful
               </h2>
-              <p className="text-foreground/60 mb-6">
+              <p className="text-fg-muted mb-6">
                 Your password has been updated successfully
               </p>
-              <Link
-                href="/login"
-                className="inline-block w-full bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 rounded-lg hover:shadow-lg transition-all"
+              <Button
+                asChild
+                className="w-full glass-strong border border-accent-500 bg-accent-500 hover:bg-accent-400 text-white shadow-soft"
               >
-                Sign In
-              </Link>
+                <Link href="/login">Sign In</Link>
+              </Button>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,7 +85,7 @@ function ResetPasswordForm() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm"
+                  className="bg-error-500/10 border border-error-500/20 text-error-500 px-4 py-3 rounded-lg text-sm"
                 >
                   {error}
                 </motion.div>
@@ -96,38 +93,48 @@ function ResetPasswordForm() {
 
               {/* New Password */}
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <Label htmlFor="password" className="block text-sm font-semibold text-fg mb-2">
                   New Password
-                </label>
-                <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-white/50 focus-within:border-primary transition-colors">
-                  <Icon path={mdiLock} size={0.6} className="text-primary mr-2" aria-hidden={true} />
-                  <input
+                </Label>
+                <div className="relative">
+                  <Icon path={mdiLock} size={0.6} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-500" aria-hidden={true} />
+                  <Input
+                    id="password"
                     name="password"
                     type="password"
                     placeholder="Enter new password"
-                    className="w-full bg-transparent outline-none text-foreground placeholder:text-foreground/40"
+                    className="pl-10 glass-subtle border-border-subtle focus:border-accent-500"
                     required
                     minLength={6}
+                    aria-describedby="password-description"
                   />
                 </div>
+                <p id="password-description" className="sr-only">
+                  Enter a new password with at least 6 characters
+                </p>
               </div>
 
               {/* Confirm Password */}
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <Label htmlFor="confirmPassword" className="block text-sm font-semibold text-fg mb-2">
                   Confirm Password
-                </label>
-                <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-white/50 focus-within:border-primary transition-colors">
-                  <Icon path={mdiLock} size={0.6} className="text-primary mr-2" aria-hidden={true} />
-                  <input
+                </Label>
+                <div className="relative">
+                  <Icon path={mdiLock} size={0.6} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-500" aria-hidden={true} />
+                  <Input
+                    id="confirmPassword"
                     name="confirmPassword"
                     type="password"
                     placeholder="Confirm new password"
-                    className="w-full bg-transparent outline-none text-foreground placeholder:text-foreground/40"
+                    className="pl-10 glass-subtle border-border-subtle focus:border-accent-500"
                     required
                     minLength={6}
+                    aria-describedby="confirm-description"
                   />
                 </div>
+                <p id="confirm-description" className="sr-only">
+                  Re-enter your new password to confirm
+                </p>
               </div>
 
               {/* Password Requirements */}
@@ -143,13 +150,14 @@ function ResetPasswordForm() {
               </div>
 
               {/* Submit Button */}
-              <button
+              <Button
                 type="submit"
+                className="w-full glass-strong border border-accent-500 bg-accent-500 hover:bg-accent-400 text-white shadow-soft"
                 disabled={isPending}
-                className="w-full bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 mt-6 rounded-lg hover:shadow-lg transition-all disabled:opacity-70"
+                aria-describedby={isPending ? "updating" : undefined}
               >
                 {isPending ? 'Updating...' : 'Update Password'}
-              </button>
+              </Button>
             </form>
           )}
         </div>

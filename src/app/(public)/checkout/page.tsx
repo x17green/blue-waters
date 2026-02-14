@@ -1,14 +1,18 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Checkbox, Input, Navbar, NavbarBrand, Select, SelectItem } from '@nextui-org/react'
-import { motion } from 'framer-motion'
+import { mdiArrowLeft, mdiCellphone, mdiCheckCircle, mdiCreditCard, mdiOfficeBuilding } from '@mdi/js'
 import Icon from '@mdi/react'
-import { mdiArrowLeft, mdiOfficeBuilding, mdiCheckCircle, mdiCreditCard, mdiCellphone } from '@mdi/js'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Suspense, useState } from 'react'
 
 import { Button } from '@/src/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
+import { Checkbox } from '@/src/components/ui/checkbox'
+import { Input } from '@/src/components/ui/input'
+import { Label } from '@/src/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/src/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
 import { useAuth } from '@/src/hooks/use-auth'
 import { createClient } from '@/src/lib/supabase/client'
@@ -93,18 +97,7 @@ function CheckoutContent() {
 
   if (bookingComplete) {
     return (
-      <main className="min-h-screen bg-gradient-to-b from-background to-bg-800">
-        <Navbar className="glass backdrop-blur-lg border-b border-border">
-          <NavbarBrand>
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">⛵</span>
-              </div>
-              <p className="font-bold text-xl text-accent-500">Yenagoa Boat Club</p>
-            </Link>
-          </NavbarBrand>
-        </Navbar>
-
+      <main className="min-h-screen bg-bg-900">
         <div className="max-w-2xl mx-auto px-4 md:px-8 py-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -127,7 +120,7 @@ function CheckoutContent() {
             </p>
 
             <Card className="glass-subtle border border-border mb-8">
-              <CardBody className="p-8">
+              <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="bg-accent-500/10 rounded-lg p-4">
                     <p className="text-sm text-fg-muted mb-1">Booking Reference</p>
@@ -162,7 +155,7 @@ function CheckoutContent() {
                     </div>
                   </div>
                 </div>
-              </CardBody>
+              </CardContent>
             </Card>
 
             <div className="space-y-3 mb-8">
@@ -192,18 +185,7 @@ function CheckoutContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-bg-800">
-      <Navbar className="glass backdrop-blur-lg border-b border-border">
-        <NavbarBrand>
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">⛵</span>
-            </div>
-            <p className="font-bold text-xl text-accent-500">Yenagoa Boat Club</p>
-          </Link>
-        </NavbarBrand>
-      </Navbar>
-
+    <main className="min-h-screen bg-bg-900">
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -241,7 +223,7 @@ function CheckoutContent() {
                 <CardHeader className="border-b border-border">
                   <h2 className="text-xl font-bold text-accent-500">Contact Information</h2>
                 </CardHeader>
-                <CardBody className="space-y-4 p-6">
+                <CardContent className="space-y-4 p-6">
                   <Input
                     label="Full Name"
                     name="fullName"
@@ -267,7 +249,7 @@ function CheckoutContent() {
                     placeholder="+234 800 000 0000"
                     required
                   />
-                </CardBody>
+                </CardContent>
               </Card>
 
               {/* Payment Method */}
@@ -275,7 +257,7 @@ function CheckoutContent() {
                 <CardHeader className="border-b border-border">
                   <h2 className="text-xl font-bold text-accent-500">Payment Method</h2>
                 </CardHeader>
-                <CardBody className="p-6">
+                <CardContent className="p-6">
                   <Tabs
                     value={paymentMethod}
                     onValueChange={setPaymentMethod}
@@ -340,16 +322,21 @@ function CheckoutContent() {
                           You will be redirected to your mobile money provider to complete the payment.
                         </p>
                       </div>
-                      <Select label="Mobile Provider">
-                        <SelectItem key="mtn" value="mtn">
-                          MTN Mobile Money
-                        </SelectItem>
-                        <SelectItem key="airtel" value="airtel">
-                          Airtel Money
-                        </SelectItem>
-                        <SelectItem key="glo" value="glo">
-                          Glo Mobile Money
-                        </SelectItem>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select provider" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem key="mtn" value="mtn">
+                            MTN Mobile Money
+                          </SelectItem>
+                          <SelectItem key="airtel" value="airtel">
+                            Airtel Money
+                          </SelectItem>
+                          <SelectItem key="glo" value="glo">
+                            Glo Mobile Money
+                          </SelectItem>
+                        </SelectContent>
                       </Select>
                       <Input
                         label="Phone Number"
@@ -364,22 +351,33 @@ function CheckoutContent() {
                           Transfer funds to our account and your booking will be confirmed upon payment verification.
                         </p>
                       </div>
-                      <Select label="Bank Name">
-                        <SelectItem key="gtb" value="gtb">
-                          Guaranty Trust Bank
-                        </SelectItem>
-                        <SelectItem key="access" value="access">
-                          Access Bank
-                        </SelectItem>
-                        <SelectItem key="zenith" value="zenith">
-                          Zenith Bank
-                        </SelectItem>
+                      <Label htmlFor="bankName" className="mb-1 block">Bank Name</Label>
+                      <Select
+                        value={formData.bankName}
+                        onValueChange={(value) =>
+                          setFormData((prev) => ({ ...prev, bankName: value }))
+                        }
+                      >
+                        <SelectTrigger id="bankName">
+                          <SelectValue placeholder="Select a bank" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem key="gtb" value="gtb">
+                            Guaranty Trust Bank
+                          </SelectItem>
+                          <SelectItem key="access" value="access">
+                            Access Bank
+                          </SelectItem>
+                          <SelectItem key="zenith" value="zenith">
+                            Zenith Bank
+                          </SelectItem>
+                        </SelectContent>
                       </Select>
                       <Input label="Account Name" disabled value="Yenagoa Boat Club Bayelsa" />
                       <Input label="Account Number" disabled value="1234567890" />
                     </TabsContent>
                   </Tabs>
-                </CardBody>
+                </CardContent>
               </Card>
 
               {/* Terms & Conditions */}
@@ -412,7 +410,7 @@ function CheckoutContent() {
               <CardHeader className="border-b border-border">
                 <h3 className="text-xl font-bold text-accent-500">Order Summary</h3>
               </CardHeader>
-              <CardBody className="space-y-4 p-6">
+              <CardContent className="space-y-4 p-6">
                 <div>
                   <p className="text-sm text-fg-muted mb-1">Trip</p>
                   <p className="font-bold text-fg">{trip?.name}</p>
@@ -435,7 +433,7 @@ function CheckoutContent() {
                     ₦{total.toLocaleString()}
                   </span>
                 </div>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
         </div>
@@ -446,17 +444,7 @@ function CheckoutContent() {
 
 function CheckoutLoadingFallback() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-bg-800">
-      <Navbar className="glass backdrop-blur-lg border-b border-border">
-        <NavbarBrand>
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">⛵</span>
-            </div>
-            <p className="font-bold text-xl text-accent-500">Yenagoa Boat Club</p>
-          </Link>
-        </NavbarBrand>
-      </Navbar>
+    <main className="min-h-screen bg-bg-900">
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-12">
         <div className="animate-pulse space-y-6">
           <div className="h-8 bg-accent-500/20 rounded w-1/3"></div>

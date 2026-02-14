@@ -1,6 +1,6 @@
+
 'use client'
 
-import { Button, Card, CardBody, CardHeader, Chip, Input } from '@nextui-org/react'
 import { motion } from 'framer-motion'
 import Icon from '@mdi/react'
 import { mdiArrowLeft, mdiClock, mdiGasStation, mdiMapMarker, mdiStar, mdiAccountGroup, mdiCheckCircle } from '@mdi/js'
@@ -8,6 +8,11 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { mockTrips, getTripById, type MockTrip, type MockSchedule } from '@/src/lib/mock-data'
+import { Button } from '@/src/components/ui/button'
+import { Card, CardContent, CardHeader } from '@/src/components/ui/card'
+import { Input } from '@/src/components/ui/input'
+import { Badge } from '@/src/components/ui/badge'
+
 
 export default function Book() {
   const searchParams = useSearchParams()
@@ -112,7 +117,7 @@ export default function Book() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-bg-100 to-bg-900">
+    <main className="min-h-screen bg-bg-900">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -122,10 +127,9 @@ export default function Book() {
           className="mb-8"
         >
           <Button
-            as="a"
-            href="/trips"
             variant="ghost"
             className="mb-4 text-accent-500 flex items-center gap-2"
+            onClick={() => router.push('/trips')}
           >
             <Icon path={mdiArrowLeft} size={0.6} aria-hidden={true} />
             Back to Trips
@@ -141,7 +145,7 @@ export default function Book() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="glass rounded-2xl p-6 shadow-lg mb-8 border border-border"
+          className="glass-subtle rounded-2xl p-6 shadow-lg mb-8 border border-border"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Input
@@ -188,8 +192,8 @@ export default function Book() {
                       onClick={() => handleSelectTrip(trip)}
                       className="cursor-pointer transition-all duration-300 hover:shadow-lg"
                     >
-                      <Card className="border border-border">
-                        <CardBody className="p-0">
+                      <Card className="glass-card border border-border">
+                        <CardContent className="p-0">
                           <div className="flex flex-col md:flex-row h-full">
                             {/* Image */}
                             <div className="relative w-full md:w-48 h-48 md:h-auto flex-shrink-0">
@@ -225,9 +229,9 @@ export default function Book() {
                                 </div>
                                 <div className="flex flex-wrap gap-2 mb-4">
                                   {trip.vessel.amenities.slice(0, 3).map((amenity: string, idx: number) => (
-                                    <Chip key={idx} size="sm" variant="flat" className="bg-accent-500/10 text-accent-500">
+                                    <Badge key={idx} variant="outline" className="bg-accent-500/10 text-accent-500 border-accent-500">
                                       {amenity}
-                                    </Chip>
+                                    </Badge>
                                   ))}
                                 </div>
                               </div>
@@ -259,7 +263,7 @@ export default function Book() {
                               </div>
                             </div>
                           </div>
-                        </CardBody>
+                        </CardContent>
                       </Card>
                     </motion.div>
                   ))}
@@ -272,7 +276,7 @@ export default function Book() {
                     Select Schedule
                   </h2>
                   <Button
-                    variant="bordered"
+                    variant="outline"
                     className="text-accent-500 border-accent-500"
                     onClick={() => {
                       setSelectedTripData(null)
@@ -284,14 +288,14 @@ export default function Book() {
                 </div>
 
                 <Card className="mb-6 border border-border">
-                  <CardBody className="p-6">
+                  <CardContent className="p-6">
                     <h3 className="text-xl font-bold text-accent-500 mb-2">{selectedTripData.name}</h3>
                     <div className="flex items-center gap-2 text-fg-muted mb-4">
                       <Icon path={mdiMapMarker} size={0.6} className="text-accent-500" aria-hidden={true} />
                       <span className="font-semibold">{selectedTripData.departure.location} → {selectedTripData.arrival.location}</span>
                     </div>
                     <p className="text-fg-muted">{selectedTripData.description}</p>
-                  </CardBody>
+                  </CardContent>
                 </Card>
 
                 <motion.div
@@ -314,7 +318,7 @@ export default function Book() {
                       }`}
                     >
                       <Card className="border border-border">
-                        <CardBody className="p-4">
+                        <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-2">
@@ -324,13 +328,12 @@ export default function Book() {
                                 <span className="font-semibold text-fg-muted">{schedule.arrivalTime}</span>
                               </div>
                               <div className="flex items-center gap-4 text-sm">
-                                <Chip 
-                                  size="sm" 
-                                  color={getStatusColor(schedule.status)}
-                                  variant="flat"
+                                <Badge
+                                  variant="outline"
+                                  className={`border ${getStatusColor(schedule.status) === 'success' ? 'border-success-500 text-success-500' : getStatusColor(schedule.status) === 'warning' ? 'border-warning-500 text-warning-500' : 'border-danger-500 text-danger-500'}`}
                                 >
                                   {schedule.status.replace('-', ' ').toUpperCase()}
-                                </Chip>
+                                </Badge>
                                 <span className="text-fg-muted">
                                   {schedule.availableSeats} seats available
                                 </span>
@@ -344,7 +347,7 @@ export default function Book() {
                               <Icon path={mdiCheckCircle} size={1} className="text-accent-500 ml-4" aria-hidden={true} />
                             )}
                           </div>
-                        </CardBody>
+                        </CardContent>
                       </Card>
                     </motion.div>
                   ))}
@@ -366,7 +369,7 @@ export default function Book() {
                   <CardHeader className="flex flex-col items-start px-6 py-4 border-b border-border">
                     <h3 className="text-xl font-bold text-accent-500">Booking Summary</h3>
                   </CardHeader>
-                  <CardBody className="p-6 space-y-4">
+                  <CardContent className="p-6 space-y-4">
                     <div>
                       <p className="text-sm text-fg-muted mb-1">Trip</p>
                       <p className="font-bold text-fg">{selectedTripData.name}</p>
@@ -396,18 +399,16 @@ export default function Book() {
                         <span className="text-fg">Passengers</span>
                         <div className="flex items-center gap-2">
                           <Button
-                            isIconOnly
                             size="sm"
-                            variant="flat"
+                            variant="ghost"
                             onClick={() => setPassengers(Math.max(1, passengers - 1))}
                           >
                             −
                           </Button>
                           <span className="w-8 text-center font-bold">{passengers}</span>
                           <Button
-                            isIconOnly
                             size="sm"
-                            variant="flat"
+                            variant="default"
                             onClick={() => setPassengers(Math.min(selectedSchedule.availableSeats, passengers + 1))}
                           >
                             +
@@ -453,22 +454,22 @@ export default function Book() {
                     </Button>
 
                     <Button
-                      variant="bordered"
+                      variant="outline"
                       className="w-full text-accent-500 border-accent-500"
                       onClick={() => setSelectedSchedule(null)}
                     >
                       Change Schedule
                     </Button>
-                  </CardBody>
+                  </CardContent>
                 </Card>
               ) : (
                 <Card className="glass-subtle border border-border">
-                  <CardBody className="p-6 text-center">
+                  <CardContent className="p-6 text-center">
                     <Icon path={mdiClock} size={2.67} className="text-accent-500/20 mx-auto mb-4" aria-hidden={true} />
                     <p className="text-fg-muted text-lg">
                       {selectedTripData ? 'Select a schedule to see booking details' : 'Select a trip to start booking'}
                     </p>
-                  </CardBody>
+                  </CardContent>
                 </Card>
               )}
             </motion.div>

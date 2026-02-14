@@ -18,12 +18,14 @@ import { mdiChevronLeft, mdiPlus, mdiClose, mdiContentSave, mdiFerry, mdiMapMark
 import { Button } from '@/src/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
 import { Input } from '@/src/components/ui/input'
+
 import { Textarea } from '@/src/components/ui/textarea'
 import { Label } from '@/src/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/src/components/ui/select'
 import { Badge } from '@/src/components/ui/badge'
 import { useAuth } from '@/src/hooks/use-auth'
 import { useToast } from '@/src/hooks/use-toast'
+import { mockVessels } from '@/lib/mock-data'
 
 const tripSchema = z.object({
   title: z.string().min(5, 'Title must be at least 5 characters').max(200),
@@ -80,12 +82,8 @@ export default function CreateTripPage() {
   const fetchVesselsAndRoutes = async () => {
     try {
       // TODO: Fetch actual vessels and routes from API
-      // For now, mock data
-      setVessels([
-        { id: '1', name: 'Ocean Star', capacity: 50, type: 'Speedboat' },
-        { id: '2', name: 'Bay Cruiser', capacity: 100, type: 'Ferry' },
-        { id: '3', name: 'Sunset Voyager', capacity: 30, type: 'Yacht' },
-      ])
+      // For now, use mock data from src/lib/mock-data
+      setVessels(mockVessels);
 
       setRoutes([
         { id: '1', name: 'Yenagoa - Kaiama', startLocation: 'Yenagoa', endLocation: 'Kaiama' },

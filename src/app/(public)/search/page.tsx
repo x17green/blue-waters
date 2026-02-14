@@ -1,12 +1,18 @@
 'use client'
 
-import { Button, Card, CardBody, Input, Navbar, NavbarBrand, NavbarContent, NavbarItem, Select, SelectItem, Slider } from '@nextui-org/react'
 import { motion } from 'framer-motion'
 import Icon from '@mdi/react'
 import { mdiArrowLeft, mdiClock, mdiMapMarker, mdiStar, mdiAccountGroup } from '@mdi/js'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+
+import { Button } from '@/src/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src/components/ui/card'
+import { Input } from '@/src/components/ui/input'
+import { Label } from '@/src/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/src/components/ui/select'
+import { Slider } from '@/src/components/ui/slider'
 
 const mockTrips = [
   {
@@ -101,28 +107,7 @@ export default function Search() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-bg-800">
-      <Navbar className="glass backdrop-blur-lg border-b border-border">
-        <NavbarBrand>
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">⛵</span>
-            </div>
-            <p className="font-bold text-xl text-accent-500">Yenagoa Boat Club</p>
-          </Link>
-        </NavbarBrand>
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button
-              href="/login"
-              variant="ghost"
-              className="text-accent-500"
-            >
-              Sign In
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
+    <main className="min-h-screen bg-bg-900">
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         <motion.div
@@ -153,8 +138,8 @@ export default function Search() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-1"
           >
-            <Card className="glass-subtle border border-border sticky top-4">
-              <CardBody className="p-6 space-y-6">
+            <Card className="glass border-border-subtle">
+              <CardContent className="p-6 space-y-6">
                 <div>
                   <h3 className="font-bold text-accent-500 mb-4">Filters</h3>
                 </div>
@@ -169,7 +154,7 @@ export default function Search() {
                     onChange={(e) =>
                       setFilters({ ...filters, departure: e.target.value })
                     }
-                    size="sm"
+                    variant="glass"
                   />
                 </div>
 
@@ -183,7 +168,7 @@ export default function Search() {
                     onChange={(e) =>
                       setFilters({ ...filters, arrival: e.target.value })
                     }
-                    size="sm"
+                    variant="glass"
                   />
                 </div>
 
@@ -197,7 +182,7 @@ export default function Search() {
                     onChange={(e) =>
                       setFilters({ ...filters, date: e.target.value })
                     }
-                    size="sm"
+                    variant="glass"
                   />
                 </div>
 
@@ -206,18 +191,17 @@ export default function Search() {
                     Price Range
                   </label>
                   <Slider
-                    label="Price"
-                    step={500}
-                    maxValue={15000}
-                    minValue={0}
                     value={[filters.minPrice, filters.maxPrice]}
-                    onChange={(value: any) => {
+                    onValueChange={(value) => {
                       setFilters({
                         ...filters,
                         minPrice: value[0],
                         maxPrice: value[1],
                       })
                     }}
+                    max={15000}
+                    min={0}
+                    step={500}
                     className="max-w-md"
                   />
                   <p className="text-xs text-fg-muted mt-2">
@@ -231,22 +215,37 @@ export default function Search() {
                     Sort By
                   </label>
                   <Select
-                    selectedKeys={[filters.sortBy]}
-                    onChange={(e) =>
-                      setFilters({ ...filters, sortBy: e.target.value })
+                    value={filters.sortBy}
+                    onValueChange={(value) =>
+                      setFilters({ ...filters, sortBy: value })
                     }
-                    size="sm"
                   >
-                    <SelectItem key="price">Price: Low to High</SelectItem>
-                    <SelectItem key="rating">Rating</SelectItem>
-                    <SelectItem key="time">Departure Time</SelectItem>
+                    <SelectTrigger className="glass">
+                      <SelectValue placeholder="Sort by..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="price">Price: Low to High</SelectItem>
+                      <SelectItem value="rating">Rating</SelectItem>
+                      <SelectItem value="time">Departure Time</SelectItem>
+                    </SelectContent>
                   </Select>
                 </div>
 
-                <Button className="w-full bg-accent-500 text-white mt-4">
+                <Button
+                  variant="outline"
+                  className="w-full glass border-accent-500 text-accent-500 hover:bg-accent-500 hover:text-white"
+                  onClick={() => setFilters({
+                    departure: '',
+                    arrival: '',
+                    date: '',
+                    minPrice: 0,
+                    maxPrice: 15000,
+                    sortBy: 'price',
+                  })}
+                >
                   Clear Filters
                 </Button>
-              </CardBody>
+              </CardContent>
             </Card>
           </motion.div>
 
@@ -260,8 +259,8 @@ export default function Search() {
             >
               {mockTrips.map((trip) => (
                 <motion.div key={trip.id} variants={itemVariants}>
-                  <Card className="hover:shadow-lg transition-shadow border border-border">
-                    <CardBody>
+                  <Card className="glass border-border-subtle hover:shadow-soft transition-shadow">
+                    <CardContent>
                       <div className="flex flex-col md:flex-row gap-6 p-6">
                         {/* Image */}
                         <div className="relative w-full md:w-48 h-48 flex-shrink-0 rounded-lg overflow-hidden">
@@ -304,7 +303,7 @@ export default function Search() {
                                   className={
                                     i < Math.floor(trip.rating)
                                       ? 'fill-accent-500 text-accent-500'
-                                      : 'text-fg-dim'
+                                      : 'text-fg-subtle'
                                   }
                                   aria-hidden={true}
                                 />
@@ -318,15 +317,17 @@ export default function Search() {
                             </div>
 
                             <Button
-                              href={`/book/${trip.id}`}
-                              className="bg-gradient-to-r from-accent-600 to-accent-400 text-white font-semibold"
+                              asChild
+                              className="glass-strong border border-accent-500 bg-accent-500 hover:bg-accent-400 text-white shadow-soft"
                             >
-                              ₦{trip.price.toLocaleString()} - Book
+                              <Link href={`/book/${trip.id}`}>
+                                ₦{trip.price.toLocaleString()} - Book
+                              </Link>
                             </Button>
                           </div>
                         </div>
                       </div>
-                    </CardBody>
+                    </CardContent>
                   </Card>
                 </motion.div>
               ))}

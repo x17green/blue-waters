@@ -20,6 +20,8 @@
     "build-storybook": "storybook build -o storybook-static"
   },
   "dependencies": {
+    "@heroui/react": "^2.8.9",
+    "@heroui/theme": "^2.4.26",
     "@hookform/resolvers": "^3.9.1",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
