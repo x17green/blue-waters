@@ -1,11 +1,11 @@
 'use client'
 
+import { mdiCircleSmall } from '@mdi/js'
 import { OTPInput, OTPInputContext } from 'input-otp'
 import * as React from 'react'
 
-import { cn } from '@/src/lib/utils'
 import { Icon } from '@/src/components/ui/icon'
-import { mdiCircleSmall } from '@mdi/js'
+import { cn } from '@/src/lib/utils'
 
 /**
  * InputOTP - One-Time Password input field component.
@@ -131,7 +131,7 @@ InputOTPSlot.displayName = 'InputOTPSlot'
  *
  * @description
  * Displays a dot icon to separate groups of OTP slots (e.g., 123 • 456).
- * Uses lucide-react Dot icon.
+ * Uses Pictogrammers mdiCircleSmall icon.
  */
 const InputOTPSeparator = React.forwardRef<
   React.ElementRef<'div'>,
