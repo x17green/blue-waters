@@ -1,13 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Icon } from '@/src/components/ui/icon'
+import Icon from '@mdi/react'
 import { mdiAlertCircle, mdiCheckCircle, mdiLock, mdiEmail, mdiPhone, mdiAccount } from '@mdi/js'
 import Link from 'next/link'
 import { useState, useTransition } from 'react'
 
 import { signup } from '@/src/app/auth/actions'
-import { Button } from '@/src/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { BlueWatersWordmark } from '@/src/components/brand'
 
 /**

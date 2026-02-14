@@ -2,7 +2,7 @@
 // filepath: l:\home\projects\blue-waters\src\app\examples\page.tsx
 'use client'
 
-import { Icon } from '@/src/components/ui/icon'
+import Icon from '@mdi/react'
 import { mdiChevronRight } from '@mdi/js'
 import Link from 'next/link'
 import * as React from 'react'
@@ -12,7 +12,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from '@/src/components/ui/card'
+} from '@/components/ui/card'
 
 /**
  * Examples Hub
@@ -52,7 +52,7 @@ export default function ExamplesPage() {
                 <div className="space-y-4">
                     <h1 className="text-4xl font-bold text-fg">Component Examples</h1>
                     <p className="text-lg text-fg-muted">
-                        Explore the Blue Waters design system with interactive component showcases
+                        Explore the Yenagoa Boat Club design system with interactive component showcases
                     </p>
                 </div>
 
@@ -220,7 +220,7 @@ export default function ExamplesPage() {
                         Built with React, TypeScript, and Tailwind CSS • Glassmorphism dark-first design system
                     </p>
                     <p className="text-xs text-fg-subtle">
-                        Blue Waters © 2026 • Design System v1.0
+                        Yenagoa Boat Club © 2026 • Design System v1.0
                     </p>
                 </div>
             </div>

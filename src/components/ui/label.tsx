@@ -7,7 +7,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Label Component - Blue Waters Design System
+ * Label Component - Yenagoa Boat Club Design System
  * 
  * Glassmorphism-enhanced form labels with design token integration.
  * Supports semantic variants, sizing, and full WCAG AA compliance.

@@ -308,7 +308,7 @@ export default function ButtonShowcase() {
           <div>
             <h2 className="text-2xl font-semibold text-fg mb-1">Real-World Examples</h2>
             <p className="text-fg-muted text-sm">
-              Common button groups from Blue Waters booking flow.
+              Common button groups from Yenagoa Boat Club booking flow.
             </p>
           </div>
           

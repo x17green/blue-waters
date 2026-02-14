@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Icon } from '@/src/components/ui/icon'
+import Icon from '@mdi/react'
 import { mdiLock } from '@mdi/js'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -52,7 +52,7 @@ function ResetPasswordForm() {
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <span className="text-white font-bold">⛵</span>
             </div>
-            <p className="font-bold text-xl text-primary">Blue Waters</p>
+            <p className="font-bold text-xl text-primary">Yenagoa Boat Club</p>
           </Link>
           <h1 className="text-4xl font-bold text-primary mb-2">Create New Password</h1>
           <p className="text-foreground/60">Enter your new password below</p>

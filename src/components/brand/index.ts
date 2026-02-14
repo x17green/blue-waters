@@ -1,5 +1,5 @@
 /**
- * Blue Waters Brand Components
+ * Yenagoa Boat Club Brand Components
  * 
  * Central export for all brand-related components
  */

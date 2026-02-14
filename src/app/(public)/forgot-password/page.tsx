@@ -44,7 +44,7 @@ export default function ForgotPassword() {
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
               <span className="text-white font-bold">⛵</span>
             </div>
-            <p className="font-bold text-xl text-accent-500">Blue Waters</p>
+            <p className="font-bold text-xl text-accent-500">Yenagoa Boat Club</p>
           </Link>
           <h1 className="text-4xl font-bold text-accent-500 mb-2">Reset Password</h1>
           <p className="text-fg-muted">

@@ -1,4 +1,4 @@
-# Blue Waters - Bayelsa Boat Booking Platform
+# Yenagoa Boat Club - Bayelsa Boat Booking Platform
 
 A sophisticated, modern boat booking platform built for the Ministry of Marine and Blue Economy. This MVP includes customer-facing booking interfaces, operator dashboards, and a comprehensive database system for managing trips, bookings, payments, and passenger check-ins.
 

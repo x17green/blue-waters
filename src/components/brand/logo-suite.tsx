@@ -1,12 +1,12 @@
 /**
- * Blue Waters Brand Logo Component Suite
+ * Yenagoa Boat Club Brand Logo Component Suite
  * 
  * Partnership Branding: AstroMANIA Enterprises x Bayelsa State Government
  * 
  * Usage Guidelines:
  * - Bayelsa Coat of Arms: Homepage header (left), official documents
  * - Ministry Blue Economy Seal: Homepage header (right), footer
- * - Blue Waters Wordmark: Center branding with official SVG emblem
+ * - Yenagoa Boat Club Wordmark: Center branding with official SVG emblem
  * 
  * Legal:
  * - Government seals remain property of Bayelsa State Government
@@ -121,10 +121,10 @@ export function MinistryBlueSeal({
 }
 
 /* ============================================================================
-   BLUE WATERS WORDMARK
+   Yenagoa Boat Club WORDMARK
    ============================================================================ */
 /**
- * Blue Waters Brand Wordmark
+ * Yenagoa Boat Club Brand Wordmark
  * 
  * Features: Official SVG emblem with boat, waves, and circular design
  * Design: Simple, clean emblem that scales well at all sizes
@@ -155,14 +155,14 @@ export function BlueWatersWordmark({
         className
       )}
     >
-      {/* Blue Waters SVG Emblem */}
+      {/* Yenagoa Boat Club SVG Emblem */}
       <div 
         className="relative flex-shrink-0"
         style={{ width: dimensions.width, height: dimensions.height }}
       >
         <Image
           src="/assets/logos/blue-waters-symbol.svg"
-          alt="Blue Waters Emblem"
+          alt="Yenagoa Boat Club Emblem"
           width={dimensions.width}
           height={dimensions.height}
           priority={priority}
@@ -181,7 +181,7 @@ export function BlueWatersWordmark({
             size === 'lg' && "text-2xl",
             size === 'xl' && "text-3xl"
           )}>
-            BLUE WATERS
+            Yenagoa Boat Club
           </span>
           <span className={cn(
             "text-fg-muted font-marketing tracking-wide",
@@ -204,7 +204,7 @@ export function BlueWatersWordmark({
  * Complete Partnership Logo Header
  * 
  * Displays all three institutional logos in brand-specified configuration:
- * [Bayelsa Coat] --- [Blue Waters Wordmark] --- [Ministry Seal]
+ * [Bayelsa Coat] --- [Yenagoa Boat Club Wordmark] --- [Ministry Seal]
  * 
  * @example
  * <PartnershipLogoHeader />

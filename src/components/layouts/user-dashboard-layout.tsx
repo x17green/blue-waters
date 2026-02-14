@@ -47,7 +47,7 @@ function UserDashboardHeader() {
           />
           <div>
             <h1 className="text-lg font-semibold text-fg tracking-tight">
-              Blue Waters
+              Yenagoa Boat Club
             </h1>
             <p className="text-xs text-fg-muted -mt-1">
               My Dashboard
@@ -139,7 +139,7 @@ function UserDashboardFooter() {
             <div className="flex items-center gap-2 mb-3">
               <BlueWatersWordmark size="xs" showText={false} />
               <span className="font-semibold text-fg">
-                Blue Waters
+                Yenagoa Boat Club
               </span>
             </div>
             <p className="text-sm text-fg-muted max-w-xs">
@@ -183,7 +183,7 @@ function UserDashboardFooter() {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-border-subtle text-center text-sm text-fg-subtle">
           <p>
-            © {currentYear} Blue Waters - Ministry of Marine and Blue Economy, Bayelsa State. 
+            © {currentYear} Yenagoa Boat Club - Ministry of Marine and Blue Economy, Bayelsa State. 
             All rights reserved.
           </p>
         </div>

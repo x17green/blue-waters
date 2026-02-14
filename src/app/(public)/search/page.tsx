@@ -108,7 +108,7 @@ export default function Search() {
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center">
               <span className="text-white font-bold text-lg">⛵</span>
             </div>
-            <p className="font-bold text-xl text-accent-500">Blue Waters</p>
+            <p className="font-bold text-xl text-accent-500">Yenagoa Boat Club</p>
           </Link>
         </NavbarBrand>
         <NavbarContent justify="end">

@@ -1,11 +1,11 @@
 'use client'
 
-import { Icon } from '@/src/components/ui/icon'
+import Icon from '@mdi/react'
 import { mdiChevronRight, mdiCalendar, mdiMapMarker, mdiFerry, mdiAccountGroup } from '@mdi/js'
 import * as React from 'react'
 
 
-import ButtonWithCompounds, { type ButtonComponent } from '@/src/components/ui/button'
+import ButtonWithCompounds, { type ButtonComponent } from '@/components/ui/button'
 
 // Use the properly typed Button with compound components
 const Button = ButtonWithCompounds as ButtonComponent
@@ -16,7 +16,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/src/components/ui/card'
+} from '@/components/ui/card'
 
 /**
  * Card Component Showcase

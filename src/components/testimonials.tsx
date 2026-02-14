@@ -12,7 +12,7 @@ const testimonials = [
     role: 'Business Executive',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Amara',
     content:
-      'Blue Waters has transformed my daily commute. Safe, reliable, and always on time. Highly recommended!',
+      'Yenagoa Boat Club has transformed my daily commute. Safe, reliable, and always on time. Highly recommended!',
     rating: 5,
   },
   {
@@ -78,7 +78,7 @@ export default function Testimonials() {
             What Our Travelers Say
           </h2>
           <p className="text-lg text-fg-muted max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust Blue Waters for their journeys
+            Join thousands of satisfied customers who trust Yenagoa Boat Club for their journeys
           </p>
         </motion.div>
 

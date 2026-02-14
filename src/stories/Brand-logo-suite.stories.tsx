@@ -1,5 +1,5 @@
 /**
- * Blue Waters Brand Logo Components
+ * Yenagoa Boat Club Brand Logo Components
  * 
  * Official partnership branding between AstroMANIA Enterprises and
  * Bayelsa State Government / Ministry of Marine and Blue Economy
@@ -25,18 +25,18 @@ const meta = {
         component: `
 ## Partnership Branding
 
-Blue Waters represents the official digital platform developed by **AstroMANIA Enterprises** 
+Yenagoa Boat Club represents the official digital platform developed by **AstroMANIA Enterprises** 
 in partnership with the **Bayelsa State Government** and the **Ministry of Marine and Blue Economy**.
 
 ### Logo Usage
 
 - **Bayelsa Coat of Arms**: Homepage header (left), official documents
 - **Ministry Blue Economy Seal**: Homepage header (right), footer sections  
-- **Blue Waters Wordmark**: Center branding with official SVG emblem
+- **Yenagoa Boat Club Wordmark**: Center branding with official SVG emblem
 
-### Blue Waters Emblem
+### Yenagoa Boat Club Emblem
 
-The Blue Waters wordmark features a clean, professional SVG emblem with:
+The Yenagoa Boat Club wordmark features a clean, professional SVG emblem with:
 
 - **Circular design** with Deep Ocean Blue background
 - **Boat silhouette** representing marine transportation
@@ -147,12 +147,12 @@ export const MinistryLarge: MinistryStory = {
 };
 
 /* ============================================================================
-   BLUE WATERS WORDMARK
+   Yenagoa Boat Club WORDMARK
    ============================================================================ */
 type WordmarkStory = StoryObj<typeof BlueWatersWordmark>;
 
 export const WordmarkSmall: WordmarkStory = {
-  name: 'Blue Waters Wordmark - Small',
+  name: 'Yenagoa Boat Club Wordmark - Small',
   render: () => <BlueWatersWordmark size="sm" showText />,
   parameters: {
     docs: {
@@ -164,7 +164,7 @@ export const WordmarkSmall: WordmarkStory = {
 };
 
 export const WordmarkMedium: WordmarkStory = {
-  name: 'Blue Waters Wordmark - Medium',
+  name: 'Yenagoa Boat Club Wordmark - Medium',
   render: () => <BlueWatersWordmark size="md" showText />,
   parameters: {
     docs: {
@@ -176,7 +176,7 @@ export const WordmarkMedium: WordmarkStory = {
 };
 
 export const WordmarkLarge: WordmarkStory = {
-  name: 'Blue Waters Wordmark - Large',
+  name: 'Yenagoa Boat Club Wordmark - Large',
   render: () => <BlueWatersWordmark size="lg" showText />,
   parameters: {
     docs: {
@@ -188,7 +188,7 @@ export const WordmarkLarge: WordmarkStory = {
 };
 
 export const WordmarkExtraLarge: WordmarkStory = {
-  name: 'Blue Waters Wordmark - Extra Large',
+  name: 'Yenagoa Boat Club Wordmark - Extra Large',
   render: () => <BlueWatersWordmark size="xl" showText />,
   parameters: {
     docs: {
@@ -200,7 +200,7 @@ export const WordmarkExtraLarge: WordmarkStory = {
 };
 
 export const WordmarkEmblemOnly: WordmarkStory = {
-  name: 'Blue Waters Emblem Only',
+  name: 'Yenagoa Boat Club Emblem Only',
   render: () => <BlueWatersWordmark size="lg" showText={false} />,
   parameters: {
     docs: {

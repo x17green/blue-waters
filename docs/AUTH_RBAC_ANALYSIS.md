@@ -1,4 +1,4 @@
-# Authentication & RBAC Analysis - Blue Waters
+# Authentication & RBAC Analysis - Yenagoa Boat Club
 
 ## Executive Summary
 

@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useState, useTransition } from 'react'
 
 import { login } from '@/src/app/auth/actions'
-import { Button } from '@/src/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { BlueWatersWordmark } from '@/src/components/brand'
 
 /**
@@ -53,7 +53,7 @@ export default function LogIn() {
               Welcome Back
             </h1>
             <p className="text-lg text-fg-muted">
-              Sign in to your Blue Waters account
+              Sign in to your Yenagoa Boat Club account
             </p>
           </div>
 

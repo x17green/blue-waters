@@ -36,7 +36,7 @@ function PublicHeader() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/#trips', label: 'Book Now' },
+    { href: '/trips', label: 'Book Now' },
     { href: '/#how', label: 'How It Works' },
     { href: '/#testimonials', label: 'Reviews' },
   ]
@@ -69,7 +69,7 @@ function PublicHeader() {
             <MinistryBlueSeal size="sm" priority />
           </motion.div>
 
-          {/* Blue Waters Wordmark - Center */}
+          {/* Yenagoa Boat Club Wordmark - Center */}
           <Link href="/" className="flex-1 flex justify-center group">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -372,7 +372,7 @@ function PublicFooter() {
                 <div className="glass-subtle rounded-lg p-1.5 group-hover:glass-strong transition-all duration-200">
                   <Icon path={mdiPhone} size={0.6} className="text-accent-500 group-hover:text-accent-400" aria-hidden={true} />
                 </div>
-                <span className="text-sm">+234 800 BLUE WATERS</span>
+                <span className="text-sm">+234 800 Yenagoa Boat Club</span>
               </motion.a>
               
               <motion.a
@@ -498,7 +498,7 @@ function PublicFooter() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-sm text-fg-muted text-center md:text-left"
             >
-              © {currentYear} Blue Waters. Ministry of Marine and Blue Economy, Bayelsa State. All rights reserved.
+              © {currentYear} Yenagoa Boat Club. Ministry of Marine and Blue Economy, Bayelsa State. All rights reserved.
             </motion.p>
 
             {/* Social Links */}
