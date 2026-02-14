@@ -115,7 +115,7 @@ const ResizableHandle = ({
   >
     {withHandle && (
       <div className="z-10 flex h-4 w-3 items-center justify-center rounded-sm border border-glass bg-glass-01">
-        <Icon path={mdiDragVertical} size={0.4} className="text-fg-muted" aria-hidden="true" />
+        <Icon path={mdiDragVertical} size={0.4} className="text-fg-muted" aria-hidden={true} />
       </div>
     )}
   </ResizablePrimitive.PanelResizeHandle>

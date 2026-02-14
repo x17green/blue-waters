@@ -120,7 +120,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Icon path={mdiChevronDown} size={0.6} className="text-fg-muted transition-transform duration-normal data-[state=open]:rotate-180" aria-hidden="true" />
+      <Icon path={mdiChevronDown} size={0.6} className="text-fg-muted transition-transform duration-normal data-[state=open]:rotate-180" aria-hidden={true} />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
@@ -140,7 +140,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon path={mdiChevronUp} size={0.6} aria-hidden="true" />
+    <Icon path={mdiChevronUp} size={0.6} aria-hidden={true} />
   </SelectPrimitive.ScrollUpButton>
 ))
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
@@ -159,7 +159,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <Icon path={mdiChevronDown} size={0.6} aria-hidden="true" />
+    <Icon path={mdiChevronDown} size={0.6} aria-hidden={true} />
   </SelectPrimitive.ScrollDownButton>
 ))
 SelectScrollDownButton.displayName =
@@ -266,7 +266,7 @@ const SelectItem = React.forwardRef<
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Icon path={mdiCheck} size={0.6} className="text-accent-400" aria-hidden="true" />
+        <Icon path={mdiCheck} size={0.6} className="text-accent-400" aria-hidden={true} />
       </SelectPrimitive.ItemIndicator>
     </span>
 

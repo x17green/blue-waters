@@ -307,7 +307,7 @@ const CarouselPrevious = React.forwardRef<
       aria-label="Previous slide"
       {...props}
     >
-      <Icon path={mdiChevronLeft} size={0.6} aria-hidden="true" />
+      <Icon path={mdiChevronLeft} size={0.6} aria-hidden={true} />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -337,7 +337,7 @@ const CarouselNext = React.forwardRef<
       aria-label="Next slide"
       {...props}
     >
-      <Icon path={mdiChevronRight} size={0.6} aria-hidden="true" />
+      <Icon path={mdiChevronRight} size={0.6} aria-hidden={true} />
       <span className="sr-only">Next slide</span>
     </Button>
   )

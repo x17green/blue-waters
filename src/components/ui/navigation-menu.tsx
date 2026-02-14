@@ -106,7 +106,7 @@ const NavigationMenuTrigger = React.forwardRef<
       path={mdiChevronDown}
       size={0.5}
       className="relative top-[1px] ml-1 transition duration-200 group-data-[state=open]:rotate-180"
-      aria-hidden="true"
+      aria-hidden={true}
     />
   </NavigationMenuPrimitive.Trigger>
 ))

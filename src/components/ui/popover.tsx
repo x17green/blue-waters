@@ -28,6 +28,7 @@ const PopoverContent = React.forwardRef<
         'border border-border-default',
         'shadow-large',
         'backdrop-blur-base',
+        'motion-reduce:backdrop-blur-none',
         
         // Text
         'text-fg',
@@ -46,6 +47,7 @@ const PopoverContent = React.forwardRef<
         'data-[side=left]:slide-in-from-right-2',
         'data-[side=right]:slide-in-from-left-2',
         'data-[side=top]:slide-in-from-bottom-2',
+        'motion-reduce:animate-none',
         
         className,
       )}

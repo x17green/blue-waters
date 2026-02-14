@@ -133,7 +133,7 @@ const BreadcrumbSeparator = ({
 }: React.ComponentProps<'li'>) => (
   <li
     role="presentation"
-    aria-hidden="true"
+    aria-hidden={true}
     className={cn(
       'text-fg-subtle',
       '[&>svg]:w-3.5 [&>svg]:h-3.5',
@@ -141,7 +141,7 @@ const BreadcrumbSeparator = ({
     )}
     {...props}
   >
-    {children ?? <Icon path={mdiChevronRight} size={0.6} aria-hidden="true" />}
+    {children ?? <Icon path={mdiChevronRight} size={0.6} aria-hidden={true} />}
   </li>
 )
 BreadcrumbSeparator.displayName = 'BreadcrumbSeparator'
@@ -152,7 +152,7 @@ const BreadcrumbEllipsis = ({
 }: React.ComponentProps<'span'>) => (
   <span
     role="presentation"
-    aria-hidden="true"
+    aria-hidden={true}
     className={cn(
       'flex h-9 w-9 items-center justify-center',
       'text-fg-subtle',
@@ -160,7 +160,7 @@ const BreadcrumbEllipsis = ({
     )}
     {...props}
   >
-    <Icon path={mdiDotsHorizontal} size={0.6} aria-hidden="true" />
+    <Icon path={mdiDotsHorizontal} size={0.6} aria-hidden={true} />
     <span className="sr-only">More</span>
   </span>
 )

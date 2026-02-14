@@ -75,7 +75,7 @@ export default function Home() {
                 className="glass-strong border-2 border-accent-500 bg-accent-600 hover:bg-accent-500 text-white shadow-2xl shadow-accent-900/50 text-lg px-8 py-6 h-auto transition-all duration-300 hover:scale-105"
               >
                 Book Your Trip Now
-                <Icon path={mdiArrowRight} size={0.8} className="ml-2" aria-hidden="true" />
+                <Icon path={mdiArrowRight} size={0.8} className="ml-2" aria-hidden={true} />
               </Button>
             </Link>
           </motion.div>

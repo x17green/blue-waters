@@ -143,7 +143,7 @@ const MenubarSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon path={mdiChevronRight} size={0.6} className="ml-auto text-fg-muted" aria-hidden="true" />
+    <Icon path={mdiChevronRight} size={0.6} className="ml-auto text-fg-muted" aria-hidden={true} />
   </MenubarPrimitive.SubTrigger>
 ))
 MenubarSubTrigger.displayName = MenubarPrimitive.SubTrigger.displayName
@@ -293,7 +293,7 @@ const MenubarCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <Icon path={mdiCheck} size={0.6} className="text-fg-DEFAULT" aria-hidden="true" />
+        <Icon path={mdiCheck} size={0.6} className="text-fg-DEFAULT" aria-hidden={true} />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}
@@ -330,7 +330,7 @@ const MenubarRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <Icon path={mdiCircleSmall} size={0.3} className="fill-current text-fg-DEFAULT" aria-hidden="true" />
+        <Icon path={mdiCircleSmall} size={0.3} className="fill-current text-fg-DEFAULT" aria-hidden={true} />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}

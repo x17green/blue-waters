@@ -175,7 +175,7 @@ function checkGlassmorphism() {
   }
   
   const hasGlassClass = /glass|backdrop-filter|backdrop-blur/i.test(content);
-  const hasReducedMotion = content.includes('prefers-reduced-motion');
+  const hasReducedMotion = content.includes('prefers-reduced-motion') || content.includes('motion-reduce:');
   
   if (!hasGlassClass) {
     results.warnings.push({

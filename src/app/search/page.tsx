@@ -136,7 +136,7 @@ export default function Search() {
             variant="ghost"
             className="mb-4 text-accent-500 flex items-center gap-2"
           >
-            <Icon path={mdiArrowLeft} size={0.6} aria-hidden="true" />
+            <Icon path={mdiArrowLeft} size={0.6} aria-hidden={true} />
             Back to Home
           </Button>
           <h1 className="text-4xl font-bold text-accent-500 mb-2">Search Trips</h1>
@@ -281,15 +281,15 @@ export default function Search() {
 
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                             <div className="flex items-center gap-2 text-sm text-fg-muted">
-                              <Icon path={mdiMapMarker} size={0.6} className="text-accent-500" aria-hidden="true" />
+                              <Icon path={mdiMapMarker} size={0.6} className="text-accent-500" aria-hidden={true} />
                               {trip.route}
                             </div>
                             <div className="flex items-center gap-2 text-sm text-fg-muted">
-                              <Icon path={mdiClock} size={0.6} className="text-accent-500" aria-hidden="true" />
+                              <Icon path={mdiClock} size={0.6} className="text-accent-500" aria-hidden={true} />
                               {trip.departure}
                             </div>
                             <div className="flex items-center gap-2 text-sm text-fg-muted">
-                              <Icon path={mdiAccountGroup} size={0.6} className="text-accent-500" aria-hidden="true" />
+                              <Icon path={mdiAccountGroup} size={0.6} className="text-accent-500" aria-hidden={true} />
                               {trip.available} available
                             </div>
                           </div>
@@ -306,7 +306,7 @@ export default function Search() {
                                       ? 'fill-accent-500 text-accent-500'
                                       : 'text-fg-dim'
                                   }
-                                  aria-hidden="true"
+                                  aria-hidden={true}
                                 />
                               ))}
                               <span className="text-sm font-semibold text-fg">

@@ -45,12 +45,12 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
             <div className="flex items-center gap-4">
               <Link href="/dashboard">
                 <Button variant="ghost" size="sm">
-                  <Icon path={mdiChevronLeft} size={0.6} className="mr-2" aria-hidden="true" />
+                  <Icon path={mdiChevronLeft} size={0.6} className="mr-2" aria-hidden={true} />
                   Dashboard
                 </Button>
               </Link>
               <Button variant="outline" size="sm" onClick={handleSignOut}>
-                <Icon path={mdiLogout} size={0.6} className="mr-2" aria-hidden="true" />
+                <Icon path={mdiLogout} size={0.6} className="mr-2" aria-hidden={true} />
                 Sign Out
               </Button>
             </div>
@@ -86,7 +86,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                 <CardContent>
                   <Link href="/forgot-password">
                     <Button variant="outline" className="w-full">
-                      <Icon path={mdiLock} size={0.6} className="mr-2" aria-hidden="true" />
+                      <Icon path={mdiLock} size={0.6} className="mr-2" aria-hidden={true} />
                       Change Password
                     </Button>
                   </Link>
@@ -105,7 +105,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                   <div>
                     <p className="text-xs text-foreground/50 mb-1">Role</p>
                     <div className="flex items-center gap-2">
-                      <Icon path={mdiShieldAccount} size={0.6} className="text-primary" aria-hidden="true" />
+                      <Icon path={mdiShieldAccount} size={0.6} className="text-primary" aria-hidden={true} />
                       <span className="text-sm font-medium capitalize">{userData.role}</span>
                     </div>
                   </div>

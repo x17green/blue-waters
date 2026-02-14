@@ -150,7 +150,7 @@ const SheetContent = React.forwardRef<
         )}
         aria-label="Close"
       >
-        <Icon path={mdiClose} size={0.6} aria-hidden="true" />
+        <Icon path={mdiClose} size={0.6} aria-hidden={true} />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>

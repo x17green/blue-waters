@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Icon from '@mdi/react'
+import { Icon } from '@/src/components/ui/icon'
 import { mdiLock } from '@mdi/js'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -67,7 +67,7 @@ function ResetPasswordForm() {
               className="text-center"
             >
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Icon path={mdiLock} size={1.33} className="text-green-600" aria-hidden="true" />
+                <Icon path={mdiLock} size={1.33} className="text-green-600" aria-hidden={true} />
               </div>
               <h2 className="text-xl font-semibold text-foreground mb-2">
                 Password Reset Successful
@@ -100,7 +100,7 @@ function ResetPasswordForm() {
                   New Password
                 </label>
                 <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-white/50 focus-within:border-primary transition-colors">
-                  <Lock className="w-4 h-4 text-primary mr-2" />
+                  <Icon path={mdiLock} size={0.6} className="text-primary mr-2" aria-hidden={true} />
                   <input
                     name="password"
                     type="password"
@@ -118,7 +118,7 @@ function ResetPasswordForm() {
                   Confirm Password
                 </label>
                 <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-white/50 focus-within:border-primary transition-colors">
-                  <Lock className="w-4 h-4 text-primary mr-2" />
+                  <Icon path={mdiLock} size={0.6} className="text-primary mr-2" aria-hidden={true} />
                   <input
                     name="confirmPassword"
                     type="password"

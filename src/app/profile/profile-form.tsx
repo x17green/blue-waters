@@ -75,7 +75,7 @@ export default function ProfileForm({ user, userData }: ProfileFormProps) {
               Email Address
             </label>
             <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-gray-50">
-              <Icon path={mdiEmail} size={0.6} className="text-primary mr-2" aria-hidden="true" />
+              <Icon path={mdiEmail} size={0.6} className="text-primary mr-2" aria-hidden={true} />
               <input
                 type="email"
                 value={user.email}
@@ -90,7 +90,7 @@ export default function ProfileForm({ user, userData }: ProfileFormProps) {
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Full Name</label>
             <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-colors">
-              <Icon path={mdiAccount} size={0.6} className="text-primary mr-2" aria-hidden="true" />
+              <Icon path={mdiAccount} size={0.6} className="text-primary mr-2" aria-hidden={true} />
               <input
                 name="fullName"
                 type="text"
@@ -107,7 +107,7 @@ export default function ProfileForm({ user, userData }: ProfileFormProps) {
               Phone Number
             </label>
             <div className="flex items-center border border-primary/20 rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-colors">
-              <Icon path={mdiPhone} size={0.6} className="text-primary mr-2" aria-hidden="true" />
+              <Icon path={mdiPhone} size={0.6} className="text-primary mr-2" aria-hidden={true} />
               <input
                 name="phone"
                 type="tel"
@@ -120,7 +120,7 @@ export default function ProfileForm({ user, userData }: ProfileFormProps) {
 
           {/* Save Button */}
           <Button type="submit" disabled={isPending} className="w-full">
-            <Icon path={mdiContentSave} size={0.6} className="mr-2" aria-hidden="true" />
+            <Icon path={mdiContentSave} size={0.6} className="mr-2" aria-hidden={true} />
             {isPending ? 'Saving...' : 'Save Changes'}
           </Button>
         </form>

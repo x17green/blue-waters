@@ -211,7 +211,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             aria-label={required ? `${label} (required)` : label}
           >
             {label}
-            {required && <span className="ml-1 text-error-500" aria-hidden="true">*</span>}
+            {required && <span className="ml-1 text-error-500" aria-hidden={true}>*</span>}
           </label>
         )}
         

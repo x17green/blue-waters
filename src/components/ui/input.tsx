@@ -248,7 +248,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       >
         {/* Start icon */}
         {startIcon && !isLoading && (
-          <span className="flex items-center justify-center text-fg-subtle" aria-hidden="true">
+          <span className="flex items-center justify-center text-fg-subtle" aria-hidden={true}>
             {startIcon}
           </span>
         )}
@@ -257,7 +257,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {isLoading && (
           <span
             className="flex items-center justify-center text-accent-400"
-            aria-hidden="true"
+            aria-hidden={true}
           >
             <svg
               className={cn(
@@ -307,7 +307,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         
         {/* End icon */}
         {endIcon && !isLoading && (
-          <span className="flex items-center justify-center text-fg-subtle" aria-hidden="true">
+          <span className="flex items-center justify-center text-fg-subtle" aria-hidden={true}>
             {endIcon}
           </span>
         )}

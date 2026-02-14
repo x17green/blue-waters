@@ -110,10 +110,9 @@ const PaginationPrevious = ({
     size="default"
     variant="glass"
     className={cn('gap-1 pl-2.5', className)}
-    aria-label="Go to previous page"
     {...props}
   >
-    <Icon path={mdiChevronLeft} size={0.6} aria-hidden="true" />
+    <Icon path={mdiChevronLeft} size={0.6} aria-hidden={true} />
     <span>Previous</span>
   </PaginationLink>
 )
@@ -128,11 +127,10 @@ const PaginationNext = ({
     size="default"
     variant="glass"
     className={cn('gap-1 pr-2.5', className)}
-    aria-label="Go to next page"
     {...props}
   >
     <span>Next</span>
-    <Icon path={mdiChevronRight} size={0.6} aria-hidden="true" />
+    <Icon path={mdiChevronRight} size={0.6} aria-hidden={true} />
   </PaginationLink>
 )
 PaginationNext.displayName = 'PaginationNext'
@@ -150,7 +148,7 @@ const PaginationEllipsis = ({
     )}
     {...props}
   >
-    <Icon path={mdiDotsHorizontal} size={0.6} aria-hidden="true" />
+    <Icon path={mdiDotsHorizontal} size={0.6} aria-hidden={true} />
     <span className="sr-only">More pages</span>
   </span>
 )

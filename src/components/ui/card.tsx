@@ -39,6 +39,7 @@ const cardVariants = cva(
         glass: [
           'bg-glass-02',
           'backdrop-blur-subtle',
+          'motion-reduce:backdrop-blur-none',
           'border border-border-subtle',
           'shadow-glass',
           'hover:bg-glass-03',

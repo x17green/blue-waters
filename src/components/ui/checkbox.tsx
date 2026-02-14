@@ -144,9 +144,9 @@ const Checkbox = React.forwardRef<
         >
           <CheckboxPrimitive.Indicator className="flex items-center justify-center text-fg">
             {props.checked === 'indeterminate' ? (
-              <Icon path={mdiMinus} size={iconSizeNum} aria-hidden="true" />
+              <Icon path={mdiMinus} size={iconSizeNum} aria-hidden={true} />
             ) : (
-              <Icon path={mdiCheck} size={iconSizeNum} aria-hidden="true" />
+              <Icon path={mdiCheck} size={iconSizeNum} aria-hidden={true} />
             )}
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
@@ -175,9 +175,9 @@ const Checkbox = React.forwardRef<
     >
       <CheckboxPrimitive.Indicator className="flex items-center justify-center text-fg">
         {props.checked === 'indeterminate' ? (
-          <Icon path={mdiMinus} size={iconSizeNum} aria-hidden="true" />
+          <Icon path={mdiMinus} size={iconSizeNum} aria-hidden={true} />
         ) : (
-          <Icon path={mdiCheck} size={iconSizeNum} aria-hidden="true" />
+          <Icon path={mdiCheck} size={iconSizeNum} aria-hidden={true} />
         )}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

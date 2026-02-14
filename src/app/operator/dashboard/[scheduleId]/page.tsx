@@ -41,7 +41,7 @@ export default async function OperatorDashboardPage({
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Icon path={mdiFerry} size={1.33} ariaHidden=" true" />
+            <Icon path={mdiFerry} size={1.33} aria-hidden={true} />
             Operator Dashboard
           </h1>
           <p className="text-muted-foreground mt-2">
@@ -53,11 +53,11 @@ export default async function OperatorDashboardPage({
       <Tabs defaultValue="boarding" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="boarding" className="gap-2">
-            <Icon path={mdiFerry} size={0.6} aria-hidden="true" />
+            <Icon path={mdiFerry} size={0.6} aria-hidden={true} />
             Boarding Management
           </TabsTrigger>
           <TabsTrigger value="safety" className="gap-2">
-            <Icon path={mdiClipboardCheck} size={0.6} aria-hidden="true" />
+            <Icon path={mdiClipboardCheck} size={0.6} aria-hidden={true} />
             Safety Checklist
           </TabsTrigger>
         </TabsList>

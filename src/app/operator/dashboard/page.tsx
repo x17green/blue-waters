@@ -138,7 +138,7 @@ export default function OperatorDashboard() {
               variant="ghost"
               onClick={handleLogout}
               className="text-primary"
-              startIcon={<Icon path={mdiLogout} size={0.6} aria-hidden="true" />}
+              startIcon={<Icon path={mdiLogout} size={0.6} aria-hidden={true} />}
             >
               Logout
             </Button>
@@ -179,7 +179,7 @@ export default function OperatorDashboard() {
                       {operatorData.totalTrips}
                     </p>
                   </div>
-                  <Icon path={mdiFerry} size={1.66} className="text-primary/30" aria-hidden="true" />
+                  <Icon path={mdiFerry} size={1.66} className="text-primary/30" aria-hidden={true} />
                 </div>
               </CardBody>
             </Card>
@@ -195,7 +195,7 @@ export default function OperatorDashboard() {
                       ₦{(operatorData.totalRevenue / 1000000).toFixed(1)}M
                     </p>
                   </div>
-                  <Icon path={mdiCurrencyUsd} size={1.66} className="text-accent/30" aria-hidden="true" />
+                  <Icon path={mdiCurrencyUsd} size={1.66} className="text-accent/30" aria-hidden={true} />
                 </div>
               </CardBody>
             </Card>
@@ -211,7 +211,7 @@ export default function OperatorDashboard() {
                       {operatorData.rating}
                     </p>
                   </div>
-                  <Icon path={mdiTrendingUp} size={1.66} className="text-blue-600/30" aria-hidden="true" />
+                  <Icon path={mdiTrendingUp} size={1.66} className="text-blue-600/30" aria-hidden={true} />
                 </div>
               </CardBody>
             </Card>
@@ -225,7 +225,7 @@ export default function OperatorDashboard() {
                     <p className="text-foreground/60 text-sm mb-2">Active Boats</p>
                     <p className="text-4xl font-bold text-green-600">4</p>
                   </div>
-                  <Icon path={mdiAccountGroup} size={1.66} className="text-green-600/30" aria-hidden="true" />
+                  <Icon path={mdiAccountGroup} size={1.66} className="text-green-600/30" aria-hidden={true} />
                 </div>
               </CardBody>
             </Card>
@@ -323,7 +323,7 @@ export default function OperatorDashboard() {
                         </h3>
                         <div className="flex flex-wrap gap-4 text-sm text-foreground/70">
                           <span className="flex items-center gap-1">
-                            <Icon path={mdiMapMarker} size={0.6} aria-hidden="true" />
+                            <Icon path={mdiMapMarker} size={0.6} aria-hidden={true} />
                             {trip.route}
                           </span>
                           <span>{trip.departure}</span>

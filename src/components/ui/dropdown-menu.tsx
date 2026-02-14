@@ -43,7 +43,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon path={mdiChevronRight} size={0.6} className="ml-auto" aria-hidden="true" />
+    <Icon path={mdiChevronRight} size={0.6} className="ml-auto" aria-hidden={true} />
   </DropdownMenuPrimitive.SubTrigger>
 ))
 DropdownMenuSubTrigger.displayName =
@@ -65,6 +65,7 @@ const DropdownMenuSubContent = React.forwardRef<
       'border border-border-default',
       'shadow-large',
       'backdrop-blur-base',
+      'motion-reduce:backdrop-blur-none',
       
       // Text
       'text-fg',
@@ -76,6 +77,7 @@ const DropdownMenuSubContent = React.forwardRef<
       'data-[state=open]:fade-in-0',
       'data-[state=closed]:zoom-out-95',
       'data-[state=open]:zoom-in-95',
+      'motion-reduce:animate-none',
       'data-[side=bottom]:slide-in-from-top-2',
       'data-[side=left]:slide-in-from-right-2',
       'data-[side=right]:slide-in-from-left-2',
@@ -107,6 +109,7 @@ const DropdownMenuContent = React.forwardRef<
         'border border-border-default',
         'shadow-large',
         'backdrop-blur-base',
+        'motion-reduce:backdrop-blur-none',
         
         // Text
         'text-fg',
@@ -118,6 +121,7 @@ const DropdownMenuContent = React.forwardRef<
         'data-[state=open]:fade-in-0',
         'data-[state=closed]:zoom-out-95',
         'data-[state=open]:zoom-in-95',
+        'motion-reduce:animate-none',
         'data-[side=bottom]:slide-in-from-top-2',
         'data-[side=left]:slide-in-from-right-2',
         'data-[side=right]:slide-in-from-left-2',
@@ -186,7 +190,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Icon path={mdiCheck} size={0.6} className="text-accent-400" aria-hidden="true" />
+        <Icon path={mdiCheck} size={0.6} className="text-accent-400" aria-hidden={true} />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -219,7 +223,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Icon path={mdiCircleSmall} size={0.3} className="fill-current text-accent-400" aria-hidden="true" />
+        <Icon path={mdiCircleSmall} size={0.3} className="fill-current text-accent-400" aria-hidden={true} />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}

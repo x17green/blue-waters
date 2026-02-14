@@ -117,7 +117,7 @@ function CheckoutContent() {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Icon path={mdiCheckCircle} size={4} className="text-success-500" aria-hidden="true" />
+                <Icon path={mdiCheckCircle} size={4} className="text-success-500" aria-hidden={true} />
               </motion.div>
             </div>
 
@@ -215,7 +215,7 @@ function CheckoutContent() {
           <Button
             href="/book"
             variant="ghost"
-            startIcon={<Icon path={mdiArrowLeft} size={0.6} aria-hidden="true" />}
+            startIcon={<Icon path={mdiArrowLeft} size={0.6} aria-hidden={true} />}
             className="mb-4 text-accent-500"
           >
             Back to Booking
@@ -283,15 +283,15 @@ function CheckoutContent() {
                   >
                     <TabsList className="grid w-full grid-cols-3 mb-6">
                       <TabsTrigger value="card" className="flex gap-2">
-                        <Icon path={mdiCreditCard} size={0.6} aria-hidden="true" />
+                        <Icon path={mdiCreditCard} size={0.6} aria-hidden={true} />
                         Card
                       </TabsTrigger>
                       <TabsTrigger value="mobile" className="flex gap-2">
-                        <Icon path={mdiCellphone} size={0.6} aria-hidden="true" />
+                        <Icon path={mdiCellphone} size={0.6} aria-hidden={true} />
                         Mobile Money
                       </TabsTrigger>
                       <TabsTrigger value="bank" className="flex gap-2">
-                        <Icon path={mdiOfficeBuilding} size={0.6} aria-hidden="true" />
+                        <Icon path={mdiOfficeBuilding} size={0.6} aria-hidden={true} />
                         Bank
                       </TabsTrigger>
                     </TabsList>

@@ -63,7 +63,7 @@ const AccordionTrigger = React.forwardRef<
           'transition-transform duration-normal',
           'text-accent-400',
         )}
-        aria-hidden="true"
+        aria-hidden={true}
       />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

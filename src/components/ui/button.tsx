@@ -353,7 +353,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && (
           <span
             className="absolute inset-0 flex items-center justify-center"
-            aria-hidden="true"
+            aria-hidden={true}
           >
             <svg
               className="size-5 animate-spin text-current"
@@ -386,7 +386,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           )}
         >
           {startIcon && (
-            <span className="inline-flex shrink-0" aria-hidden="true">
+            <span className="inline-flex shrink-0" aria-hidden={true}>
               {startIcon}
             </span>
           )}
@@ -394,7 +394,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           {children}
           
           {endIcon && (
-            <span className="inline-flex shrink-0" aria-hidden="true">
+            <span className="inline-flex shrink-0" aria-hidden={true}>
               {endIcon}
             </span>
           )}
@@ -421,7 +421,7 @@ const ButtonIcon = React.forwardRef<
   <span
     ref={ref}
     className={cn('inline-flex shrink-0', className)}
-    aria-hidden="true"
+    aria-hidden={true}
     {...props}
   />
 ))

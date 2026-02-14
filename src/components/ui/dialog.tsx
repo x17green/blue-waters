@@ -26,6 +26,7 @@ const DialogOverlay = React.forwardRef<
       // Glassmorphism overlay
       'bg-bg-950/80',
       'backdrop-blur-modal',
+      'motion-reduce:backdrop-blur-none',
       // Animations
       'data-[state=open]:animate-in',
       'data-[state=closed]:animate-out',
@@ -57,6 +58,7 @@ const DialogContent = React.forwardRef<
         'border border-border-default',
         'shadow-large',
         'backdrop-blur-base',
+        'motion-reduce:backdrop-blur-none',
         
         // Spacing and shape
         'p-6 sm:rounded-lg',
@@ -70,6 +72,7 @@ const DialogContent = React.forwardRef<
         'data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0',
         'data-[state=open]:fade-in-0',
+        'motion-reduce:animate-none',
         'data-[state=closed]:zoom-out-95',
         'data-[state=open]:zoom-in-95',
         'data-[state=closed]:slide-out-to-left-1/2',
@@ -100,7 +103,7 @@ const DialogContent = React.forwardRef<
         )}
         aria-label="Close"
       >
-        <Icon path={mdiClose} size={0.6} aria-hidden="true" />
+        <Icon path={mdiClose} size={0.6} aria-hidden={true} />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

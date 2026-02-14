@@ -96,7 +96,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <Icon path={mdiChevronRight} size={0.6} className="ml-auto text-fg-muted" aria-hidden="true" />
+    <Icon path={mdiChevronRight} size={0.6} className="ml-auto text-fg-muted" aria-hidden={true} />
   </ContextMenuPrimitive.SubTrigger>
 ))
 ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
@@ -242,7 +242,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Icon path={mdiCheck} size={0.6} className="text-fg-DEFAULT" aria-hidden="true" />
+        <Icon path={mdiCheck} size={0.6} className="text-fg-DEFAULT" aria-hidden={true} />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -280,7 +280,7 @@ const ContextMenuRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <Icon path={mdiCircleSmall} size={0.3} className="fill-current text-fg-DEFAULT" aria-hidden="true" />
+        <Icon path={mdiCircleSmall} size={0.3} className="fill-current text-fg-DEFAULT" aria-hidden={true} />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}

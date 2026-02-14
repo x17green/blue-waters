@@ -182,7 +182,7 @@ const ToastClose = React.forwardRef<
     aria-label="Close"
     {...props}
   >
-    <Icon path={mdiClose} size={0.6} aria-hidden="true" />
+    <Icon path={mdiClose} size={0.6} aria-hidden={true} />
   </ToastPrimitives.Close>
 ))
 ToastClose.displayName = ToastPrimitives.Close.displayName

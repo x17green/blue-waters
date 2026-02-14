@@ -99,8 +99,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ..._props }) => <Icon path={mdiChevronLeft} size={0.6} aria-hidden="true" />,
-        IconRight: ({ ..._props }) => <Icon path={mdiChevronRight} size={0.6} aria-hidden="true" />,
+        IconLeft: ({ ..._props }) => <Icon path={mdiChevronLeft} size={0.6} aria-hidden={true} />,
+        IconRight: ({ ..._props }) => <Icon path={mdiChevronRight} size={0.6} aria-hidden={true} />,
       }}
       {...props}
     />

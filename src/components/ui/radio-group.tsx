@@ -172,7 +172,7 @@ const RadioGroupItem = React.forwardRef<
           path={mdiCircle}
           size={0.4}
           className="fill-current" 
-          aria-hidden="true"
+          aria-hidden={true}
         />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>

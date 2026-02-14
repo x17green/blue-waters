@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Icon from '@mdi/react'
+import { Icon } from '@/src/components/ui/icon'
 import { mdiAlertCircle, mdiCheckCircle, mdiLock, mdiEmail, mdiPhone, mdiAccount, mdiWaves } from '@mdi/js'
 import Link from 'next/link'
 import { useState, useTransition } from 'react'
@@ -56,7 +56,7 @@ export default function SignUp() {
           {/* Header */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-accent-600 to-accent-400 mb-6 ring-4 ring-accent-900 ring-offset-4 ring-offset-bg-900">
-              <Icon path={mdiWaves} size={1.33} className="text-white" aria-hidden="true" />
+              <Icon path={mdiWaves} size={1.33} className="text-white" aria-hidden={true} />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-fg mb-3">
               Create Account
@@ -76,7 +76,7 @@ export default function SignUp() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="glass-subtle border border-error-600 rounded-md p-4 flex items-start gap-3"
                 >
-                  <Icon path={mdiAlertCircle} size={0.8} className="text-error-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <Icon path={mdiAlertCircle} size={0.8} className="text-error-500 flex-shrink-0 mt-0.5" aria-hidden={true} />
                   <p className="text-sm text-error-300 leading-relaxed">{error}</p>
                 </motion.div>
               )}
@@ -88,7 +88,7 @@ export default function SignUp() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="glass-subtle border border-success-600 rounded-md p-4 flex items-start gap-3"
                 >
-                  <Icon path={mdiCheckCircle} size={0.8} className="text-success-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <Icon path={mdiCheckCircle} size={0.8} className="text-success-500 flex-shrink-0 mt-0.5" aria-hidden={true} />
                   <p className="text-sm text-success-300 leading-relaxed">{success}</p>
                 </motion.div>
               )}
@@ -100,7 +100,7 @@ export default function SignUp() {
                 </label>
                 <div className="relative">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <Icon path={mdiAccount} size={0.8} className="text-accent-500" aria-hidden="true" />
+                    <Icon path={mdiAccount} size={0.8} className="text-accent-500" aria-hidden={true} />
                   </div>
                   <input
                     id="fullName"
@@ -123,7 +123,7 @@ export default function SignUp() {
                   </label>
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <Icon path={mdiEmail} size={0.8} className="text-accent-500" aria-hidden="true" />
+                      <Icon path={mdiEmail} size={0.8} className="text-accent-500" aria-hidden={true} />
                     </div>
                     <input
                       id="email"
@@ -144,7 +144,7 @@ export default function SignUp() {
                   </label>
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <Icon path={mdiPhone} size={0.8} className="text-accent-500" aria-hidden="true" />
+                      <Icon path={mdiPhone} size={0.8} className="text-accent-500" aria-hidden={true} />
                     </div>
                     <input
                       id="phone"
@@ -183,7 +183,7 @@ export default function SignUp() {
                   </label>
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <Lock className="w-5 h-5 text-accent-500" />
+                      <Icon path={mdiLock} size={0.8} className="text-accent-500" aria-hidden={true} />
                     </div>
                     <input
                       id="password"
@@ -204,7 +204,7 @@ export default function SignUp() {
                   </label>
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <Icon path={mdiLock} size={0.8} className="text-accent-500" aria-hidden="true" />
+                      <Icon path={mdiLock} size={0.8} className="text-accent-500" aria-hidden={true} />
                     </div>
                     <input
                       id="confirmPassword"

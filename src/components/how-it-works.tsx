@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Icon from '@mdi/react'
+import { Icon } from '@/src/components/ui/icon'
 import { mdiCheckCircle, mdiCreditCard, mdiMagnify, mdiFerry } from '@mdi/js'
 
 const steps = [
@@ -75,7 +75,7 @@ export default function HowItWorks() {
           className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-4"
         >
           {steps.map((step, index) => {
-            const Icon = step.icon
+            const iconPath = step.icon
             return (
               <motion.div key={index} variants={itemVariants} className="relative">
                 {/* Connector line */}
@@ -89,7 +89,7 @@ export default function HowItWorks() {
                     whileHover={{ scale: 1.1 }}
                     className={`w-16 h-16 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 shadow-lg`}
                   >
-                    <Icon className="w-8 h-8 text-white" />
+                    <Icon path={iconPath} size={1.33} className="text-white" aria-hidden={true} />
                   </motion.div>
 
                   <div className="absolute -top-4 -right-2 w-8 h-8 bg-accent-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
