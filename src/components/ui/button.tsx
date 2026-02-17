@@ -6,7 +6,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Yenagoa Boat Club Button Component
+ * Bayelsa Boat Club Button Component
  * 
  * Glassmorphism dark-first design with accessibility features.
  * Design Source: docs/design-architecture.md#8-component-system

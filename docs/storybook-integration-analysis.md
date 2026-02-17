@@ -1,4 +1,4 @@
-# Storybook Integration Analysis — Yenagoa Boat Club
+# Storybook Integration Analysis — Bayelsa Boat Club
 
 **Date:** February 14, 2026  
 **Status:** Design System Migration Phase — Storybook Story Files Required

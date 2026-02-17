@@ -1,4 +1,4 @@
-# Yenagoa Boat Club: Bayelsa Boat Booking Platform - Implementation Plan
+# Bayelsa Boat Club: Bayelsa Boat Booking Platform - Implementation Plan
 
 ## Executive Summary
 

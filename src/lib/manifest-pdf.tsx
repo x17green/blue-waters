@@ -179,7 +179,7 @@ export const ManifestPDF: React.FC<ManifestPDFProps> = ({ data }) => {
         <View style={styles.header}>
           <Text style={styles.title}>PASSENGER MANIFEST</Text>
           <Text style={styles.subtitle}>
-            Yenagoa Boat Club Boat Cruise System - Bayelsa State
+            Bayelsa Boat Club Boat Cruise System - Bayelsa State
           </Text>
         </View>
 
@@ -307,7 +307,7 @@ export const ManifestPDF: React.FC<ManifestPDFProps> = ({ data }) => {
             This manifest must be carried on board for regulatory compliance.
           </Text>
           <Text>
-            Page 1 of 1 | Yenagoa Boat Club Booking System | Ministry of Marine
+            Page 1 of 1 | Bayelsa Boat Club Booking System | Ministry of Marine
             Affairs, Bayelsa State
           </Text>
         </View>

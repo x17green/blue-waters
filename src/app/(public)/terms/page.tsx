@@ -20,7 +20,7 @@ export default function TermsPage() {
           </CardHeader>
           <CardContent className="prose prose-sm max-w-none dark:prose-invert">
             <p>
-              By accessing and using Yenagoa Boat Club's services, you agree to be bound by these
+              By accessing and using Bayelsa Boat Club's services, you agree to be bound by these
               Terms of Service and all applicable laws and regulations. If you do not agree with
               any of these terms, you are prohibited from using our services.
             </p>
@@ -138,14 +138,14 @@ export default function TermsPage() {
           <CardContent className="prose prose-sm max-w-none dark:prose-invert space-y-4">
             <h4 className="font-semibold">6.1 Safety Standards</h4>
             <p>
-              All vessels operated by Yenagoa Boat Club meet Nigerian Maritime Safety regulations
+              All vessels operated by Bayelsa Boat Club meet Nigerian Maritime Safety regulations
               and are regularly inspected. Life jackets and safety equipment are provided on all
               trips.
             </p>
 
             <h4 className="font-semibold">6.2 Limitation of Liability</h4>
             <p>
-              Yenagoa Boat Club is not liable for:
+              Bayelsa Boat Club is not liable for:
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>Delays or cancellations due to weather or circumstances beyond our control</li>

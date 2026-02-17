@@ -7,7 +7,7 @@
 
 ## 🎯 Overview
 
-This directory contains the complete infrastructure for migrating Yenagoa Boat Club from a **hybrid shadcn/NextUI system with vibrant ocean theming** to a **sophisticated dark-first glassmorphism design system** built on HeroUI, Pictogrammers icons, and WCAG AA accessibility standards.
+This directory contains the complete infrastructure for migrating Bayelsa Boat Club from a **hybrid shadcn/NextUI system with vibrant ocean theming** to a **sophisticated dark-first glassmorphism design system** built on HeroUI, Pictogrammers icons, and WCAG AA accessibility standards.
 
 ### What's Changing
 

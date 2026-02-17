@@ -1,6 +1,6 @@
-# Storybook Starter for Yenagoa Boat Club — HeroUI wrappers + Design Tokens
+# Storybook Starter for Bayelsa Boat Club — HeroUI wrappers + Design Tokens
 
-This is a Storybook-ready starter scaffold tailored for **Yenagoa Boat Club**. It includes:
+This is a Storybook-ready starter scaffold tailored for **Bayelsa Boat Club**. It includes:
 
 - `package.json` with necessary dependencies and scripts (HeroUI, Storybook, React, TypeScript)
 - Storybook config (`.storybook/main.ts`, `.storybook/preview.tsx`)
@@ -365,7 +365,7 @@ A HeroUI-wrapped button with accessible defaults and glassmorphism-ready styling
 ### README_STORYBOOK.md
 
 ```md
-# Yenagoa Boat Club — Storybook Starter
+# Bayelsa Boat Club — Storybook Starter
 
 ## Setup
 

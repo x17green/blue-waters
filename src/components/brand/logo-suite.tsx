@@ -1,12 +1,12 @@
 /**
- * Yenagoa Boat Club Brand Logo Component Suite
+ * Bayelsa Boat Club Brand Logo Component Suite
  * 
  * Partnership Branding: AstroMANIA Enterprises x Bayelsa State Government
  * 
  * Usage Guidelines:
  * - Bayelsa Coat of Arms: Homepage header (left), official documents
  * - Ministry Blue Economy Seal: Homepage header (right), footer
- * - Yenagoa Boat Club Wordmark: Center branding with official SVG emblem
+ * - Bayelsa Boat Club Wordmark: Center branding with official SVG emblem
  * 
  * Legal:
  * - Government seals remain property of Bayelsa State Government
@@ -121,10 +121,10 @@ export function MinistryBlueSeal({
 }
 
 /* ============================================================================
-   Yenagoa Boat Club WORDMARK
+  Bayelsa Boat Club WORDMARK
    ============================================================================ */
 /**
- * Yenagoa Boat Club Brand Wordmark
+ * Bayelsa Boat Club Brand Wordmark
  * 
  * Features: Official SVG emblem with boat, waves, and circular design
  * Design: Simple, clean emblem that scales well at all sizes
@@ -144,7 +144,8 @@ export function BlueWatersWordmark({
   className,
   showText = true,
   priority = false,
-}: Omit<LogoProps, 'priority'> & { showText?: boolean; priority?: boolean }) {
+  subTextClassName,
+}: Omit<LogoProps, 'priority'> & { showText?: boolean; priority?: boolean; subTextClassName?: string }) {
   const dimensions = LOGO_SIZES[size];
   
   return (
@@ -155,14 +156,14 @@ export function BlueWatersWordmark({
         className
       )}
     >
-      {/* Yenagoa Boat Club SVG Emblem */}
+      {/* Bayelsa Boat Club SVG Emblem */}
       <div 
         className="relative flex-shrink-0"
         style={{ width: dimensions.width, height: dimensions.height }}
       >
         <Image
           src="/assets/logos/blue-waters-symbol.svg"
-          alt="Yenagoa Boat Club Emblem"
+          alt="Bayelsa Boat Club Emblem"
           width={dimensions.width}
           height={dimensions.height}
           priority={priority}
@@ -173,23 +174,29 @@ export function BlueWatersWordmark({
       {/* Wordmark Text (optional) */}
       {showText && (
         <div className="flex flex-col justify-center">
-          <span className={cn(
-            "font-extrabold text-fg tracking-tight",
-            size === 'xs' && "text-sm",
-            size === 'sm' && "text-base",
-            size === 'md' && "text-xl",
-            size === 'lg' && "text-2xl",
-            size === 'xl' && "text-3xl"
-          )}>
-            Yenagoa Boat Club
+          <span
+            className={cn(
+              "font-extrabold text-fg tracking-tight",
+              size === 'xs' && "text-sm",
+              size === 'sm' && "text-base",
+              size === 'md' && "text-xl",
+              size === 'lg' && "text-2xl",
+              size === 'xl' && "text-3xl",
+              className // <-- forward parent className here
+            )}
+          >
+            Bayelsa Boat Club
           </span>
-          <span className={cn(
-            "text-fg-muted font-marketing tracking-wide",
-            size === 'xs' && "text-xs",
-            size === 'sm' && "text-xs",
-            (size === 'md' || size === 'lg' || size === 'xl') && "text-sm"
-          )}>
-            Bayelsa Marine Ecosystem
+          <span 
+            className={cn(
+              "text-fg-muted font-marketing tracking-wide",
+              size === 'xs' && "text-xs",
+              size === 'sm' && "text-xs",
+              (size === 'md' || size === 'lg' || size === 'xl') && "text-sm",
+              subTextClassName // <-- forward parent subTextClassName here
+            )}
+          >
+            Ministry of Marine and Blue Economy
           </span>
         </div>
       )}
@@ -204,7 +211,7 @@ export function BlueWatersWordmark({
  * Complete Partnership Logo Header
  * 
  * Displays all three institutional logos in brand-specified configuration:
- * [Bayelsa Coat] --- [Yenagoa Boat Club Wordmark] --- [Ministry Seal]
+ * [Bayelsa Coat] --- [Bayelsa Boat Club Wordmark] --- [Ministry Seal]
  * 
  * @example
  * <PartnershipLogoHeader />
@@ -266,7 +273,7 @@ export function FooterLogoSuite({ className }: FooterLogoSuiteProps) {
     <div className={cn("flex flex-col items-center gap-3", className)}>
       <MinistryBlueSeal size="sm" />
       <p className="text-xs text-fg-muted text-center max-w-xs">
-        In partnership with the Bayelsa State Ministry of Marine and Blue Economy
+        The Bayelsa Boat Club is a division of the < br /> Ministry of Marine and Blue Economy <br /> Bayelsa State - Nigeria.
       </p>
     </div>
   );

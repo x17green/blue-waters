@@ -233,7 +233,7 @@ function AdminDashboardFooter() {
             </div>
             <div>
               <p className="text-sm font-semibold text-fg">
-                Yenagoa Boat Club Admin Portal
+                Bayelsa Boat Club Admin Portal
               </p>
               <p className="text-xs text-fg-muted">
                 © {currentYear} Ministry of Marine and Blue Economy

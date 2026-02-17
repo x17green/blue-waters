@@ -6,7 +6,7 @@ import { Icon } from '@/src/components/ui/icon'
 import { mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js'
 
 /**
- * Pagination Component - Yenagoa Boat Club Design System
+ * Pagination Component - Bayelsa Boat Club Design System
  * 
  * Glassmorphism-enhanced pagination with design token integration.
  * Uses migrated Button component variants for consistent styling.

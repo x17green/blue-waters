@@ -69,7 +69,7 @@ export default function AboutPage() {
     {
       name: 'Chief Ebikeme Michael',
       role: 'Founder & Chief Executive',
-      bio: 'With over 20 years of maritime experience, Chief Ebikeme founded Yenagoa Boat Club to revolutionize water transportation in Bayelsa State.',
+      bio: 'With over 20 years of maritime experience, Chief Ebikeme founded Bayelsa Boat Club to revolutionize water transportation in Bayelsa State.',
     },
     {
       name: 'Capt. Tonye Owei',
@@ -100,7 +100,7 @@ export default function AboutPage() {
           </div>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-fg">
-          About Yenagoa Boat Club
+          About Bayelsa Boat Club
         </h1>
         <p className="text-xl text-fg-muted max-w-3xl mx-auto">
           Connecting communities across Bayelsa State through safe, reliable, and comfortable water transportation.
@@ -139,7 +139,7 @@ export default function AboutPage() {
         <h2 className="text-3xl font-bold text-fg text-center mb-6">Our Story</h2>
         <div className="space-y-4 text-fg-muted text-lg leading-relaxed">
           <p>
-            Founded in 2018, <span className="text-fg font-semibold">Yenagoa Boat Club</span> began with a simple
+            Founded in 2018, <span className="text-fg font-semibold">Bayelsa Boat Club</span> began with a simple
             mission: to provide the people of Bayelsa State with a safe, reliable, and modern alternative for water
             transportation.
           </p>

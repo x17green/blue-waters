@@ -74,16 +74,16 @@ export default function ContactPage() {
     {
       icon: mdiPhoneInTalk,
       title: 'Phone',
-      primary: '+234 803 123 4567',
-      secondary: '+234 805 987 6543',
-      action: 'tel:+2348031234567',
+      primary: '+234 907 080 7444',
+      secondary: '+234 810 473 9334',
+      action: 'tel:+2349070807444',
     },
     {
       icon: mdiMapMarker,
       title: 'Office',
-      primary: 'Yenagoa Central Jetty',
+      primary: 'Ox-Bow Lake Pavilion, Yenagoa',
       secondary: 'Bayelsa State, Nigeria',
-      action: 'https://maps.google.com/?q=Yenagoa+Central+Jetty',
+      action: 'https://maps.app.goo.gl/34VZRC41bPtoCYC38',
     },
     {
       icon: mdiClockOutline,
@@ -98,7 +98,7 @@ export default function ContactPage() {
     { icon: mdiFacebook, label: 'Facebook', url: '#', color: 'text-accent-500' },
     { icon: mdiTwitter, label: 'Twitter', url: '#', color: 'text-accent-500' },
     { icon: mdiInstagram, label: 'Instagram', url: '#', color: 'text-accent-500' },
-    { icon: mdiWhatsapp, label: 'WhatsApp', url: 'https://wa.me/2348031234567', color: 'text-accent-500' },
+    { icon: mdiWhatsapp, label: 'WhatsApp', url: 'https://wa.me/2348104739334', color: 'text-accent-500' },
   ]
 
   return (

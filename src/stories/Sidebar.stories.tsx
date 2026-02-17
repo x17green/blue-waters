@@ -45,7 +45,7 @@ export const Default: Story = {
     <Sidebar>
       <SidebarHeader>
         <div className="px-6 py-4">
-          <h2 className="text-lg font-semibold">Yenagoa Boat Club</h2>
+          <h2 className="text-lg font-semibold">Bayelsa Boat Club</h2>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -90,7 +90,7 @@ export const Default: Story = {
       </SidebarContent>
       <SidebarFooter>
         <div className="px-6 py-4">
-          <p className="text-xs text-fg-muted">© 2026 Yenagoa Boat Club</p>
+          <p className="text-xs text-fg-muted">© 2026 Bayelsa Boat Club</p>
         </div>
       </SidebarFooter>
     </Sidebar>

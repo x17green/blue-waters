@@ -1,5 +1,5 @@
 /**
- * Yenagoa Boat Club Brand Components
+ * Bayelsa Boat Club Brand Components
  * 
  * Central export for all brand-related components
  */

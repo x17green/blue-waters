@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/src/lib/supabase/server'
+import { prisma } from '@/lib/prisma.client'
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
@@ -80,6 +81,24 @@ export async function signup(formData: FormData) {
 
   // User data will be synced to Prisma via the database trigger we created
   // No need to manually insert into the users table
+
+  // If user is an operator, create an Operator record
+  if (data.userType === 'operator' && authData.user) {
+    try {
+      await prisma.operator.create({
+        data: {
+          userId: authData.user.id,
+          organizationName: '', // Will be filled in onboarding
+          contactEmail: data.email,
+          contactPhone: data.phone || '',
+          verified: false, // Will be verified during onboarding
+        },
+      })
+    } catch (error) {
+      console.error('Failed to create operator record:', error)
+      // Don't fail signup if operator creation fails
+    }
+  }
 
   // Check if email confirmation is required
   if (authData.user && !authData.session) {

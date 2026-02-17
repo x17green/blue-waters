@@ -19,7 +19,7 @@ export default function PrivacyPage() {
 
         <Card className="glass-card border-primary/50">\n          <CardContent className="pt-6">
             <p className="text-sm">
-              Yenagoa Boat Club ("we," "our," or "us") is committed to protecting your privacy.
+              Bayelsa Boat Club ("we," "our," or "us") is committed to protecting your privacy.
               This Privacy Policy explains how we collect, use, disclose, and safeguard your
               information when you use our booking services. Please read this policy carefully.
             </p>
@@ -372,7 +372,7 @@ export default function PrivacyPage() {
               <p>
                 <strong>Data Protection Officer</strong>
                 <br />
-                Yenagoa Boat Club
+                Bayelsa Boat Club
                 <br />
                 Yenagoa Central Jetty, Bayelsa State, Nigeria
               </p>
@@ -410,7 +410,7 @@ export default function PrivacyPage() {
 
         <div className="text-center text-sm text-muted-foreground">
           <p>
-            By using Yenagoa Boat Club services, you acknowledge that you have read and understood
+            By using Bayelsa Boat Club services, you acknowledge that you have read and understood
             this Privacy Policy.
           </p>
           <p className="mt-4">

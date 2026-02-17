@@ -18,7 +18,7 @@ import {
  * Examples Hub
  * 
  * Central showcase page linking to all component examples
- * and utilities in the Blue Waters design system.
+ * and utilities in the Bayelsa Boat Club design system.
  */
 export default function ExamplesPage() {
     const examples = [
@@ -52,7 +52,7 @@ export default function ExamplesPage() {
                 <div className="space-y-4">
                     <h1 className="text-4xl font-bold text-fg">Component Examples</h1>
                     <p className="text-lg text-fg-muted">
-                        Explore the Yenagoa Boat Club design system with interactive component showcases
+                        Explore the Bayelsa Boat Club design system with interactive component showcases
                     </p>
                 </div>
 
@@ -220,7 +220,7 @@ export default function ExamplesPage() {
                         Built with React, TypeScript, and Tailwind CSS • Glassmorphism dark-first design system
                     </p>
                     <p className="text-xs text-fg-subtle">
-                        Yenagoa Boat Club © 2026 • Design System v1.0
+                        Bayelsa Boat Club © 2026 • Design System v1.0
                     </p>
                 </div>
             </div>

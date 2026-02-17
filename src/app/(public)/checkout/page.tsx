@@ -373,7 +373,7 @@ function CheckoutContent() {
                           </SelectItem>
                         </SelectContent>
                       </Select>
-                      <Input label="Account Name" disabled value="Yenagoa Boat Club Bayelsa" />
+                      <Input label="Account Name" disabled value="Bayelsa Boat Club Bayelsa" />
                       <Input label="Account Number" disabled value="1234567890" />
                     </TabsContent>
                   </Tabs>

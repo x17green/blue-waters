@@ -3,17 +3,36 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/src/lib/supabase/server'
 import DashboardClient from './dashboard-client'
 
-/**
- * Customer Dashboard Page (Server Component)
- * 
- * Server-side rendering with auth/role checks and data fetching.
- * No race condition - operators are redirected before page renders.
- * 
- * Security:
- * - Role check handled by layout.tsx (customers only)
- * - Server-side data fetching
- * - Passes data to client component for interactivity
- */
+// API Response Types
+interface ApiBooking {
+  id: string
+  reference: string
+  status: string
+  paymentStatus: string
+  numberOfPassengers: number
+  totalAmount: number
+  createdAt: string
+  tripSchedule: {
+    startTime: string
+    trip: {
+      title: string
+      description: string
+    }
+    vessel: {
+      name: string
+    }
+  }
+}
+
+interface ApiResponse {
+  bookings: ApiBooking[]
+  pagination: {
+    total: number
+    limit: number
+    offset: number
+    hasMore: boolean
+  }
+}
 
 interface Booking {
   id: string
@@ -42,14 +61,35 @@ export default async function Dashboard() {
     .eq('id', user.id)
     .single()
   
-  // Fetch bookings server-side
-  const { data: bookingsData } = await supabase
-    .from('Booking')
-    .select('*')
-    .eq('user_id', user.id)
-    .order('created_at', { ascending: false })
+  // Fetch bookings from API (real data)
+  const { cookies } = await import('next/headers')
+  const cookieStore = await cookies()
   
-  const bookings: Booking[] = bookingsData || []
+  const bookingsResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/bookings?limit=50`, {
+    headers: {
+      'Cookie': cookieStore.toString(),
+    },
+  })
+
+  if (!bookingsResponse.ok) {
+    console.error('Failed to fetch bookings:', bookingsResponse.statusText)
+    // Fallback to empty array if API fails
+    const bookings: Booking[] = []
+    return <DashboardClient user={user} appUser={appUser} bookings={bookings} />
+  }
+
+  const bookingsData: ApiResponse = await bookingsResponse.json()
+  
+  // Transform API response to match dashboard expectations
+  const bookings: Booking[] = bookingsData.bookings.map((booking) => ({
+    id: booking.id,
+    trip_id: booking.tripSchedule.trip.title, // Use trip title as trip_id for display
+    booking_reference: booking.reference,
+    number_of_passengers: booking.numberOfPassengers,
+    total_amount: booking.totalAmount, // Already converted from kobo to naira
+    booking_status: booking.status,
+    created_at: booking.createdAt,
+  }))
   
   return <DashboardClient user={user} appUser={appUser} bookings={bookings} />
 }

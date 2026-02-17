@@ -9,7 +9,7 @@ import { Icon } from '@/src/components/ui/icon'
 import { mdiClose } from '@mdi/js'
 
 /**
- * Sheet Component - Yenagoa Boat Club Design System
+ * Sheet Component - Bayelsa Boat Club Design System
  * 
  * Glassmorphism-enhanced slide-in panel with design token integration.
  * Built on Radix Dialog with directional sliding animations.

@@ -11,7 +11,7 @@ source_of_truth: docs/design-architecture.md#6-glassmorphism-system
 
 ## Design Philosophy
 
-**Glassmorphism** creates depth through layered translucent surfaces with backdrop blur. In Yenagoa Boat Club, glass effects provide:
+**Glassmorphism** creates depth through layered translucent surfaces with backdrop blur. In Bayelsa Boat Club, glass effects provide:
 1. **Visual hierarchy** (modals > cards > panels > background)
 2. **Contextual depth** (floating elements appear above content)
 3. **Professional restraint** (subtle, not over-saturated)

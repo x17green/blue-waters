@@ -4,7 +4,7 @@
 Digitize Bayelsa’s marine and tourism ecosystem by providing a **central platform for booking, organizing, and managing boat cruises and marine events**.
 
 ## Context
-The Bayelsa State Ministry of Environment / Marine + Tourism in partnership with Bluewaters launched new marine vessels for public use and private charter. This initiative presents an opportunity for digital transformation.
+The Bayelsa State Ministry of Marine and Blue Economy launched the Bayelsa Boat Club, equipped with new marine vessels for public use and private charter. This initiative presents an opportunity for digital transformation.
 
 ## Objectives
 - Enable **real-time booking** for boat cruises and charters.

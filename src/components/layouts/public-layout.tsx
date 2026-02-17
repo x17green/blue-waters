@@ -19,7 +19,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { type ReactNode, useState } from 'react'
 
-import { BayelsaCoatOfArms, BlueWatersWordmark, MinistryBlueSeal, FooterLogoSuite } from '@/src/components/brand'
+import { BayelsaCoatOfArms, BlueWatersWordmark, MinistryBlueSeal, FooterLogoSuite, PartnershipLogoHeader } from '@/src/components/brand'
 import { Button } from '@/src/components/ui/button'
 import { Icon } from '@/src/components/ui/icon'
 import { useAuth } from '@/src/hooks/use-auth'
@@ -69,7 +69,7 @@ function PublicHeader() {
             <MinistryBlueSeal size="sm" priority />
           </motion.div>
 
-          {/* Yenagoa Boat Club Wordmark - Center */}
+          {/* Bayelsa Boat Club Wordmark - Center */}
           <Link href="/" className="flex-1 flex justify-center group">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -78,7 +78,11 @@ function PublicHeader() {
               whileHover={{ scale: 1.05 }}
               className="transition-transform duration-300"
             >
-              <BlueWatersWordmark size="sm" />
+              <BlueWatersWordmark 
+                size="sm" 
+                className="uppercase text-center sm:text-md md:text-3xl lg:text-5xl font-bold" 
+                subTextClassName="text-center sm:text-sm md:text-base lg:text-2xl text-accent-500" 
+              />
             </motion.div>
           </Link>
 
@@ -372,7 +376,7 @@ function PublicFooter() {
                 <div className="glass-subtle rounded-lg p-1.5 group-hover:glass-strong transition-all duration-200">
                   <Icon path={mdiPhone} size={0.6} className="text-accent-500 group-hover:text-accent-400" aria-hidden={true} />
                 </div>
-                <span className="text-sm">+234 800 Yenagoa Boat Club</span>
+                <span className="text-sm">+234 800 BAYELSABC</span>
               </motion.a>
               
               <motion.a
@@ -498,7 +502,7 @@ function PublicFooter() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-sm text-fg-muted text-center md:text-left"
             >
-              © {currentYear} Yenagoa Boat Club. Ministry of Marine and Blue Economy, Bayelsa State. All rights reserved.
+              © {currentYear} Bayelsa Boat Club. Ministry of Marine and Blue Economy, Bayelsa State. All rights reserved.
             </motion.p>
 
             {/* Social Links */}

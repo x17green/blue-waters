@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Yenagoa Boat Club - Boat Booking Platform | Ministry of Marine and Blue Economy',
-  description: 'Book safe, reliable, and affordable boat trips across Bayelsa waterways. Experience the beauty of water travel with Yenagoa Boat Club.',
+  title: 'Bayelsa Boat Club - Boat Booking Platform | Ministry of Marine and Blue Economy',
+  description: 'Book safe, reliable, and affordable boat trips across Bayelsa waterways. Experience the beauty of water travel with Bayelsa Boat Club.',
   keywords: 'boat booking, bayelsa, water transport, cruise, boat rental',
   openGraph: {
-    title: 'Yenagoa Boat Club - Boat Booking Platform',
+    title: 'Bayelsa Boat Club - Boat Booking Platform',
     description: 'Book safe, reliable, and affordable boat trips across Bayelsa waterways',
     type: 'website',
   },

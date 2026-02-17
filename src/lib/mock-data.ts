@@ -1,5 +1,5 @@
 /**
- * Mock Data for Yenagoa Boat Club
+ * Mock Data for Bayelsa Boat Club
  * Used for rapid UI development and testing
  * Replace with real API calls in Phase 2
  */

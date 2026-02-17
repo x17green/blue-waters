@@ -38,7 +38,7 @@ export async function GET() {
     // In a real implementation, you'd fetch from a settings table
     const settings = {
       general: {
-        siteName: 'Blue Waters Bayelsa',
+        siteName: 'Bayelsa Boat Club',
         siteDescription: 'Premium boat cruise experiences in Bayelsa',
         contactEmail: 'info@bluewatersbayelsa.com',
         contactPhone: '+234-XXX-XXXXXXX',

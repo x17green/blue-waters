@@ -1,8 +1,8 @@
-# Yenagoa Boat Club — Product Design Documentation
+# Bayelsa Boat Club — Product Design Documentation
 
 **Dark-first · Glassmorphism · shadcn/ui · Pictogrammers (Material Icons) · Full ARIA compliance**
 
-> Purpose: A concise, professional product-design spec for _Yenagoa Boat Club_ — the Bayelsa Boat Cruise booking app.  
+> Purpose: A concise, professional product-design spec for _Bayelsa Boat Club_ — the Bayelsa Boat Cruise booking app.  
 > Audience: product designers, frontend engineers, accessibility specialists, and stakeholders.
 
 ---
@@ -228,7 +228,7 @@ Define tokens as CSS variables (dark-first). Use `--` naming. Keep tokens availa
 
 # 6. Glassmorphism System (dark-first)
 
-Glass design principles for _Yenagoa Boat Club_:
+Glass design principles for _Bayelsa Boat Club_:
 
 - **Subtlety** — glass panels must be functional; no over-saturation.
     

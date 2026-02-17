@@ -1,5 +1,5 @@
 /**
- * Icon Component - Yenagoa Boat Club Design System
+ * Icon Component - Bayelsa Boat Club Design System
  * 
  * Wrapper for Pictogrammers (Material Design Icons) with design token integration.
  * Replaces Lucide React icons for consistent, accessible, government-appropriate iconography.

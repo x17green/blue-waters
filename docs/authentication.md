@@ -1,6 +1,6 @@
 # Authentication System
 
-Complete Supabase authentication implementation for Yenagoa Boat Club Boat Cruise Booking System using Next.js App Router.
+Complete Supabase authentication implementation for Bayelsa Boat Club Boat Cruise Booking System using Next.js App Router.
 
 ## Architecture
 
@@ -199,7 +199,6 @@ Features:
 - Email/password authentication
 - Remember me checkbox
 - Forgot password link
-- Demo credentials display
 - Automatic redirect to dashboard on success
 
 ### Signup Page

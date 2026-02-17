@@ -190,7 +190,12 @@ export async function GET(request: NextRequest) {
     // 3. Build query filters
     const where: any = { userId: user.id }
     if (status) {
-      where.status = status
+      // Handle comma-separated status values and validate against BookingStatus enum
+      const validStatuses = ['pending', 'held', 'paid', 'confirmed', 'cancelled', 'refunded', 'expired']
+      const statusArray = status.split(',').map(s => s.trim()).filter(s => validStatuses.includes(s))
+      if (statusArray.length > 0) {
+        where.status = { in: statusArray }
+      }
     }
 
     // 4. Fetch bookings

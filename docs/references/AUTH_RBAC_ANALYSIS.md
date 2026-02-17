@@ -1,4 +1,4 @@
-# Authentication & RBAC Analysis - Yenagoa Boat Club
+# Authentication & RBAC Analysis - Bayelsa Boat Club
 
 ## Executive Summary
 

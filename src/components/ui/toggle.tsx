@@ -7,7 +7,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Toggle Component - Yenagoa Boat Club Design System
+ * Toggle Component - Bayelsa Boat Club Design System
  * 
  * Glassmorphism-enhanced toggle button with design token integration.
  * Supports multiple variants, sizing, and full WCAG AA compliance.

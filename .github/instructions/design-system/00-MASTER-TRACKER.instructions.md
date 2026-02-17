@@ -10,7 +10,7 @@ enforceMode: strict
 update_mode: semi-automated
 ---
 
-# 🎨 Yenagoa Boat Club Design System Migration
+# 🎨 Bayelsa Boat Club Design System Migration
 ## Master Tracker & Status Dashboard
 
 **Migration Goal:** Transform from vibrant ocean tourism → dark-first conservative glassmorphism

@@ -1,11 +1,11 @@
 // prisma/seed.ts
-// Seed script for Yenagoa Boat Club Boat Cruise Booking System
+// Seed script for Bayelsa Boat Club Boat Cruise Booking System
 
 // ✅ Import from single source of truth
 import { prisma, UserRole, BookingStatus, PaymentStatus, CheckinStatus } from '../src/lib/prisma.client'
 
 async function main() {
-  console.log('🌊 Starting Yenagoa Boat Club database seeding...\n')
+  console.log('🌊 Starting Bayelsa Boat Club database seeding...\n')
 
   // Clear existing data (in correct order to respect foreign keys)
   console.log('🗑️  Clearing existing data...')
@@ -81,7 +81,7 @@ async function main() {
     prisma.operator.create({
       data: {
         userId: testUsers[1].id,
-        organizationName: 'Yenagoa Boat Club Marine Services',
+        organizationName: 'Bayelsa Boat Club Marine Services',
         contactEmail: 'info@bluewaters.ng',
         contactPhone: '+2348087654321',
         verified: true,
@@ -481,7 +481,7 @@ async function main() {
         recipient: testUsers[0].email!,
         channel: 'email',
         type: 'booking_confirmation',
-        subject: 'Your Yenagoa Boat Club Booking Confirmation',
+        subject: 'Your Bayelsa Boat Club Booking Confirmation',
         body: 'Your booking for Sunset Cruise has been confirmed.',
         provider: 'sendgrid',
         providerMsgId: 'SG-2026-0001',

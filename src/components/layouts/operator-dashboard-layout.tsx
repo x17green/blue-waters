@@ -236,7 +236,7 @@ function OperatorDashboardFooter() {
             </div>
             <div>
               <p className="text-sm font-semibold text-fg">
-                Yenagoa Boat Club Operator Portal
+                Bayelsa Boat Club Operator Portal
               </p>
               <p className="text-xs text-fg-muted">
                 © {currentYear} Ministry of Marine and Blue Economy

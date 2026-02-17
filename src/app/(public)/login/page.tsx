@@ -53,7 +53,7 @@ export default function LogIn() {
               Welcome Back
             </h1>
             <p className="text-lg text-fg-muted">
-              Sign in to your Yenagoa Boat Club account
+              Sign in to your Bayelsa Boat Club account
             </p>
           </div>
 
@@ -189,27 +189,6 @@ export default function LogIn() {
                   Create one now
                 </Link>
               </p>
-            </div>
-
-            {/* Demo Credentials */}
-            <div className="mt-6 glass-subtle border border-accent-900 rounded-md p-4">
-              <p className="text-xs font-semibold text-accent-400 mb-2 uppercase tracking-wide">
-                Demo Credentials
-              </p>
-              <div className="space-y-1">
-                <p className="text-xs text-fg-muted">
-                  Email:{' '}
-                  <span className="font-mono text-accent-300 bg-glass-01 px-2 py-0.5 rounded">
-                    demo@bluewaters.com
-                  </span>
-                </p>
-                <p className="text-xs text-fg-muted">
-                  Password:{' '}
-                  <span className="font-mono text-accent-300 bg-glass-01 px-2 py-0.5 rounded">
-                    Demo@123456
-                  </span>
-                </p>
-              </div>
             </div>
           </div>
         </motion.div>

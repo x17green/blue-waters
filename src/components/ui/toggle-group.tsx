@@ -8,7 +8,7 @@ import { toggleVariants } from '@/src/components/ui/toggle'
 import { cn } from '@/src/lib/utils'
 
 /**
- * ToggleGroup Component - Yenagoa Boat Club Design System
+ * ToggleGroup Component - Bayelsa Boat Club Design System
  * 
  * Glassmorphism-enhanced toggle group with design token integration.
  * Manages multiple toggle buttons with single or multiple selection modes.

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Table Component - Yenagoa Boat Club Design System
+ * Table Component - Bayelsa Boat Club Design System
  * 
  * Glassmorphism-enhanced data table with design token integration.
  * Supports multiple variants, semantic states, and full WCAG AA compliance.

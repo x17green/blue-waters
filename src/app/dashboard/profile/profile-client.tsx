@@ -39,7 +39,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <span className="text-white font-bold">⛵</span>
               </div>
-              <span className="font-bold text-xl text-primary">Yenagoa Boat Club</span>
+              <span className="font-bold text-xl text-primary">Bayelsa Boat Club</span>
             </Link>
 
             <div className="flex items-center gap-4">
