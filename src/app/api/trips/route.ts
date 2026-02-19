@@ -21,6 +21,10 @@ const createTripSchema = z.object({
   amenities: z.array(z.string()).optional(),
   images: z.array(z.string().url()).optional(),
   highlights: z.array(z.string()).optional(),
+  // Trip-level canonical route (optional)
+  departurePort: z.string().min(2).optional(),
+  arrivalPort: z.string().min(2).optional(),
+  routeName: z.string().max(200).optional(),
 })
 
 /**
@@ -189,6 +193,10 @@ export async function GET(request: NextRequest) {
           durationMinutes: trip.durationMinutes,
           highlights: trip.highlights,
           amenities: trip.amenities,
+          // Trip-level canonical route (may be null) — preferred by UI when present
+          departurePort: trip.departurePort ?? null,
+          arrivalPort: trip.arrivalPort ?? null,
+          routeName: trip.routeName ?? null,
           pricing: {
             minPrice: minPrice / 100,
             maxPrice: maxPrice / 100,
@@ -201,7 +209,7 @@ export async function GET(request: NextRequest) {
             rating: trip.operator.rating ? Number(trip.operator.rating) : null,
           } : undefined,
           // Include schedules when the caller requested them so the UI can render per-day availability
-          schedules: (trip as any).schedules ? (trip as any).schedules.map((s: any) => ({
+          schedules: trip.schedules ? trip.schedules.map((s: any) => ({
             id: s.id,
             startTime: s.startTime,
             endTime: s.endTime,
@@ -315,6 +323,9 @@ export async function POST(request: NextRequest) {
         category: validatedData.category,
         amenities: validatedData.amenities || [],
         highlights: validatedData.highlights || [],
+        departurePort: validatedData.departurePort || null,
+        arrivalPort: validatedData.arrivalPort || null,
+        routeName: validatedData.routeName || null,
       },
       include: {
         vessel: true,
@@ -351,6 +362,9 @@ export async function POST(request: NextRequest) {
         description: trip.description,
         category: trip.category,
         durationMinutes: trip.durationMinutes,
+        departurePort: trip.departurePort ?? null,
+        arrivalPort: trip.arrivalPort ?? null,
+        routeName: trip.routeName ?? null,
         amenities: trip.amenities,
         highlights: trip.highlights,
         vessel: trip.vessel || undefined,

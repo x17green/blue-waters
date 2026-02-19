@@ -36,6 +36,10 @@ const tripSchema = z.object({
   category: z.enum(['tour', 'transport', 'charter', 'event']),
   amenities: z.array(z.string()).optional(),
   highlights: z.array(z.string()).optional(),
+  // Trip-level route fields
+  departurePort: z.string().min(2).optional(),
+  arrivalPort: z.string().min(2).optional(),
+  routeName: z.string().max(200).optional(),
 })
 
 type TripFormValues = z.infer<typeof tripSchema>
@@ -306,6 +310,21 @@ export default function CreateTripPage() {
                   ))}
                 </SelectContent>
               </Select>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+                <div>
+                  <Label htmlFor="routeName">Route name</Label>
+                  <Input id="routeName" placeholder="e.g., Yenagoa → Brass" {...register('routeName')} />
+                </div>
+                <div>
+                  <Label htmlFor="departurePort">Departure port</Label>
+                  <Input id="departurePort" placeholder="Yenagoa" {...register('departurePort')} />
+                </div>
+                <div>
+                  <Label htmlFor="arrivalPort">Arrival port</Label>
+                  <Input id="arrivalPort" placeholder="Brass" {...register('arrivalPort')} />
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

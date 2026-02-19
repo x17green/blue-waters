@@ -105,7 +105,7 @@ async function main() {
     prisma.vessel.create({
       data: {
         operatorId: operators[0].id,
-        name: 'MV Blue Pearl',
+        name: 'BBC Cruiser Carrier',
         registrationNo: 'BY-2024-001',
         capacity: 50,
         description: 'Luxury cruise vessel with air-conditioned cabin',
@@ -115,8 +115,8 @@ async function main() {
     prisma.vessel.create({
       data: {
         operatorId: operators[0].id,
-        name: 'SS Ocean Breeze',
-        registrationNo: 'BY-2024-002',
+        name: 'Ekelga Explorer',
+        registrationNo: 'BY-EKR-002',
         capacity: 30,
         description: 'Compact speedboat for island hopping',
         vesselMetadata: { image: '/assets/images/trips/ekeremor-peretoru.jpg', amenities: ['Life Jackets', 'Cooler', 'Music'], maxSpeed: 35 },
@@ -125,7 +125,7 @@ async function main() {
     prisma.vessel.create({
       data: {
         operatorId: operators[1].id,
-        name: 'Bayelsa Star',
+        name: 'Ogboinbiri Titanic',
         registrationNo: 'BY-GOV-2024-001',
         capacity: 80,
         description: 'Government-owned large capacity vessel for public tours',
@@ -408,6 +408,33 @@ async function main() {
 
   const createdSchedules = await Promise.all(schedules)
   console.log(`✅ Created ${createdSchedules.length} trip schedules`)
+
+  // Backfill trip-level canonical route fields from earliest schedule (deterministic)
+  console.log('\n🔁 Backfilling Trip.departurePort/arrivalPort/routeName from earliest TripSchedule when missing...')
+  const tripIds = Array.from(new Set(createdSchedules.map(s => s.tripId)))
+  let backfilled = 0
+  for (const tripId of tripIds) {
+    const earliest = await prisma.tripSchedule.findFirst({
+      where: { tripId },
+      orderBy: { startTime: 'asc' },
+      select: { departurePort: true, arrivalPort: true },
+    })
+    if (!earliest) continue
+    // Only backfill if trip-level route is not already set
+    const tripRecord = await prisma.trip.findUnique({ where: { id: tripId }, select: { departurePort: true, arrivalPort: true } })
+    if (tripRecord && (!tripRecord.departurePort || !tripRecord.arrivalPort)) {
+      await prisma.trip.update({
+        where: { id: tripId },
+        data: {
+          departurePort: earliest.departurePort || null,
+          arrivalPort: earliest.arrivalPort || null,
+          routeName: (earliest.departurePort && earliest.arrivalPort) ? `${earliest.departurePort} → ${earliest.arrivalPort}` : null,
+        },
+      })
+      backfilled++
+    }
+  }
+  console.log(`✅ Backfilled canonical routes for ${backfilled} trips`)
 
   // 6. Create Price Tiers
   console.log('\n💰 Creating price tiers...')

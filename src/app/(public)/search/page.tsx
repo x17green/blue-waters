@@ -124,7 +124,7 @@ export default function Search() {
       id: `${t.id}-${s.id}`,
       tripId: t.id,
       name: t.title,
-      route: `${s.departurePort} → ${s.arrivalPort}`,
+      route: `${s.departurePort ?? t.departurePort ?? '—'} → ${s.arrivalPort ?? t.arrivalPort ?? '—'}`,
       departure: new Date(s.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       arrival: new Date(s.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       price: s.priceTiers?.[0]?.price ?? t.pricing?.minPrice ?? 0,

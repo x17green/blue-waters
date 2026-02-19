@@ -138,6 +138,10 @@ model Trip {
   isRecurring        Boolean         @default(false)
   amenities          Json?           @default("[]") // ["wifi", "drinks", "meals"]
   highlights         Json?           @default("[]") // ["Scenic views", "Dinner included"]
+  // Canonical route for the trip (used when schedules are not selected)
+  departurePort      String?
+  arrivalPort        String?
+  routeName          String?
   isActive           Boolean         @default(true)
   schedules          TripSchedule[]
   reviews            Review[]

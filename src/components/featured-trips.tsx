@@ -64,7 +64,7 @@ export default function FeaturedTrips() {
               <div className="space-y-3 mb-4 flex-1">
                 <div className="flex items-center gap-2 text-fg-muted">
                   <Icon path={mdiMapMarker} size={0.6} className="text-accent-500" aria-hidden={true} />
-                  <span className="text-sm">{trip?.schedules?.[0]?.departurePort ?? '—'}</span>
+                  <span className="text-sm">{trip?.departurePort ?? trip?.schedules?.[0]?.departurePort ?? '—'}</span>
                 </div>
 
                 <div className="flex gap-4 text-sm text-fg-muted">

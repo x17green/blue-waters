@@ -39,24 +39,57 @@ export default function EditTripPage({ params }: { params: { id: string } }) {
   const router = useRouter()
   const [trip, setTrip] = useState<MockTrip | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+  const [routeName, setRouteName] = useState<string>('')
+  const [departurePort, setDeparturePort] = useState<string>('')
+  const [arrivalPort, setArrivalPort] = useState<string>('')
 
-  // Load trip data
+  // Load trip data (mock fallback) — also initialize trip-level route fields
   useEffect(() => {
     const foundTrip = mockTrips.find((t) => t.id === params.id)
     if (foundTrip) {
       setTrip({ ...foundTrip })
+      setRouteName(foundTrip.routeName || foundTrip.name || '')
+      setDeparturePort(foundTrip.departure?.location || '')
+      setArrivalPort(foundTrip.arrival?.location || '')
     }
   }, [params.id])
 
   // Form handlers
   const handleSave = async () => {
     setIsSaving(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSaving(false)
-    // TODO: Replace with actual API call
-    console.log('Saving trip:', trip)
-    router.push('/operator/trips')
+    if (!trip) {
+      alert('Trip data not loaded')
+      setIsSaving(false)
+      return
+    }
+    try {
+      const payload: any = {
+        title: trip.name,
+        description: trip.description,
+        durationMinutes: trip.duration || 0,
+        departurePort: departurePort || null,
+        arrivalPort: arrivalPort || null,
+        routeName: routeName || null,
+      }
+
+      const res = await fetch(`/api/trips/${params.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err.error || 'Failed to save trip')
+      }
+
+      router.push('/operator/trips')
+    } catch (err) {
+      console.error('Failed to save trip:', err)
+      alert(err instanceof Error ? err.message : 'Failed to save trip')
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   const handleDelete = async () => {
@@ -207,10 +240,10 @@ export default function EditTripPage({ params }: { params: { id: string } }) {
                     id="depLocation"
                     value={trip.departure.location}
                     onChange={(e) =>
-                      setTrip({
+                      (setTrip({
                         ...trip,
                         departure: { ...trip.departure, location: e.target.value },
-                      })
+                      }), setDeparturePort(e.target.value))
                     }
                   />
                 </div>
@@ -241,10 +274,10 @@ export default function EditTripPage({ params }: { params: { id: string } }) {
                     id="arrLocation"
                     value={trip.arrival.location}
                     onChange={(e) =>
-                      setTrip({
+                      (setTrip({
                         ...trip,
                         arrival: { ...trip.arrival, location: e.target.value },
-                      })
+                      }), setArrivalPort(e.target.value))
                     }
                   />
                 </div>
@@ -264,7 +297,12 @@ export default function EditTripPage({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="mt-4">
+              <Label htmlFor="routeName">Route name (canonical)</Label>
+              <Input id="routeName" value={routeName} onChange={(e) => setRouteName(e.target.value)} placeholder="e.g., Yenagoa → Brass" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
               <div>
                 <Label htmlFor="duration">Duration (minutes)</Label>
                 <Input

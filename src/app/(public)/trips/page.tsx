@@ -186,7 +186,7 @@ export default function TripsPage() {
                 <SelectContent>
                   <SelectItem value="any">Any</SelectItem>
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                  {Array.from(new Set(trips.flatMap((t: any) => (t.schedules || []).map((s: any) => s.departurePort || '')))).filter(Boolean).map((port: any) => (
+                  {Array.from(new Set(trips.flatMap((t: any) => [t.departurePort].concat((t.schedules || []).map((s: any) => s.departurePort || ''))))).filter(Boolean).map((port: any) => (
                     <SelectItem key={port} value={port}>{port}</SelectItem>
                   ))}
                 </SelectContent>
@@ -203,7 +203,7 @@ export default function TripsPage() {
                 <SelectContent>
                   <SelectItem value="any">Any</SelectItem>
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                  {Array.from(new Set(trips.flatMap((t: any) => (t.schedules || []).map((s: any) => s.arrivalPort || '')))).filter(Boolean).map((port: any) => (
+                  {Array.from(new Set(trips.flatMap((t: any) => [t.arrivalPort].concat((t.schedules || []).map((s: any) => s.arrivalPort || ''))))).filter(Boolean).map((port: any) => (
                     <SelectItem key={port} value={port}>{port}</SelectItem>
                   ))}
                 </SelectContent>

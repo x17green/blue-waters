@@ -218,6 +218,26 @@ ON trips USING gin(to_tsvector('english', title || ' ' || description));
 
 **Backup & Recovery**:
 - Supabase automatic backups (daily)
+
+---
+
+### Schema changes: Trip canonical route (new)
+- Migration: `prisma/migrations/20260219000000_add_trip_route_fields/migration.sql` adds `departurePort`, `arrivalPort`, `routeName` columns to `Trip`.
+- Seed/backfill: `prisma/seed.ts` now backfills trip-level route fields from the earliest `TripSchedule` when schedules have port data.
+- API/UX: server APIs now accept and return trip-level route fields; frontend prefers `trip.departurePort`/`trip.arrivalPort` when present.
+
+Rollout steps:
+1. Apply migration: `npx prisma migrate deploy` (or `npx prisma migrate dev` locally).
+2. Run seed/backfill: `node prisma/seed.ts` (or `pnpm prisma db seed`).
+3. Regenerate Prisma client: `npx prisma generate`.
+4. Restart services and verify public trip pages show canonical routes.
+
+Rollback:
+- If required, revert the migration using `npx prisma migrate resolve --applied "20260219000000_add_trip_route_fields"` and restore database from backup.
+
+Notes:
+- The migration is additive and safe; backfill follows deterministic rule (earliest schedule wins).
+- After migration, run `scripts/check-trip-route-backfill.js` to validate backfill results.
 - Point-in-Time Recovery (PITR) enabled
 - 7-day backup retention
 

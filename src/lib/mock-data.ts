@@ -48,6 +48,8 @@ export interface MockTrip {
   rating: number
   reviewCount: number
   popularityScore: number
+  // optional trip-level route (used by operator UI mocks)
+  routeName?: string
 }
 
 export interface MockBooking {
@@ -121,6 +123,7 @@ export const mockTrips: MockTrip[] = [
     id: 'trip-1',
     name: 'Yenagoa to Port Harcourt Express',
     slug: 'yenagoa-port-harcourt',
+    routeName: 'Yenagoa → Port Harcourt',
     departure: {
       location: 'Yenagoa',
       jetty: 'Yenagoa Central Jetty',
@@ -190,6 +193,7 @@ export const mockTrips: MockTrip[] = [
     id: 'trip-2',
     name: 'Yenagoa to Brass Scenic Route',
     slug: 'yenagoa-brass-scenic',
+    routeName: 'Yenagoa → Brass',
     departure: {
       location: 'Yenagoa',
       jetty: 'Yenagoa Central Jetty',
@@ -243,6 +247,7 @@ export const mockTrips: MockTrip[] = [
     id: 'trip-3',
     name: 'Port Harcourt to Yenagoa',
     slug: 'port-harcourt-yenagoa',
+    routeName: 'Port Harcourt → Yenagoa',
     departure: {
       location: 'Port Harcourt',
       jetty: 'Port Harcourt Marina',
@@ -311,6 +316,7 @@ export const mockTrips: MockTrip[] = [
     id: 'trip-4',
     name: 'Brass to Yenagoa Return',
     slug: 'brass-yenagoa',
+    routeName: 'Brass → Yenagoa',
     departure: {
       location: 'Brass',
       jetty: 'Brass Island Terminal',
@@ -361,6 +367,7 @@ export const mockTrips: MockTrip[] = [
     id: 'trip-5',
     name: 'Yenagoa to Warri Express',
     slug: 'yenagoa-warri',
+    routeName: 'Yenagoa → Warri',
     departure: {
       location: 'Yenagoa',
       jetty: 'Yenagoa Central Jetty',

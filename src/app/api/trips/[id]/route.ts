@@ -27,6 +27,10 @@ const updateTripSchema = z.object({
   images: z.array(z.string().url()).optional(),
   highlights: z.array(z.string()).optional(),
   status: z.enum(['active', 'inactive', 'archived']).optional(),
+  // Trip-level canonical route updates
+  departurePort: z.string().min(2).optional(),
+  arrivalPort: z.string().min(2).optional(),
+  routeName: z.string().max(200).optional(),
 })
 
 /**
@@ -107,6 +111,9 @@ export async function GET(
         durationMinutes: trip.durationMinutes,
         highlights: trip.highlights,
         amenities: trip.amenities,
+        departurePort: trip.departurePort ?? null,
+        arrivalPort: trip.arrivalPort ?? null,
+        routeName: trip.routeName ?? null,
         vessel: trip.vessel,
         operator: trip.operator ? {
           id: trip.operator.id,

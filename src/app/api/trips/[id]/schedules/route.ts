@@ -314,7 +314,36 @@ export async function POST(
       return { schedule: newSchedule, priceTiers }
     })
 
-    // Create audit log
+    // If the trip does not yet have canonical route fields, populate them from this schedule (best-effort)
+    try {
+      if ((!trip.departurePort || !trip.arrivalPort) && (validatedData.departurePort || validatedData.arrivalPort)) {
+        await prisma.trip.update({
+          where: { id: tripId },
+          data: {
+            departurePort: validatedData.departurePort || null,
+            arrivalPort: validatedData.arrivalPort || null,
+            routeName: (validatedData.departurePort && validatedData.arrivalPort) ? `${validatedData.departurePort} → ${validatedData.arrivalPort}` : (validatedData.departurePort || validatedData.arrivalPort) || null,
+          },
+        })
+
+        await prisma.auditLog.create({
+          data: {
+            entityType: 'trip',
+            entityId: tripId,
+            action: 'update',
+            userId: user.id,
+            changes: {
+              departurePort: validatedData.departurePort || null,
+              arrivalPort: validatedData.arrivalPort || null,
+            },
+          },
+        })
+      }
+    } catch (err) {
+      console.warn('Failed to backfill trip route from schedule (non-fatal):', err)
+    }
+
+    // Create audit log for the schedule create
     await prisma.auditLog.create({
       data: {
         entityType: 'trip_schedule',

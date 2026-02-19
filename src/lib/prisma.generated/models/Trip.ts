@@ -44,6 +44,9 @@ export type TripMinAggregateOutputType = {
   externalReference: string | null
   durationMinutes: number | null
   isRecurring: boolean | null
+  departurePort: string | null
+  arrivalPort: string | null
+  routeName: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -60,6 +63,9 @@ export type TripMaxAggregateOutputType = {
   externalReference: string | null
   durationMinutes: number | null
   isRecurring: boolean | null
+  departurePort: string | null
+  arrivalPort: string | null
+  routeName: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -78,6 +84,9 @@ export type TripCountAggregateOutputType = {
   isRecurring: number
   amenities: number
   highlights: number
+  departurePort: number
+  arrivalPort: number
+  routeName: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -104,6 +113,9 @@ export type TripMinAggregateInputType = {
   externalReference?: true
   durationMinutes?: true
   isRecurring?: true
+  departurePort?: true
+  arrivalPort?: true
+  routeName?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -120,6 +132,9 @@ export type TripMaxAggregateInputType = {
   externalReference?: true
   durationMinutes?: true
   isRecurring?: true
+  departurePort?: true
+  arrivalPort?: true
+  routeName?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -138,6 +153,9 @@ export type TripCountAggregateInputType = {
   isRecurring?: true
   amenities?: true
   highlights?: true
+  departurePort?: true
+  arrivalPort?: true
+  routeName?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -243,6 +261,9 @@ export type TripGroupByOutputType = {
   isRecurring: boolean
   amenities: runtime.JsonValue | null
   highlights: runtime.JsonValue | null
+  departurePort: string | null
+  arrivalPort: string | null
+  routeName: string | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -284,6 +305,9 @@ export type TripWhereInput = {
   isRecurring?: Prisma.BoolFilter<"Trip"> | boolean
   amenities?: Prisma.JsonNullableFilter<"Trip">
   highlights?: Prisma.JsonNullableFilter<"Trip">
+  departurePort?: Prisma.StringNullableFilter<"Trip"> | string | null
+  arrivalPort?: Prisma.StringNullableFilter<"Trip"> | string | null
+  routeName?: Prisma.StringNullableFilter<"Trip"> | string | null
   isActive?: Prisma.BoolFilter<"Trip"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Trip"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trip"> | Date | string
@@ -306,6 +330,9 @@ export type TripOrderByWithRelationInput = {
   isRecurring?: Prisma.SortOrder
   amenities?: Prisma.SortOrderInput | Prisma.SortOrder
   highlights?: Prisma.SortOrderInput | Prisma.SortOrder
+  departurePort?: Prisma.SortOrderInput | Prisma.SortOrder
+  arrivalPort?: Prisma.SortOrderInput | Prisma.SortOrder
+  routeName?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -331,6 +358,9 @@ export type TripWhereUniqueInput = Prisma.AtLeast<{
   isRecurring?: Prisma.BoolFilter<"Trip"> | boolean
   amenities?: Prisma.JsonNullableFilter<"Trip">
   highlights?: Prisma.JsonNullableFilter<"Trip">
+  departurePort?: Prisma.StringNullableFilter<"Trip"> | string | null
+  arrivalPort?: Prisma.StringNullableFilter<"Trip"> | string | null
+  routeName?: Prisma.StringNullableFilter<"Trip"> | string | null
   isActive?: Prisma.BoolFilter<"Trip"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Trip"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trip"> | Date | string
@@ -353,6 +383,9 @@ export type TripOrderByWithAggregationInput = {
   isRecurring?: Prisma.SortOrder
   amenities?: Prisma.SortOrderInput | Prisma.SortOrder
   highlights?: Prisma.SortOrderInput | Prisma.SortOrder
+  departurePort?: Prisma.SortOrderInput | Prisma.SortOrder
+  arrivalPort?: Prisma.SortOrderInput | Prisma.SortOrder
+  routeName?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -379,6 +412,9 @@ export type TripScalarWhereWithAggregatesInput = {
   isRecurring?: Prisma.BoolWithAggregatesFilter<"Trip"> | boolean
   amenities?: Prisma.JsonNullableWithAggregatesFilter<"Trip">
   highlights?: Prisma.JsonNullableWithAggregatesFilter<"Trip">
+  departurePort?: Prisma.StringNullableWithAggregatesFilter<"Trip"> | string | null
+  arrivalPort?: Prisma.StringNullableWithAggregatesFilter<"Trip"> | string | null
+  routeName?: Prisma.StringNullableWithAggregatesFilter<"Trip"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Trip"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Trip"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Trip"> | Date | string
@@ -395,6 +431,9 @@ export type TripCreateInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -417,6 +456,9 @@ export type TripUncheckedCreateInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -435,6 +477,9 @@ export type TripUpdateInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -457,6 +502,9 @@ export type TripUncheckedUpdateInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -477,6 +525,9 @@ export type TripCreateManyInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -493,6 +544,9 @@ export type TripUpdateManyMutationInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -511,6 +565,9 @@ export type TripUncheckedUpdateManyInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -539,6 +596,9 @@ export type TripCountOrderByAggregateInput = {
   isRecurring?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
   highlights?: Prisma.SortOrder
+  departurePort?: Prisma.SortOrder
+  arrivalPort?: Prisma.SortOrder
+  routeName?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -559,6 +619,9 @@ export type TripMaxOrderByAggregateInput = {
   externalReference?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   isRecurring?: Prisma.SortOrder
+  departurePort?: Prisma.SortOrder
+  arrivalPort?: Prisma.SortOrder
+  routeName?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -575,6 +638,9 @@ export type TripMinOrderByAggregateInput = {
   externalReference?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   isRecurring?: Prisma.SortOrder
+  departurePort?: Prisma.SortOrder
+  arrivalPort?: Prisma.SortOrder
+  routeName?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -720,6 +786,9 @@ export type TripCreateWithoutOperatorInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -740,6 +809,9 @@ export type TripUncheckedCreateWithoutOperatorInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -789,6 +861,9 @@ export type TripScalarWhereInput = {
   isRecurring?: Prisma.BoolFilter<"Trip"> | boolean
   amenities?: Prisma.JsonNullableFilter<"Trip">
   highlights?: Prisma.JsonNullableFilter<"Trip">
+  departurePort?: Prisma.StringNullableFilter<"Trip"> | string | null
+  arrivalPort?: Prisma.StringNullableFilter<"Trip"> | string | null
+  routeName?: Prisma.StringNullableFilter<"Trip"> | string | null
   isActive?: Prisma.BoolFilter<"Trip"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Trip"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trip"> | Date | string
@@ -805,6 +880,9 @@ export type TripCreateWithoutVesselInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -825,6 +903,9 @@ export type TripUncheckedCreateWithoutVesselInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -869,6 +950,9 @@ export type TripCreateWithoutSchedulesInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -890,6 +974,9 @@ export type TripUncheckedCreateWithoutSchedulesInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -923,6 +1010,9 @@ export type TripUpdateWithoutSchedulesInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -944,6 +1034,9 @@ export type TripUncheckedUpdateWithoutSchedulesInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -961,6 +1054,9 @@ export type TripCreateWithoutReviewsInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -982,6 +1078,9 @@ export type TripUncheckedCreateWithoutReviewsInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1015,6 +1114,9 @@ export type TripUpdateWithoutReviewsInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1036,6 +1138,9 @@ export type TripUncheckedUpdateWithoutReviewsInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1054,6 +1159,9 @@ export type TripCreateManyOperatorInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1070,6 +1178,9 @@ export type TripUpdateWithoutOperatorInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1090,6 +1201,9 @@ export type TripUncheckedUpdateWithoutOperatorInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1109,6 +1223,9 @@ export type TripUncheckedUpdateManyWithoutOperatorInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1126,6 +1243,9 @@ export type TripCreateManyVesselInput = {
   isRecurring?: boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1142,6 +1262,9 @@ export type TripUpdateWithoutVesselInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1162,6 +1285,9 @@ export type TripUncheckedUpdateWithoutVesselInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1181,6 +1307,9 @@ export type TripUncheckedUpdateManyWithoutVesselInput = {
   isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amenities?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   highlights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departurePort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  arrivalPort?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1239,6 +1368,9 @@ export type TripSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isRecurring?: boolean
   amenities?: boolean
   highlights?: boolean
+  departurePort?: boolean
+  arrivalPort?: boolean
+  routeName?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1262,6 +1394,9 @@ export type TripSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isRecurring?: boolean
   amenities?: boolean
   highlights?: boolean
+  departurePort?: boolean
+  arrivalPort?: boolean
+  routeName?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1282,6 +1417,9 @@ export type TripSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isRecurring?: boolean
   amenities?: boolean
   highlights?: boolean
+  departurePort?: boolean
+  arrivalPort?: boolean
+  routeName?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1302,13 +1440,16 @@ export type TripSelectScalar = {
   isRecurring?: boolean
   amenities?: boolean
   highlights?: boolean
+  departurePort?: boolean
+  arrivalPort?: boolean
+  routeName?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type TripOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vesselId" | "operatorId" | "title" | "description" | "category" | "externalReference" | "durationMinutes" | "isRecurring" | "amenities" | "highlights" | "isActive" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["trip"]>
+export type TripOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vesselId" | "operatorId" | "title" | "description" | "category" | "externalReference" | "durationMinutes" | "isRecurring" | "amenities" | "highlights" | "departurePort" | "arrivalPort" | "routeName" | "isActive" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["trip"]>
 export type TripInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vessel?: boolean | Prisma.VesselDefaultArgs<ExtArgs>
   operator?: boolean | Prisma.Trip$operatorArgs<ExtArgs>
@@ -1345,6 +1486,9 @@ export type $TripPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isRecurring: boolean
     amenities: runtime.JsonValue | null
     highlights: runtime.JsonValue | null
+    departurePort: string | null
+    arrivalPort: string | null
+    routeName: string | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -1787,6 +1931,9 @@ export interface TripFieldRefs {
   readonly isRecurring: Prisma.FieldRef<"Trip", 'Boolean'>
   readonly amenities: Prisma.FieldRef<"Trip", 'Json'>
   readonly highlights: Prisma.FieldRef<"Trip", 'Json'>
+  readonly departurePort: Prisma.FieldRef<"Trip", 'String'>
+  readonly arrivalPort: Prisma.FieldRef<"Trip", 'String'>
+  readonly routeName: Prisma.FieldRef<"Trip", 'String'>
   readonly isActive: Prisma.FieldRef<"Trip", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Trip", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Trip", 'DateTime'>

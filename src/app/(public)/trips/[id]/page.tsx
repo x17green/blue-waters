@@ -62,6 +62,9 @@ interface ApiTrip {
     reviewCount: number
     upcomingSchedules: number
   }
+  departurePort?: string | null
+  arrivalPort?: string | null
+  routeName?: string | null
   createdAt: string
   updatedAt: string
 }
@@ -75,6 +78,9 @@ interface ApiSchedule {
   availableSeats: number
   status: string
   bookingsCount: number
+  // optional ports may be present on server schedule objects
+  departurePort?: string | null
+  arrivalPort?: string | null
 }
 
 interface DetailedSchedule extends ApiSchedule {
@@ -99,6 +105,7 @@ export default function TripDetailPage() {
   const [weekAvailability, setWeekAvailability] = useState<Record<string, DetailedSchedule[]>>({})
   const [tripStartingPrice, setTripStartingPrice] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
+  const [schedulesLoading, setSchedulesLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [selectedSchedule, setSelectedSchedule] = useState<string | null>(null)
   const [selectedDate, setSelectedDate] = useState(getNextAvailableDate())
@@ -115,51 +122,58 @@ export default function TripDetailPage() {
   // Selected price tier for the currently-selected schedule
   const [selectedTierId, setSelectedTierId] = useState<string | null>(null)
 
+  // fetch trip details (runs when tripId changes)
   useEffect(() => {
-    const fetchTripData = async () => {
+    let mounted = true
+    const fetchTrip = async () => {
       try {
         setLoading(true)
         setError(null)
 
-        // Fetch trip details
         const tripResponse = await fetch(`/api/trips/${tripId}`)
-        if (!tripResponse.ok) {
-          throw new Error('Failed to fetch trip details')
-        }
+        if (!tripResponse.ok) throw new Error('Failed to fetch trip details')
         const tripData = await tripResponse.json()
-        setTrip(tripData.trip)
+        if (mounted) setTrip(tripData.trip)
+      } catch (err) {
+        console.error('Error fetching trip details:', err)
+        if (mounted) setError(err instanceof Error ? err.message : 'Failed to load trip data')
+      } finally {
+        if (mounted) setLoading(false)
+      }
+    }
 
-        // Fetch detailed schedules for the selected date (startDate = selectedDate 00:00 UTC, endDate = next day 00:00 UTC)
+    if (tripId) fetchTrip()
+    return () => { mounted = false }
+  }, [tripId])
+
+  // fetch schedules for the selected date only (separate loading state so the page content stays visible)
+  useEffect(() => {
+    let mounted = true
+    const fetchSchedulesForDate = async () => {
+      try {
+        setSchedulesLoading(true)
+
         const startIso = new Date(selectedDate + 'T00:00:00.000Z').toISOString()
         const endDateObj = new Date(selectedDate + 'T00:00:00.000Z')
         endDateObj.setUTCDate(endDateObj.getUTCDate() + 1)
         const endIso = endDateObj.toISOString()
 
         const schedulesResponse = await fetch(`/api/trips/${tripId}/schedules?startDate=${encodeURIComponent(startIso)}&endDate=${encodeURIComponent(endIso)}`)
-        if (!schedulesResponse.ok) {
-          throw new Error('Failed to fetch schedules')
-        }
+        if (!schedulesResponse.ok) throw new Error('Failed to fetch schedules')
         const schedulesData = await schedulesResponse.json()
 
-        // Defensive: ensure schedules belong to this trip (server now returns tripId)
         const filtered = (schedulesData.schedules || []).filter((s: any) => s.tripId === tripId)
-        if (filtered.length !== (schedulesData.schedules || []).length) {
-          console.warn(`Trip detail: filtered schedules for trip ${tripId} — ${filtered.length}/${(schedulesData.schedules || []).length} matched`)
-        }
-
-        setSchedules(filtered)
-
+        if (mounted) setSchedules(filtered)
       } catch (err) {
-        console.error('Error fetching trip data:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load trip data')
+        console.error('Error fetching schedules:', err)
+        if (mounted) setSchedules([])
       } finally {
-        setLoading(false)
+        if (mounted) setSchedulesLoading(false)
       }
     }
 
-    if (tripId) {
-      fetchTripData()
-    }
+    if (tripId) fetchSchedulesForDate()
+    return () => { mounted = false }
   }, [tripId, selectedDate])
 
   // Default selected tier when schedule changes (server returns tiers ordered asc)
@@ -225,13 +239,37 @@ export default function TripDetailPage() {
   }, [tripId])
 
   if (loading) {
+    // Page skeleton: keep layout stable and show placeholders instead of a full-page spinner
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
-          <Icon path={mdiLoading} size={1.33} className="text-muted-foreground animate-spin" aria-hidden={true} />
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="relative h-[400px] rounded-lg overflow-hidden bg-muted animate-pulse" />
+
+            <div className="space-y-4">
+              <div className="h-8 bg-muted rounded w-3/4 animate-pulse" />
+              <div className="h-4 bg-muted rounded w-1/4 animate-pulse" />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              <div className="p-6 bg-muted rounded-lg animate-pulse h-36" />
+              <div className="p-6 bg-muted rounded-lg animate-pulse h-40" />
+              <div className="p-6 bg-muted rounded-lg animate-pulse h-44" />
+            </div>
+          </div>
+
+          <div className="lg:col-span-1">
+            <div className="sticky top-8">
+              <div className="p-6 bg-muted rounded-lg space-y-4">
+                <div className="h-6 bg-muted rounded w-1/2 animate-pulse" />
+                <div className="h-40 bg-muted rounded animate-pulse" />
+                <div className="h-4 bg-muted rounded w-2/3 animate-pulse" />
+                <div className="h-4 bg-muted rounded w-1/3 animate-pulse" />
+                <div className="h-10 bg-muted rounded w-full animate-pulse" />
+              </div>
+            </div>
+          </div>
         </div>
-        <h1 className="text-2xl font-bold mb-2">Loading Trip Details...</h1>
-        <p className="text-muted-foreground">Please wait while we fetch the latest information.</p>
       </div>
     )
   }
@@ -334,7 +372,7 @@ export default function TripDetailPage() {
                     </div>
                     <div>
                       <p className="font-semibold">Departure Port</p>
-                      <p className="text-sm text-muted-foreground">{schedule?.departurePort ?? (schedules[0]?.departurePort ?? '—')}</p>
+                      <p className="text-sm text-muted-foreground">{schedule?.departurePort ?? trip?.departurePort ?? schedules[0]?.departurePort ?? trip?.schedules?.[0]?.departurePort ?? '—'}</p>
                     </div>
                   </div>
                   <Icon path={mdiArrowRight} size={1} className="text-muted-foreground" aria-hidden={true} />
@@ -344,7 +382,7 @@ export default function TripDetailPage() {
                     </div>
                     <div>
                       <p className="font-semibold">Arrival Port</p>
-                      <p className="text-sm text-muted-foreground">{schedule?.arrivalPort ?? (schedules[0]?.arrivalPort ?? '—')}</p>
+                      <p className="text-sm text-muted-foreground">{schedule?.arrivalPort ?? trip?.arrivalPort ?? schedules[0]?.arrivalPort ?? trip?.schedules?.[0]?.arrivalPort ?? '—'}</p>
                     </div>
                   </div>
                 </div>
@@ -480,16 +518,25 @@ export default function TripDetailPage() {
                 <div>
                   <label className="text-sm font-medium mb-2 block">Departure Time</label>
                   <div className="space-y-2">
-                    {schedules.map((schedule) => (
-                      <ScheduleOption
-                        key={schedule.id}
-                        schedule={schedule}
-                        isSelected={selectedSchedule === schedule.id}
-                        onSelect={() => setSelectedSchedule(schedule.id)}
-                      />
-                    ))}
+                    {schedulesLoading ? (
+                      [1,2,3].map((n) => (
+                        <div key={n} className="p-3 border rounded-lg animate-pulse bg-muted">
+                          <div className="h-4 bg-muted rounded w-2/3 mb-2"></div>
+                          <div className="h-3 bg-muted rounded w-1/4"></div>
+                        </div>
+                      ))
+                    ) : (
+                      schedules.map((schedule) => (
+                        <ScheduleOption
+                          key={schedule.id}
+                          schedule={schedule}
+                          isSelected={selectedSchedule === schedule.id}
+                          onSelect={() => setSelectedSchedule(schedule.id)}
+                        />
+                      ))
+                    )}
                   </div>
-                  {schedules.length === 0 && (
+                  {!schedulesLoading && schedules.length === 0 && (
                     <p className="text-sm text-muted-foreground text-center py-4">
                       No schedules available for this trip.
                     </p>
