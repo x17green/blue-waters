@@ -11,6 +11,7 @@ const nextConfig = {
         hostname: 'api.dicebear.com',
       },
     ],
+    unoptimized: true,
   },
   typescript: {
     ignoreBuildErrors: true,
