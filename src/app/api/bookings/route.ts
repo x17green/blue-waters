@@ -139,14 +139,14 @@ export async function POST(request: NextRequest) {
 
 // Invalidate caches that may be affected by this booking (schedules/trips) and availability snapshot
     try {
-      const { redis, buildRedisKey, REDIS_KEYS } = await import('@/src/lib/redis')
+      const { redis, bumpCacheVersion, buildRedisKey, REDIS_KEYS } = await import('@/src/lib/redis')
       const tripId = schedule.trip?.id
+      const promises: Promise<any>[] = []
       if (tripId) {
-        const scheduleKeys = await redis.keys(buildRedisKey('api_cache', 'schedules', tripId, '*'))
-        if (scheduleKeys && scheduleKeys.length > 0) await Promise.all(scheduleKeys.map(k => redis.del(k)))
+        promises.push(bumpCacheVersion(`api_cache:schedules:${tripId}`))
       }
-      const tripKeys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (tripKeys && tripKeys.length > 0) await Promise.all(tripKeys.map(k => redis.del(k)))
+      promises.push(bumpCacheVersion('api_cache:trips'))
+      await Promise.all(promises)
 
       // Remove short-lived availability snapshot for the schedule
       try {
@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
         console.warn('Failed to invalidate availability snapshot after booking create', e)
       }
     } catch (err) {
-      console.warn('Failed to invalidate cache after booking create', err)
+      console.warn('Failed to bump cache versions after booking create', err)
     }
 
     return apiResponse({

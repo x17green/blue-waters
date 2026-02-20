@@ -335,8 +335,12 @@ function TripCard({ trip }: { trip: Trip }) {
             className="object-cover"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-600">
-            <span className="text-white text-6xl opacity-20">🚢</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-600" aria-hidden>
+            <svg width="96" height="56" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-30">
+              <path d="M6 38c6-6 18-6 30-2 12 4 24 4 36 0 6-2 12-4 18 2" stroke="white" strokeWidth="1.5" strokeOpacity="0.22" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M18 30c6-4 12-6 18-4 6 2 12 2 18 0" stroke="white" strokeWidth="1.2" strokeOpacity="0.14" strokeLinecap="round" strokeLinejoin="round"/>
+              <rect x="58" y="16" width="12" height="6" rx="1" fill="white" fillOpacity="0.08" />
+            </svg>
           </div>
         )}
       </div>

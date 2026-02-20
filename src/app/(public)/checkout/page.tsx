@@ -98,7 +98,7 @@ function CheckoutContent() {
 
     if (!user) {
       // User must be signed in to create a booking
-      window.location.href = '/auth/signin'
+      window.location.href = '/login'
       return
     }
 

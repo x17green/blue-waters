@@ -54,8 +54,25 @@ export async function GET(request: NextRequest) {
     // Cache key includes query params so different queries are cached separately
     try {
       // lazy import to avoid circular deps during tests
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const cacheKey = buildRedisKey('api_cache', 'trips', `cat:${category||'_'}`, `op:${operatorId||'_'}`, `q:${search||'_'}`, `incSchedules:${includeSchedules}`, `start:${scheduleStart||'_'}`, `end:${scheduleEnd||'_'}`, `l:${limit}`, `o:${offset}`)
+      const { redis, buildVersionedRedisKey, bumpCacheVersion } = await import('@/src/lib/redis')
+      const namespace = 'api_cache:trips'
+      const cacheKey = await buildVersionedRedisKey(namespace, `cat:${category||'_'}`, `op:${operatorId||'_'}`, `q:${search||'_'}`, `incSchedules:${includeSchedules}`, `start:${scheduleStart||'_'}`, `end:${scheduleEnd||'_'}`, `l:${limit}`, `o:${offset}`)
+      const etagKey = `${cacheKey}:etag`
+
+      // pre-db ETag check (mandatory per caching guidelines)
+      const existingEtag = await redis.get<string>(etagKey)
+      const ifNoneMatch = request.headers.get('if-none-match')
+      if (ifNoneMatch && existingEtag && ifNoneMatch === existingEtag) {
+        return new Response(null, {
+          status: 304,
+          headers: {
+            'ETag': existingEtag,
+            'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
+            'X-Cache': 'HIT',
+          },
+        })
+      }
+
       const cached = await redis.get<string | object>(cacheKey)
       if (cached) {
         let payload: any = null
@@ -76,18 +93,7 @@ export async function GET(request: NextRequest) {
           // compute ETag and support conditional GET
           const { createHash } = await import('crypto')
           const etag = createHash('sha1').update(JSON.stringify(payload)).digest('hex')
-          const ifNoneMatch = request.headers.get('if-none-match')
-          if (ifNoneMatch && ifNoneMatch === etag) {
-            return new Response(null, {
-              status: 304,
-              headers: {
-                'ETag': etag,
-                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
-                'X-Cache': 'HIT',
-              },
-            })
-          }
-
+          // note: the conditional header was already checked above; this is additional guard
           return apiResponse(payload, 200, {
             'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
             'X-Cache': 'HIT',
@@ -116,12 +122,18 @@ export async function GET(request: NextRequest) {
     }
 
     // helper to build schedule where (used for include)
-    const scheduleWhere: any = { status: 'scheduled' }
+    // accept optional `scheduleStatus` query param (scheduled | in_progress | completed | cancelled)
+    const scheduleStatus = searchParams.get('scheduleStatus')
+    const allowedStatuses = new Set(['scheduled', 'in_progress', 'completed', 'cancelled'])
+    const scheduleWhere: any = {}
+    scheduleWhere.status = allowedStatuses.has(scheduleStatus || '') ? scheduleStatus : 'scheduled'
+
     if (scheduleStart || scheduleEnd) {
       scheduleWhere.startTime = {}
       if (scheduleStart) scheduleWhere.startTime.gte = new Date(scheduleStart)
       if (scheduleEnd) scheduleWhere.startTime.lte = new Date(scheduleEnd)
     } else {
+      // default to future schedules when no date range provided
       scheduleWhere.startTime = { gte: new Date() }
     }
 
@@ -167,69 +179,88 @@ export async function GET(request: NextRequest) {
       prisma.trip.count({ where }),
     ])
 
-    // Calculate price range for each trip
-    const tripsWithPricing = await Promise.all(
-      trips.map(async (trip) => {
-        const schedules = await prisma.tripSchedule.findMany({
-          where: { tripId: trip.id },
-          include: {
-            priceTiers: {
-              orderBy: { amountKobo: 'asc' },
-            },
-          },
-        })
+    // Calculate price range for each trip while avoiding N+1 queries
+    let priceMap: Record<string, { min: number; max: number; tiers: number }> = {}
 
-        const allPrices = schedules.flatMap((s) =>
-          s.priceTiers.map((pt) => Number(pt.amountKobo)),
-        )
+    if (includeSchedules) {
+      // schedules already loaded in the main query; compute directly
+      trips.forEach((trip) => {
+        const allPrices = (trip.schedules || [])
+          .flatMap((s: any) => (s.priceTiers || []).map((pt: any) => Number(pt.amountKobo)))
         const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : 0
         const maxPrice = allPrices.length > 0 ? Math.max(...allPrices) : 0
-
-        return {
-          id: trip.id,
-          title: trip.title,
-          description: trip.description,
-          category: trip.category,
-          durationMinutes: trip.durationMinutes,
-          highlights: trip.highlights,
-          amenities: trip.amenities,
-          // Trip-level canonical route (may be null) — preferred by UI when present
-          departurePort: trip.departurePort ?? null,
-          arrivalPort: trip.arrivalPort ?? null,
-          routeName: trip.routeName ?? null,
-          pricing: {
-            minPrice: minPrice / 100,
-            maxPrice: maxPrice / 100,
-            tiers: allPrices.length,
-          },
-          vessel: trip.vessel || undefined,
-          operator: trip.operator ? {
-            id: trip.operator.id,
-            companyName: trip.operator.companyName,
-            rating: trip.operator.rating ? Number(trip.operator.rating) : null,
-          } : undefined,
-          // Include schedules when the caller requested them so the UI can render per-day availability
-          schedules: trip.schedules ? trip.schedules.map((s: any) => ({
-            id: s.id,
-            startTime: s.startTime,
-            endTime: s.endTime,
-            capacity: s.capacity,
-            bookedSeats: s.bookedSeats,
-            availableSeats: s.capacity - s.bookedSeats,
-            status: s.status,
-            departurePort: s.departurePort,
-            arrivalPort: s.arrivalPort,
-            priceTiers: (s.priceTiers || []).map((pt: any) => ({
-              id: pt.id,
-              name: pt.name,
-              price: (pt.amountKobo ? Number(pt.amountKobo) : (pt.priceKobo ?? 0)) / 100,
-              capacity: pt.capacity,
-            })),
-          })) : undefined,
-          createdAt: trip.createdAt,
+        priceMap[trip.id] = { min: minPrice, max: maxPrice, tiers: allPrices.length }
+      })
+    } else if (trips.length > 0) {
+      // bulk fetch schedules for all trips we retrieved
+      const schedules = await prisma.tripSchedule.findMany({
+        where: { tripId: { in: trips.map(t => t.id) } },
+        include: { priceTiers: { orderBy: { amountKobo: 'asc' } } },
+      })
+      schedules.forEach((s) => {
+        const prices = (s.priceTiers || []).map(pt => Number(pt.amountKobo))
+        if (prices.length === 0) return
+        const min = Math.min(...prices)
+        const max = Math.max(...prices)
+        const existing = priceMap[s.tripId] || { min: Infinity, max: 0, tiers: 0 }
+        priceMap[s.tripId] = {
+          min: Math.min(existing.min, min),
+          max: Math.max(existing.max, max),
+          tiers: existing.tiers + prices.length,
         }
-      }),
-    )
+      })
+      // fill missing trips with zero prices
+      trips.forEach(t => {
+        if (!priceMap[t.id]) priceMap[t.id] = { min: 0, max: 0, tiers: 0 }
+      })
+    }
+
+    const tripsWithPricing = trips.map((trip) => {
+      const pricing = priceMap[trip.id] || { min: 0, max: 0, tiers: 0 }
+      return {
+        id: trip.id,
+        title: trip.title,
+        description: trip.description,
+        category: trip.category,
+        durationMinutes: trip.durationMinutes,
+        highlights: trip.highlights,
+        amenities: trip.amenities,
+        // Trip-level canonical route (may be null) — preferred by UI when present
+        departurePort: trip.departurePort ?? null,
+        arrivalPort: trip.arrivalPort ?? null,
+        routeName: trip.routeName ?? null,
+        pricing: {
+          minPrice: pricing.min / 100,
+          maxPrice: pricing.max / 100,
+          tiers: pricing.tiers,
+        },
+        vessel: trip.vessel || undefined,
+        operator: trip.operator ? {
+          id: trip.operator.id,
+          companyName: trip.operator.companyName,
+          rating: trip.operator.rating ? Number(trip.operator.rating) : null,
+        } : undefined,
+        // Include schedules when the caller requested them so the UI can render per-day availability
+        schedules: trip.schedules ? trip.schedules.map((s: any) => ({
+          id: s.id,
+          startTime: s.startTime,
+          endTime: s.endTime,
+          capacity: s.capacity,
+          bookedSeats: s.bookedSeats,
+          availableSeats: s.capacity - s.bookedSeats,
+          status: s.status,
+          departurePort: s.departurePort,
+          arrivalPort: s.arrivalPort,
+          priceTiers: (s.priceTiers || []).map((pt: any) => ({
+            id: pt.id,
+            name: pt.name,
+            price: (pt.amountKobo ? Number(pt.amountKobo) : (pt.priceKobo ?? 0)) / 100,
+            capacity: pt.capacity,
+          })),
+        })) : undefined,
+        createdAt: trip.createdAt,
+      }
+    })
 
     const payload = {
       trips: tripsWithPricing,
@@ -350,15 +381,12 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Invalidate related caches (best-effort)
+    // Invalidate related caches by bumping version (non‑blocking, avoids key scans)
     try {
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const keys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (keys && keys.length > 0) {
-        await Promise.all(keys.map((k) => redis.del(k)))
-      }
+      const { bumpCacheVersion } = await import('@/src/lib/redis')
+      await bumpCacheVersion('api_cache:trips')
     } catch (err) {
-      console.warn('Failed to invalidate trips cache after create', err)
+      console.warn('Failed to bump trips cache version after create', err)
     }
 
     return apiResponse({

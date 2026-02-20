@@ -6,6 +6,7 @@ import { mdiArrowRight } from '@mdi/js'
 import Link from 'next/link'
 
 import FeaturedTrips from '@/src/components/featured-trips'
+import PastEvents from '@/src/components/past-events'
 import Hero from '@/src/components/hero'
 import HowItWorks from '@/src/components/how-it-works'
 import Testimonials from '@/src/components/testimonials'
@@ -46,6 +47,9 @@ export default function Home() {
 
       {/* Testimonials */}
       <Testimonials />
+
+      {/* Past Events Section */}
+      <PastEvents />
 
       {/* CTA Section */}
       <section className="py-24 px-4 md:px-8 relative overflow-hidden">

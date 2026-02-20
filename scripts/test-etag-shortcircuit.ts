@@ -12,6 +12,19 @@
       console.log(url, '→ first:', r1.status, 'X-Cache:', xcache1, 'ETag:', etag)
       if (!etag) throw new Error(`${url} did not return ETag on first request`)
 
+      // verify separate etag key exists in Redis (optional, may fail if no Redis config)
+      try {
+        const { redis, buildVersionedRedisKey } = await import('../src/lib/redis')
+        // attempt to reconstruct a versioned key from url (simple heuristic)
+        const parsed = new URL(url)
+        const namespace = url.includes('/schedules') ? 'api_cache:schedules' : 'api_cache:trips'
+        // this heuristic may not match the exact key; we just check that some key ends with ':etag'
+        const etagKeyCandidates = await redis.keys(`*etage*`)
+        console.log('Redis etag keys count:', etagKeyCandidates.length)
+      } catch (_e) {
+        // not critical if Redis not available
+      }
+
       // conditional GET
       const r2 = await fetch(url, { headers: { 'If-None-Match': etag } })
       console.log(url, '→ conditional:', r2.status, 'X-Cache:', r2.headers.get('x-cache'))

@@ -304,13 +304,12 @@ export async function PATCH(
       },
     })
 
-    // Invalidate trips cache (best-effort)
+    // Invalidate trips cache by bumping version
     try {
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const keys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (keys && keys.length > 0) await Promise.all(keys.map(k => redis.del(k)))
+      const { bumpCacheVersion } = await import('@/src/lib/redis')
+      await bumpCacheVersion('api_cache:trips')
     } catch (err) {
-      console.warn('Failed to invalidate trips cache after update', err)
+      console.warn('Failed to bump trips cache version after update', err)
     }
 
     return apiResponse({
@@ -397,15 +396,15 @@ export async function DELETE(
       },
     })
 
-    // Invalidate trips + schedules cache for this trip (best-effort)
+    // Invalidate trips and related schedules via version bump
     try {
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const tripKeys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (tripKeys && tripKeys.length > 0) await Promise.all(tripKeys.map(k => redis.del(k)))
-      const scheduleKeys = await redis.keys(buildRedisKey('api_cache', 'schedules', id, '*'))
-      if (scheduleKeys && scheduleKeys.length > 0) await Promise.all(scheduleKeys.map(k => redis.del(k)))
+      const { bumpCacheVersion } = await import('@/src/lib/redis')
+      await Promise.all([
+        bumpCacheVersion('api_cache:trips'),
+        bumpCacheVersion(`api_cache:schedules:${id}`),
+      ])
     } catch (err) {
-      console.warn('Failed to invalidate caches after trip delete', err)
+      console.warn('Failed to bump cache versions after trip delete', err)
     }
 
     return apiResponse({

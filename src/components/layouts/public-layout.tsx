@@ -36,7 +36,7 @@ function PublicHeader() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/trips', label: 'Book Now' },
+    { href: '/book', label: 'Book Now' },
     { href: '/#how', label: 'How It Works' },
     { href: '/#testimonials', label: 'Reviews' },
   ]

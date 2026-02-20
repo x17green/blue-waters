@@ -382,15 +382,15 @@ export async function POST(
       },
     })
 
-    // Invalidate caches for this trip's schedules and trips listing (best-effort)
+    // Invalidate caches for this trip's schedules and trip list via version bump
     try {
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const scheduleKeys = await redis.keys(buildRedisKey('api_cache', 'schedules', tripId, '*'))
-      if (scheduleKeys && scheduleKeys.length > 0) await Promise.all(scheduleKeys.map(k => redis.del(k)))
-      const tripKeys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (tripKeys && tripKeys.length > 0) await Promise.all(tripKeys.map(k => redis.del(k)))
+      const { bumpCacheVersion } = await import('@/src/lib/redis')
+      await Promise.all([
+        bumpCacheVersion(`api_cache:schedules:${tripId}`),
+        bumpCacheVersion('api_cache:trips'),
+      ])
     } catch (err) {
-      console.warn('Failed to invalidate cache after schedule create', err)
+      console.warn('Failed to bump cache versions after schedule create', err)
     }
 
     return apiResponse({

@@ -58,3 +58,28 @@ export const REDIS_TTL = {
 export function buildRedisKey(prefix: string, ...parts: string[]): string {
   return [prefix, ...parts].join(':')
 }
+
+// Cache versioning helpers (avoid wildcard key scans)
+const CACHE_VERSION_PREFIX = 'cache_version'
+
+export async function getCacheVersion(namespace: string): Promise<number> {
+  const key = `${CACHE_VERSION_PREFIX}:${namespace}`
+  const v = await redis.get<number | string>(key)
+  if (v == null) return 0
+  if (typeof v === 'string') return parseInt(v, 10) || 0
+  return v
+}
+
+export async function bumpCacheVersion(namespace: string): Promise<number> {
+  const key = `${CACHE_VERSION_PREFIX}:${namespace}`
+  // redis.incr returns new value
+  const newVal = await redis.incr(key)
+  return typeof newVal === 'string' ? parseInt(newVal, 10) : newVal
+}
+
+// build a key that includes the current version for a namespace.
+// this ensures invalidation by bumping version instead of deleting keys.
+export async function buildVersionedRedisKey(namespace: string, ...parts: string[]): Promise<string> {
+  const version = await getCacheVersion(namespace)
+  return [namespace, `v${version}`, ...parts].join(':')
+}

@@ -260,6 +260,7 @@ model BookingItem {
   tripSeatId     String?    @unique
   passengerName  String?
   passengerPhone String?
+  passengerEmail String?    // added for guest checkout / ticket delivery
   ticketReference String?
   status         CheckinStatus @default(not_checked_in)
   checkin        Checkin?

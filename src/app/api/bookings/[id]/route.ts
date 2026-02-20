@@ -186,16 +186,16 @@ export async function PATCH(
       data: { updatedAt: new Date() },
     })
 
-    // Invalidate caches related to this booking's schedule (best-effort)
+    // Invalidate caches related to this booking's schedule via version bump (non-blocking)
     try {
       const bookingFull = await prisma.booking.findUnique({ where: { id }, include: { tripSchedule: true } })
       const tripId = bookingFull?.tripSchedule?.tripId
       if (tripId) {
-        const { redis, buildRedisKey, REDIS_KEYS } = await import('@/src/lib/redis')
-        const scheduleKeys = await redis.keys(buildRedisKey('api_cache', 'schedules', tripId, '*'))
-        if (scheduleKeys && scheduleKeys.length > 0) await Promise.all(scheduleKeys.map(k => redis.del(k)))
-        const tripKeys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-        if (tripKeys && tripKeys.length > 0) await Promise.all(tripKeys.map(k => redis.del(k)))
+        const { redis, bumpCacheVersion, buildRedisKey, REDIS_KEYS } = await import('@/src/lib/redis')
+        const promises: Promise<any>[] = []
+        promises.push(bumpCacheVersion('api_cache:trips'))
+        promises.push(bumpCacheVersion(`api_cache:schedules:${tripId}`))
+        await Promise.all(promises)
 
         // invalidate availability snapshot for any schedules belonging to this trip (best-effort)
         try {
@@ -206,7 +206,7 @@ export async function PATCH(
         }
       }
     } catch (err) {
-      console.warn('Failed to invalidate cache after booking update', err)
+      console.warn('Failed to bump cache versions after booking update', err)
     }
 
     return apiResponse({ message: 'Booking updated successfully' })

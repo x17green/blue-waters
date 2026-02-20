@@ -31,6 +31,23 @@ function BookContent() {
   const [filteredTrips, setFilteredTrips] = useState<any[]>([])
   const [loadingTrips, setLoadingTrips] = useState(false)
 
+  // Helper: normalize trip.schedules for the booking UI (ensures `price` and display fields exist)
+  const normalizeTripForBooking = (trip: any) => ({
+    ...trip,
+    schedules: (trip.schedules || []).map((s: any) => ({
+      id: s.id,
+      departureDate: new Date(s.startTime).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }),
+      departureTime: new Date(s.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      arrivalTime: new Date(s.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      departurePort: s.departurePort,
+      arrivalPort: s.arrivalPort,
+      price: s.priceTiers?.[0]?.price ?? 0,
+      availableSeats: s.availableSeats,
+      status: s.status === 'scheduled' ? (s.availableSeats === 0 ? 'sold-out' : s.availableSeats <= 5 ? 'filling-fast' : 'available') : s.status,
+      raw: s,
+    })),
+  })
+
   // Load trips list from API
   useEffect(() => {
     const loadTrips = async () => {
@@ -39,7 +56,7 @@ function BookContent() {
         const res = await fetch('/api/trips?includeSchedules=true&limit=50')
         if (!res.ok) throw new Error('Failed to load trips')
         const data = await res.json()
-        setFilteredTrips(data.trips || [])
+        setFilteredTrips((data.trips || []).map(normalizeTripForBooking))
       } catch (err) {
         console.error('Error loading trips:', err)
         setFilteredTrips([])
@@ -114,7 +131,7 @@ function BookContent() {
         setLoadingTrips(true)
         const res = await fetch(`/api/trips?includeSchedules=true&limit=50&startDate=${searchDate}`)
         const data = await res.json()
-        setFilteredTrips(data.trips || [])
+        setFilteredTrips((data.trips || []).map(normalizeTripForBooking))
       } catch (err) {
         setFilteredTrips([])
       } finally {
@@ -282,7 +299,13 @@ function BookContent() {
                                   className="object-cover"
                                 />
                               ) : (
-                                <div className="w-full h-full bg-muted flex items-center justify-center text-6xl">🚢</div>
+                                <div className="w-full h-full bg-muted flex items-center justify-center" aria-hidden>
+                                  <svg width="96" height="56" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-30">
+                                    <path d="M6 38c6-6 18-6 30-2 12 4 24 4 36 0 6-2 12-4 18 2" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.22" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M18 30c6-4 12-6 18-4 6 2 12 2 18 0" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.14" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <rect x="58" y="16" width="12" height="6" rx="1" fill="currentColor" fillOpacity="0.08" />
+                                  </svg>
+                                </div>
                               )}
                             </div>
 
@@ -392,7 +415,7 @@ function BookContent() {
                       onClick={() => schedule.status === 'available' || schedule.status === 'filling-fast' ? handleSelectSchedule(schedule) : null}
                       className={`cursor-pointer transition-all duration-300 ${
                         selectedSchedule?.id === schedule.id
-                          ? 'ring-2 ring-accent-500 shadow-lg'
+                          ? 'ring-accent-500 shadow-lg'
                           : schedule.status === 'available' || schedule.status === 'filling-fast'
                           ? 'hover:shadow-lg'
                           : 'opacity-50 cursor-not-allowed'
@@ -427,7 +450,7 @@ function BookContent() {
                               </div>
                             </div>
                             <div className="text-right">
-                              <p className="text-2xl font-bold text-accent-500">₦{schedule.price.toLocaleString()}</p>
+                              <p className="text-2xl font-bold text-accent-500">₦{(Number(schedule.price ?? 0)).toLocaleString()}</p>
                               <p className="text-xs text-fg-muted">per person</p>
                             </div>
                             {selectedSchedule?.id === schedule.id && (
