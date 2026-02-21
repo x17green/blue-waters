@@ -37,8 +37,8 @@ function PublicHeader() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/book', label: 'Book Now' },
-    { href: '/#how', label: 'How It Works' },
-    { href: '/#testimonials', label: 'Reviews' },
+    // { href: '/#how', label: 'How It Works' },
+    // { href: '/#testimonials', label: 'Reviews' },
   ]
 
   const isActive = (href: string) => pathname === href

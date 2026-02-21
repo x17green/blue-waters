@@ -49,7 +49,7 @@ export default function Home() {
       <PastEvents />
 
       {/* Testimonials */}
-      <Testimonials />
+      {/* <Testimonials /> // Currently hidden pending content refresh - can be re-enabled once we have new testimonials to show */}
 
       {/* CTA Section */}
       <section className="py-24 px-4 md:px-8 relative overflow-hidden">
