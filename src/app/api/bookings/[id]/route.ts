@@ -317,14 +317,15 @@ export async function DELETE(
     // Release seat locks in Redis
     await releaseSeats(booking.tripScheduleId, user.id)
 
-    // Invalidate caches for affected trip/schedules (best-effort)
+    // Invalidate caches for affected trip/schedules (best-effort) via version bump
     try {
       const tripId = booking.tripSchedule.tripId
-      const { redis, buildRedisKey, REDIS_KEYS } = await import('@/src/lib/redis')
-      const scheduleKeys = await redis.keys(buildRedisKey('api_cache', 'schedules', tripId, '*'))
-      if (scheduleKeys && scheduleKeys.length > 0) await Promise.all(scheduleKeys.map(k => redis.del(k)))
-      const tripKeys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (tripKeys && tripKeys.length > 0) await Promise.all(tripKeys.map(k => redis.del(k)))
+      const { redis, bumpCacheVersion, REDIS_KEYS } = await import('@/src/lib/redis')
+      // bump both the trip list and the specific schedule namespace
+      const promises: Promise<any>[] = []
+      promises.push(bumpCacheVersion('api_cache:trips'))
+      if (tripId) promises.push(bumpCacheVersion(`api_cache:schedules:${tripId}`))
+      await Promise.all(promises)
 
       // invalidate availability snapshot for this schedule (best-effort)
       try {

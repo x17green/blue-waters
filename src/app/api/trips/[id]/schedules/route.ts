@@ -63,29 +63,36 @@ export async function GET(
       where.status = status
     }
 
-    // --- Redis short-circuit: check ETAG and cache BEFORE hitting Prisma ---
+    // --- Redis short-circuit: check ETag + versioned cache BEFORE hitting Prisma ---
     try {
-      const { redis, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
-      const cacheKey = buildRedisKey('api_cache', 'schedules', id, `start:${startDate||'_'}`, `end:${endDate||'_'}`, `status:${status||'_'}`)
+      // Use versioned namespace so bumpCacheVersion invalidation works without key scans
+      const { redis, buildVersionedRedisKey, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
+      const namespace = `api_cache:schedules:${id}`
+      const args = [`start:${startDate||'_'}`, `end:${endDate||'_'}`, `status:${status||'_'}`]
+      const cacheKey = await buildVersionedRedisKey(namespace, ...args)
+      const baseKey = buildRedisKey(namespace, ...args)
       const etagKey = `${cacheKey}:etag`
       const ifNoneMatchHdr = request.headers.get('if-none-match')
 
       // Fast path: if client sent If-None-Match and we have a cached ETag -> short-circuit 304 without DB
+      let cachedEtag: string | null = null
       try {
-        const cachedEtag = await redis.get<string>(etagKey)
-        if (ifNoneMatchHdr && cachedEtag && ifNoneMatchHdr === cachedEtag) {
-          return new Response(null, {
-            status: 304,
-            headers: {
-              'ETag': cachedEtag,
-              'Cache-Control': 'public, s-maxage=15, stale-while-revalidate=5',
-              'X-Cache': 'HIT',
-            },
-          })
-        }
+        cachedEtag = await redis.get<string>(etagKey)
       } catch (etagErr) {
-        // continue to attempt payload read if ETag fetch fails
         console.warn('Failed to read schedules etag key', etagErr)
+      }
+      if (!cachedEtag && ifNoneMatchHdr) {
+        try { cachedEtag = await redis.get<string>(`${baseKey}:etag`) } catch {}
+      }
+      if (ifNoneMatchHdr && cachedEtag && ifNoneMatchHdr === cachedEtag) {
+        return new Response(null, {
+          status: 304,
+          headers: {
+            'ETag': cachedEtag,
+            'Cache-Control': 'public, s-maxage=15, stale-while-revalidate=5',
+            'X-Cache': 'HIT',
+          },
+        })
       }
 
       const cached = await redis.get<string | object>(cacheKey)
@@ -193,14 +200,18 @@ export async function GET(
 
     // Try to populate schedules cache + etag (best-effort)
     try {
-      const { redis, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
-      const cacheKey = buildRedisKey('api_cache', 'schedules', id, `start:${startDate||'_'}`, `end:${endDate||'_'}`, `status:${status||'_'}`)
+      const { redis, buildVersionedRedisKey, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
+      const namespace = `api_cache:schedules:${id}`
+      const args = [`start:${startDate||'_'}`, `end:${endDate||'_'}`, `status:${status||'_'}`]
+      const cacheKey = await buildVersionedRedisKey(namespace, ...args)
+      const baseKey = buildRedisKey(namespace, ...args)
       const payloadStr = JSON.stringify(payload)
       const { createHash } = await import('crypto')
       const etag = createHash('sha1').update(payloadStr).digest('hex')
       await Promise.all([
         redis.setex(cacheKey, REDIS_TTL.API_CACHE_SCHEDULES, payloadStr),
         redis.setex(`${cacheKey}:etag`, REDIS_TTL.API_CACHE_SCHEDULES, etag),
+        redis.setex(`${baseKey}:etag`, REDIS_TTL.API_CACHE_SCHEDULES, etag),
       ])
     } catch (cacheErr) {
       console.warn('Schedules cache write failed', cacheErr)

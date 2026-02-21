@@ -10,6 +10,7 @@ import { z } from 'zod'
 
 import { apiError, apiResponse, UnauthorizedError, verifyRole } from '@/src/lib/api-auth'
 import { prisma } from '@/src/lib/prisma.client'
+import { buildVersionedRedisKey } from '@/src/lib/redis'
 
 const createTripSchema = z.object({
   title: z.string().min(5).max(200),
@@ -54,14 +55,26 @@ export async function GET(request: NextRequest) {
     // Cache key includes query params so different queries are cached separately
     try {
       // lazy import to avoid circular deps during tests
-      const { redis, buildVersionedRedisKey, bumpCacheVersion } = await import('@/src/lib/redis')
+      const { redis, buildVersionedRedisKey, buildRedisKey, bumpCacheVersion } = await import('@/src/lib/redis')
       const namespace = 'api_cache:trips'
-      const cacheKey = await buildVersionedRedisKey(namespace, `cat:${category||'_'}`, `op:${operatorId||'_'}`, `q:${search||'_'}`, `incSchedules:${includeSchedules}`, `start:${scheduleStart||'_'}`, `end:${scheduleEnd||'_'}`, `l:${limit}`, `o:${offset}`)
+      const args = [`cat:${category||'_'}`, `op:${operatorId||'_'}`, `q:${search||'_'}`, `incSchedules:${includeSchedules}`, `start:${scheduleStart||'_'}`, `end:${scheduleEnd||'_'}`, `l:${limit}`, `o:${offset}`]
+      const cacheKey = await buildVersionedRedisKey(namespace, ...args)
+      const baseKey = buildRedisKey(namespace, ...args) // unversioned key used only for etag fallback
       const etagKey = `${cacheKey}:etag`
 
       // pre-db ETag check (mandatory per caching guidelines)
-      const existingEtag = await redis.get<string>(etagKey)
       const ifNoneMatch = request.headers.get('if-none-match')
+      let existingEtag: string | null = null
+      try {
+        existingEtag = await redis.get<string>(etagKey)
+      } catch {}
+      // if we don't have a versioned etag but client sent one, try unversioned fallback
+      if (!existingEtag && ifNoneMatch) {
+        try {
+          existingEtag = await redis.get<string>(`${baseKey}:etag`)
+        } catch {}
+      }
+
       if (ifNoneMatch && existingEtag && ifNoneMatch === existingEtag) {
         return new Response(null, {
           status: 304,
@@ -179,11 +192,14 @@ export async function GET(request: NextRequest) {
       prisma.trip.count({ where }),
     ])
 
-    // Calculate price range for each trip while avoiding N+1 queries
+    // Calculate price range for each trip while avoiding N+1 queries.
+    // When includeSchedules=true we already pulled schedules (with price tiers)
+    // in the main query above, so we can compute pricing straight from that.
+    // Otherwise we need a separate lookup — but only if we actually have trips.
     let priceMap: Record<string, { min: number; max: number; tiers: number }> = {}
 
     if (includeSchedules) {
-      // schedules already loaded in the main query; compute directly
+      // no additional DB work; schedules from the main query may be empty
       trips.forEach((trip) => {
         const allPrices = (trip.schedules || [])
           .flatMap((s: any) => (s.priceTiers || []).map((pt: any) => Number(pt.amountKobo)))
@@ -192,7 +208,7 @@ export async function GET(request: NextRequest) {
         priceMap[trip.id] = { min: minPrice, max: maxPrice, tiers: allPrices.length }
       })
     } else if (trips.length > 0) {
-      // bulk fetch schedules for all trips we retrieved
+      // only fetch schedules if we actually got some trips back
       const schedules = await prisma.tripSchedule.findMany({
         where: { tripId: { in: trips.map(t => t.id) } },
         include: { priceTiers: { orderBy: { amountKobo: 'asc' } } },
@@ -209,7 +225,7 @@ export async function GET(request: NextRequest) {
           tiers: existing.tiers + prices.length,
         }
       })
-      // fill missing trips with zero prices
+      // ensure every trip has a default entry even if no schedule
       trips.forEach(t => {
         if (!priceMap[t.id]) priceMap[t.id] = { min: 0, max: 0, tiers: 0 }
       })
@@ -275,13 +291,18 @@ export async function GET(request: NextRequest) {
     // Try to populate cache + etag (best-effort)
     try {
       const { redis, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
-      const cacheKey = buildRedisKey('api_cache', 'trips', `cat:${category||'_'}`, `op:${operatorId||'_'}`, `q:${search||'_'}`, `incSchedules:${includeSchedules}`, `start:${scheduleStart||'_'}`, `end:${scheduleEnd||'_'}`, `l:${limit}`, `o:${offset}`)
+      const args = [`cat:${category||'_'}`, `op:${operatorId||'_'}`, `q:${search||'_'}`, `incSchedules:${includeSchedules}`, `start:${scheduleStart||'_'}`, `end:${scheduleEnd||'_'}`, `l:${limit}`, `o:${offset}`]
+      const namespace = 'api_cache:trips'
+      const cacheKey = await buildVersionedRedisKey(namespace, ...args)
+      const baseKey = buildRedisKey(namespace, ...args)
       const payloadStr = JSON.stringify(payload)
       const { createHash } = await import('crypto')
       const etagForCache = createHash('sha1').update(payloadStr).digest('hex')
       await Promise.all([
         redis.setex(cacheKey, REDIS_TTL.API_CACHE_TRIPS, payloadStr),
         redis.setex(`${cacheKey}:etag`, REDIS_TTL.API_CACHE_TRIPS, etagForCache),
+        // unversioned etag fallback
+        redis.setex(`${baseKey}:etag`, REDIS_TTL.API_CACHE_TRIPS, etagForCache),
       ])
     } catch (cacheErr) {
       console.warn('Trips cache write failed', cacheErr)

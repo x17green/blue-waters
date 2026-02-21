@@ -33,7 +33,7 @@ export default function Home() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-fg mb-4">
-            Featured Journeys
+            Featured Trips
           </h2>
           <p className="text-lg text-fg-muted max-w-2xl mx-auto leading-relaxed">
             Explore the most popular boat trips across the beautiful Bayelsa waterways
@@ -45,11 +45,11 @@ export default function Home() {
       {/* How It Works */}
       <HowItWorks />
 
-      {/* Testimonials */}
-      <Testimonials />
-
       {/* Past Events Section */}
       <PastEvents />
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* CTA Section */}
       <section className="py-24 px-4 md:px-8 relative overflow-hidden">
