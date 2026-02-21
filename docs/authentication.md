@@ -121,14 +121,14 @@ export async function updateProfile(formData: FormData) {
 Routes automatically protected by middleware:
 
 - `/dashboard` - User dashboard
-- `/checkout` - Booking checkout
-- `/book/*` - Trip booking pages
+- `/checkout` - Booking checkout (booking form is public, auth enforced only when submitting)
 - `/operator/*` - Operator admin pages
 
 Add more in [`src/lib/supabase/middleware.ts`](src/lib/supabase/middleware.ts):
 
 ```typescript
-const protectedPaths = ['/dashboard', '/checkout', '/book', '/operator']
+// note: `/book` is intentionally public; authentication occurs during API checkout
+const protectedPaths = ['/dashboard', '/checkout', '/operator', '/profile', '/admin']
 ```
 
 ## Database Synchronization

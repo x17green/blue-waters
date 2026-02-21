@@ -45,8 +45,10 @@ export async function updateSession(request: NextRequest) {
     userRole = userData?.role || 'customer'
   }
 
-  // Protected routes that require authentication
-  const protectedPaths = ['/dashboard', '/checkout', '/book', '/operator', '/profile', '/admin']
+  // Protected routes that require authentication on **server** navigations.
+  // '/book' is intentionally omitted so anonymous users can browse the booking page;
+  // authentication will be enforced by the booking API when the user submits.
+  const protectedPaths = ['/dashboard', '/checkout', '/operator', '/profile', '/admin']
   const isProtectedRoute = protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
 
   // Redirect to login if accessing protected route without auth
