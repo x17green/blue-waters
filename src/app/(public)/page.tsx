@@ -6,6 +6,7 @@ import { mdiArrowRight } from '@mdi/js'
 import Link from 'next/link'
 
 import FeaturedTrips from '@/src/components/featured-trips'
+import PastEvents from '@/src/components/past-events'
 import Hero from '@/src/components/hero'
 import HowItWorks from '@/src/components/how-it-works'
 import Testimonials from '@/src/components/testimonials'
@@ -32,7 +33,7 @@ export default function Home() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-fg mb-4">
-            Featured Journeys
+            Featured Trips
           </h2>
           <p className="text-lg text-fg-muted max-w-2xl mx-auto leading-relaxed">
             Explore the most popular boat trips across the beautiful Bayelsa waterways
@@ -44,8 +45,11 @@ export default function Home() {
       {/* How It Works */}
       <HowItWorks />
 
+      {/* Past Events Section */}
+      <PastEvents />
+
       {/* Testimonials */}
-      <Testimonials />
+      {/* <Testimonials /> // Currently hidden pending content refresh - can be re-enabled once we have new testimonials to show */}
 
       {/* CTA Section */}
       <section className="py-24 px-4 md:px-8 relative overflow-hidden">

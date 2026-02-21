@@ -1,25 +1,25 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
+  mdiAccountPlus,
   mdiAnchor,
+  mdiChevronRight,
+  mdiClose,
   mdiEmail,
   mdiFacebook,
   mdiInstagram,
   mdiLogin,
   mdiMapMarker,
+  mdiMenu,
   mdiPhone,
   mdiTwitter,
-  mdiAccountPlus,
-  mdiMenu,
-  mdiClose,
-  mdiChevronRight
 } from '@mdi/js'
+import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { type ReactNode, useState } from 'react'
 
-import { BayelsaCoatOfArms, BlueWatersWordmark, MinistryBlueSeal, FooterLogoSuite, PartnershipLogoHeader } from '@/src/components/brand'
+import { BayelsaCoatOfArms, BlueWatersWordmark, FooterLogoSuite, MinistryBlueSeal, PartnershipLogoHeader } from '@/src/components/brand'
 import { Button } from '@/src/components/ui/button'
 import { Icon } from '@/src/components/ui/icon'
 import { useAuth } from '@/src/hooks/use-auth'
@@ -36,9 +36,9 @@ function PublicHeader() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/trips', label: 'Book Now' },
-    { href: '/#how', label: 'How It Works' },
-    { href: '/#testimonials', label: 'Reviews' },
+    { href: '/book', label: 'Book Now' },
+    // { href: '/#how', label: 'How It Works' },
+    // { href: '/#testimonials', label: 'Reviews' },
   ]
 
   const isActive = (href: string) => pathname === href
@@ -80,6 +80,7 @@ function PublicHeader() {
             >
               <BlueWatersWordmark 
                 size="sm" 
+                showLogo={false}
                 className="uppercase text-center sm:text-md md:text-3xl lg:text-5xl font-bold" 
                 subTextClassName="text-center sm:text-sm md:text-base lg:text-2xl text-accent-500" 
               />
@@ -311,19 +312,19 @@ function PublicFooter() {
       platform: 'Facebook', 
       href: 'https://facebook.com', 
       icon: mdiFacebook,
-      color: 'hover:text-blue-400' 
+      color: 'hover:text-blue-400', 
     },
     { 
       platform: 'Twitter', 
       href: 'https://twitter.com', 
       icon: mdiTwitter,
-      color: 'hover:text-sky-400' 
+      color: 'hover:text-sky-400', 
     },
     { 
       platform: 'Instagram', 
       href: 'https://instagram.com', 
       icon: mdiInstagram,
-      color: 'hover:text-pink-400' 
+      color: 'hover:text-pink-400', 
     },
   ]
 

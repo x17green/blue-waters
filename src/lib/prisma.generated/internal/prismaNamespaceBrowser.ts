@@ -243,6 +243,7 @@ export const BookingItemScalarFieldEnum = {
   tripSeatId: 'tripSeatId',
   passengerName: 'passengerName',
   passengerPhone: 'passengerPhone',
+  passengerEmail: 'passengerEmail',
   ticketReference: 'ticketReference',
   status: 'status',
   createdAt: 'createdAt'

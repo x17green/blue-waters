@@ -307,8 +307,12 @@ export default function TripDetailPage() {
                 priority
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-600">
-                <span className="text-white text-9xl opacity-20">🚢</span>
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-600" aria-hidden>
+                <svg width="140" height="84" viewBox="0 0 140 84" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-20">
+                  <path d="M8 56c8-8 24-8 40-3 16 5 32 5 48 0 8-3 16-6 24 3" stroke="white" strokeWidth="1.5" strokeOpacity="0.18" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M28 44c8-5 16-8 24-5 8 3 16 3 24 0" stroke="white" strokeWidth="1.2" strokeOpacity="0.12" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="100" y="22" width="18" height="8" rx="1" fill="white" fillOpacity="0.06" />
+                </svg>
               </div>
             )}
 

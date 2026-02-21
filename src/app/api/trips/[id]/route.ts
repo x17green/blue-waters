@@ -44,28 +44,35 @@ export async function GET(
   try {
     const { id } = await context.params
 
-    // Try Redis cache/ETag for trip detail (short-circuit before DB)
+    // Try Redis cache/ETag for trip detail (short-circuit before DB) using versioned namespace
     try {
-      const { redis, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
-      const cacheKey = buildRedisKey('api_cache', 'trips', 'detail', id)
+      const { redis, buildVersionedRedisKey, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
+      const namespace = `api_cache:trips:detail:${id}`
+      const cacheKey = await buildVersionedRedisKey(namespace)
+      const baseKey = buildRedisKey(namespace) // unversioned for etag fallback
       const etagKey = `${cacheKey}:etag`
       const ifNoneMatchHdr = request.headers.get('if-none-match')
 
       // short-circuit 304 using cached ETag only
+      let cachedEtag: string | null = null
       try {
-        const cachedEtag = await redis.get<string>(etagKey)
-        if (ifNoneMatchHdr && cachedEtag && ifNoneMatchHdr === cachedEtag) {
-          return new Response(null, {
-            status: 304,
-            headers: {
-              'ETag': cachedEtag,
-              'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
-              'X-Cache': 'HIT',
-            },
-          })
-        }
+        cachedEtag = await redis.get<string>(etagKey)
       } catch (etagErr) {
         console.warn('Trip detail etag read failed', etagErr)
+      }
+      if (!cachedEtag && ifNoneMatchHdr) {
+        try { cachedEtag = await redis.get<string>(`${baseKey}:etag`) } catch {};
+      }
+
+      if (ifNoneMatchHdr && cachedEtag && ifNoneMatchHdr === cachedEtag) {
+        return new Response(null, {
+          status: 304,
+          headers: {
+            'ETag': cachedEtag,
+            'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
+            'X-Cache': 'HIT',
+          },
+        })
       }
 
       const cached = await redis.get<string | object>(cacheKey)
@@ -208,16 +215,19 @@ export async function GET(
       },
     }
 
-    // Best-effort: populate trip detail cache + etag
+    // Best-effort: populate trip detail cache + etag (also write unversioned etag)
     try {
-      const { redis, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
-      const cacheKey = buildRedisKey('api_cache', 'trips', 'detail', id)
+      const { redis, buildVersionedRedisKey, buildRedisKey, REDIS_TTL } = await import('@/src/lib/redis')
+      const namespace = `api_cache:trips:detail:${id}`
+      const cacheKey = await buildVersionedRedisKey(namespace)
+      const baseKey = buildRedisKey(namespace)
       const payloadStr = JSON.stringify(payload)
       const { createHash } = await import('crypto')
       const etagForCache = createHash('sha1').update(payloadStr).digest('hex')
       await Promise.all([
         redis.setex(cacheKey, REDIS_TTL.API_CACHE_TRIPS, payloadStr),
         redis.setex(`${cacheKey}:etag`, REDIS_TTL.API_CACHE_TRIPS, etagForCache),
+        redis.setex(`${baseKey}:etag`, REDIS_TTL.API_CACHE_TRIPS, etagForCache),
       ])
     } catch (cacheErr) {
       console.warn('Trip detail cache write failed', cacheErr)
@@ -304,13 +314,12 @@ export async function PATCH(
       },
     })
 
-    // Invalidate trips cache (best-effort)
+    // Invalidate trips cache by bumping version
     try {
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const keys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (keys && keys.length > 0) await Promise.all(keys.map(k => redis.del(k)))
+      const { bumpCacheVersion } = await import('@/src/lib/redis')
+      await bumpCacheVersion('api_cache:trips')
     } catch (err) {
-      console.warn('Failed to invalidate trips cache after update', err)
+      console.warn('Failed to bump trips cache version after update', err)
     }
 
     return apiResponse({
@@ -397,15 +406,16 @@ export async function DELETE(
       },
     })
 
-    // Invalidate trips + schedules cache for this trip (best-effort)
+    // Invalidate trips and related schedules via version bump
     try {
-      const { redis, buildRedisKey } = await import('@/src/lib/redis')
-      const tripKeys = await redis.keys(buildRedisKey('api_cache', 'trips', '*'))
-      if (tripKeys && tripKeys.length > 0) await Promise.all(tripKeys.map(k => redis.del(k)))
-      const scheduleKeys = await redis.keys(buildRedisKey('api_cache', 'schedules', id, '*'))
-      if (scheduleKeys && scheduleKeys.length > 0) await Promise.all(scheduleKeys.map(k => redis.del(k)))
+      const { bumpCacheVersion } = await import('@/src/lib/redis')
+      await Promise.all([
+        bumpCacheVersion('api_cache:trips'),
+        bumpCacheVersion(`api_cache:trips:detail:${id}`),
+        bumpCacheVersion(`api_cache:schedules:${id}`),
+      ])
     } catch (err) {
-      console.warn('Failed to invalidate caches after trip delete', err)
+      console.warn('Failed to bump cache versions after trip delete', err)
     }
 
     return apiResponse({

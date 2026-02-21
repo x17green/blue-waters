@@ -31,6 +31,7 @@ export type BookingItemMinAggregateOutputType = {
   tripSeatId: string | null
   passengerName: string | null
   passengerPhone: string | null
+  passengerEmail: string | null
   ticketReference: string | null
   status: $Enums.CheckinStatus | null
   createdAt: Date | null
@@ -43,6 +44,7 @@ export type BookingItemMaxAggregateOutputType = {
   tripSeatId: string | null
   passengerName: string | null
   passengerPhone: string | null
+  passengerEmail: string | null
   ticketReference: string | null
   status: $Enums.CheckinStatus | null
   createdAt: Date | null
@@ -55,6 +57,7 @@ export type BookingItemCountAggregateOutputType = {
   tripSeatId: number
   passengerName: number
   passengerPhone: number
+  passengerEmail: number
   ticketReference: number
   status: number
   createdAt: number
@@ -69,6 +72,7 @@ export type BookingItemMinAggregateInputType = {
   tripSeatId?: true
   passengerName?: true
   passengerPhone?: true
+  passengerEmail?: true
   ticketReference?: true
   status?: true
   createdAt?: true
@@ -81,6 +85,7 @@ export type BookingItemMaxAggregateInputType = {
   tripSeatId?: true
   passengerName?: true
   passengerPhone?: true
+  passengerEmail?: true
   ticketReference?: true
   status?: true
   createdAt?: true
@@ -93,6 +98,7 @@ export type BookingItemCountAggregateInputType = {
   tripSeatId?: true
   passengerName?: true
   passengerPhone?: true
+  passengerEmail?: true
   ticketReference?: true
   status?: true
   createdAt?: true
@@ -178,6 +184,7 @@ export type BookingItemGroupByOutputType = {
   tripSeatId: string | null
   passengerName: string | null
   passengerPhone: string | null
+  passengerEmail: string | null
   ticketReference: string | null
   status: $Enums.CheckinStatus
   createdAt: Date
@@ -211,6 +218,7 @@ export type BookingItemWhereInput = {
   tripSeatId?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   passengerName?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   passengerPhone?: Prisma.StringNullableFilter<"BookingItem"> | string | null
+  passengerEmail?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   ticketReference?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   status?: Prisma.EnumCheckinStatusFilter<"BookingItem"> | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFilter<"BookingItem"> | Date | string
@@ -227,6 +235,7 @@ export type BookingItemOrderByWithRelationInput = {
   tripSeatId?: Prisma.SortOrderInput | Prisma.SortOrder
   passengerName?: Prisma.SortOrderInput | Prisma.SortOrder
   passengerPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  passengerEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   ticketReference?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -246,6 +255,7 @@ export type BookingItemWhereUniqueInput = Prisma.AtLeast<{
   priceTierId?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   passengerName?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   passengerPhone?: Prisma.StringNullableFilter<"BookingItem"> | string | null
+  passengerEmail?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   ticketReference?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   status?: Prisma.EnumCheckinStatusFilter<"BookingItem"> | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFilter<"BookingItem"> | Date | string
@@ -262,6 +272,7 @@ export type BookingItemOrderByWithAggregationInput = {
   tripSeatId?: Prisma.SortOrderInput | Prisma.SortOrder
   passengerName?: Prisma.SortOrderInput | Prisma.SortOrder
   passengerPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  passengerEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   ticketReference?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -280,6 +291,7 @@ export type BookingItemScalarWhereWithAggregatesInput = {
   tripSeatId?: Prisma.StringNullableWithAggregatesFilter<"BookingItem"> | string | null
   passengerName?: Prisma.StringNullableWithAggregatesFilter<"BookingItem"> | string | null
   passengerPhone?: Prisma.StringNullableWithAggregatesFilter<"BookingItem"> | string | null
+  passengerEmail?: Prisma.StringNullableWithAggregatesFilter<"BookingItem"> | string | null
   ticketReference?: Prisma.StringNullableWithAggregatesFilter<"BookingItem"> | string | null
   status?: Prisma.EnumCheckinStatusWithAggregatesFilter<"BookingItem"> | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BookingItem"> | Date | string
@@ -289,6 +301,7 @@ export type BookingItemCreateInput = {
   id?: string
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -305,6 +318,7 @@ export type BookingItemUncheckedCreateInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -315,6 +329,7 @@ export type BookingItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -331,6 +346,7 @@ export type BookingItemUncheckedUpdateInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -344,6 +360,7 @@ export type BookingItemCreateManyInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -353,6 +370,7 @@ export type BookingItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -365,6 +383,7 @@ export type BookingItemUncheckedUpdateManyInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -392,6 +411,7 @@ export type BookingItemCountOrderByAggregateInput = {
   tripSeatId?: Prisma.SortOrder
   passengerName?: Prisma.SortOrder
   passengerPhone?: Prisma.SortOrder
+  passengerEmail?: Prisma.SortOrder
   ticketReference?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -404,6 +424,7 @@ export type BookingItemMaxOrderByAggregateInput = {
   tripSeatId?: Prisma.SortOrder
   passengerName?: Prisma.SortOrder
   passengerPhone?: Prisma.SortOrder
+  passengerEmail?: Prisma.SortOrder
   ticketReference?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -416,6 +437,7 @@ export type BookingItemMinOrderByAggregateInput = {
   tripSeatId?: Prisma.SortOrder
   passengerName?: Prisma.SortOrder
   passengerPhone?: Prisma.SortOrder
+  passengerEmail?: Prisma.SortOrder
   ticketReference?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -561,6 +583,7 @@ export type BookingItemCreateWithoutPriceTierInput = {
   id?: string
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -575,6 +598,7 @@ export type BookingItemUncheckedCreateWithoutPriceTierInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -617,6 +641,7 @@ export type BookingItemScalarWhereInput = {
   tripSeatId?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   passengerName?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   passengerPhone?: Prisma.StringNullableFilter<"BookingItem"> | string | null
+  passengerEmail?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   ticketReference?: Prisma.StringNullableFilter<"BookingItem"> | string | null
   status?: Prisma.EnumCheckinStatusFilter<"BookingItem"> | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFilter<"BookingItem"> | Date | string
@@ -626,6 +651,7 @@ export type BookingItemCreateWithoutTripSeatInput = {
   id?: string
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -640,6 +666,7 @@ export type BookingItemUncheckedCreateWithoutTripSeatInput = {
   priceTierId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -666,6 +693,7 @@ export type BookingItemUpdateWithoutTripSeatInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -680,6 +708,7 @@ export type BookingItemUncheckedUpdateWithoutTripSeatInput = {
   priceTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -690,6 +719,7 @@ export type BookingItemCreateWithoutBookingInput = {
   id?: string
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -704,6 +734,7 @@ export type BookingItemUncheckedCreateWithoutBookingInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -740,6 +771,7 @@ export type BookingItemCreateWithoutCheckinInput = {
   id?: string
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -755,6 +787,7 @@ export type BookingItemUncheckedCreateWithoutCheckinInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -780,6 +813,7 @@ export type BookingItemUpdateWithoutCheckinInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -795,6 +829,7 @@ export type BookingItemUncheckedUpdateWithoutCheckinInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -806,6 +841,7 @@ export type BookingItemCreateManyPriceTierInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -815,6 +851,7 @@ export type BookingItemUpdateWithoutPriceTierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -829,6 +866,7 @@ export type BookingItemUncheckedUpdateWithoutPriceTierInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -841,6 +879,7 @@ export type BookingItemUncheckedUpdateManyWithoutPriceTierInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -852,6 +891,7 @@ export type BookingItemCreateManyBookingInput = {
   tripSeatId?: string | null
   passengerName?: string | null
   passengerPhone?: string | null
+  passengerEmail?: string | null
   ticketReference?: string | null
   status?: $Enums.CheckinStatus
   createdAt?: Date | string
@@ -861,6 +901,7 @@ export type BookingItemUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -875,6 +916,7 @@ export type BookingItemUncheckedUpdateWithoutBookingInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -887,6 +929,7 @@ export type BookingItemUncheckedUpdateManyWithoutBookingInput = {
   tripSeatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passengerEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCheckinStatusFieldUpdateOperationsInput | $Enums.CheckinStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -901,6 +944,7 @@ export type BookingItemSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   tripSeatId?: boolean
   passengerName?: boolean
   passengerPhone?: boolean
+  passengerEmail?: boolean
   ticketReference?: boolean
   status?: boolean
   createdAt?: boolean
@@ -917,6 +961,7 @@ export type BookingItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   tripSeatId?: boolean
   passengerName?: boolean
   passengerPhone?: boolean
+  passengerEmail?: boolean
   ticketReference?: boolean
   status?: boolean
   createdAt?: boolean
@@ -932,6 +977,7 @@ export type BookingItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   tripSeatId?: boolean
   passengerName?: boolean
   passengerPhone?: boolean
+  passengerEmail?: boolean
   ticketReference?: boolean
   status?: boolean
   createdAt?: boolean
@@ -947,12 +993,13 @@ export type BookingItemSelectScalar = {
   tripSeatId?: boolean
   passengerName?: boolean
   passengerPhone?: boolean
+  passengerEmail?: boolean
   ticketReference?: boolean
   status?: boolean
   createdAt?: boolean
 }
 
-export type BookingItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingId" | "priceTierId" | "tripSeatId" | "passengerName" | "passengerPhone" | "ticketReference" | "status" | "createdAt", ExtArgs["result"]["bookingItem"]>
+export type BookingItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingId" | "priceTierId" | "tripSeatId" | "passengerName" | "passengerPhone" | "passengerEmail" | "ticketReference" | "status" | "createdAt", ExtArgs["result"]["bookingItem"]>
 export type BookingItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
   priceTier?: boolean | Prisma.BookingItem$priceTierArgs<ExtArgs>
@@ -985,6 +1032,7 @@ export type $BookingItemPayload<ExtArgs extends runtime.Types.Extensions.Interna
     tripSeatId: string | null
     passengerName: string | null
     passengerPhone: string | null
+    passengerEmail: string | null
     ticketReference: string | null
     status: $Enums.CheckinStatus
     createdAt: Date
@@ -1421,6 +1469,7 @@ export interface BookingItemFieldRefs {
   readonly tripSeatId: Prisma.FieldRef<"BookingItem", 'String'>
   readonly passengerName: Prisma.FieldRef<"BookingItem", 'String'>
   readonly passengerPhone: Prisma.FieldRef<"BookingItem", 'String'>
+  readonly passengerEmail: Prisma.FieldRef<"BookingItem", 'String'>
   readonly ticketReference: Prisma.FieldRef<"BookingItem", 'String'>
   readonly status: Prisma.FieldRef<"BookingItem", 'CheckinStatus'>
   readonly createdAt: Prisma.FieldRef<"BookingItem", 'DateTime'>

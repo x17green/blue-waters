@@ -1,9 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { mdiFerry, mdiAnchor, mdiShipWheel } from '@mdi/js'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Button } from '@/src/components/ui/button'
+import { Icon } from '@/src/components/ui/icon' 
 
 export default function Hero() {
   const containerVariants = {
@@ -111,23 +113,24 @@ export default function Hero() {
         animate="visible"
         className="relative z-10 max-w-5xl mx-auto text-center"
       >
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl md:text-7xl font-bold mb-6 text-fg"
-        >
-          <span>Sail Across</span>
-          <br />
-          <span className="bg-gradient-to-r from-accent-600 to-accent-400 bg-clip-text text-transparent">
-            Bayelsa Waterways
-          </span>
-        </motion.h1>
+        <motion.div variants={itemVariants} className="mb-6">
+          <p className="text-sm uppercase tracking-widest text-accent-300 mb-3">Seamless bookings · Safe journeys</p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-fg mb-4">Book fast. Sail better.</h2>
 
-        <motion.p
-          variants={itemVariants}
-          className="text-xl md:text-2xl text-foreground/70 mb-8 max-w-3xl mx-auto"
-        >
-          Experience the safest, most convenient way to book and enjoy boat trips across beautiful Bayelsa. From scenic cruises to daily commutes, we've got your journey covered.
-        </motion.p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
+            <Button href="/book" variant="primary" size="lg" startIcon={<Icon path={mdiFerry} size={0.9} aria-hidden />}>
+              Book a Trip
+            </Button>
+
+            <Button href="/search?category=charter" variant="glass" size="lg" startIcon={<Icon path={mdiAnchor} size={0.9} aria-hidden />}>
+              Book a Charter
+            </Button>
+
+            <Button href="/search?category=tour" variant="outline" size="lg" startIcon={<Icon path={mdiShipWheel} size={0.9} aria-hidden />}>
+              Book a Cruise
+            </Button>
+          </div>
+        </motion.div>
 
         {/* Search Section (API-backed suggestions; client navigation) */}
         <motion.div
@@ -195,42 +198,44 @@ export default function Hero() {
             Search Trips
           </button>
         </motion.div>
+      </motion.div>
 
-        {/* Trust Badges */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap justify-center gap-8 mt-16 text-center"
+      {/* Floating scene (SVG + motion -> lightweight 3D-like float without adding three.js) */}
+      <div style={{ perspective: 900 }} className="absolute inset-0 pointer-events-none">
+        {/* soft floating wave blob */}
+        <motion.svg
+          viewBox="0 0 200 200"
+          className="absolute left-6 top-24 w-72 h-72 filter blur-2xl opacity-60"
+          animate={{ y: [0, -18, 0], rotateY: [0, 8, -8, 0], rotateX: [0, 6, -6, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          aria-hidden
         >
-          <div>
-            <div className="text-3xl font-bold text-accent-500">10K+</div>
-            <div className="text-fg-muted">Happy Travelers</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-accent-500">500+</div>
-            <div className="text-fg-muted">Daily Trips</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-accent-500">100%</div>
-            <div className="text-fg-muted">Safe & Verified</div>
-          </div>
-        </motion.div>
-      </motion.div>
+          <defs>
+            <linearGradient id="waveGrad" x1="0%" x2="100%">
+              {/* use design tokens (CSS variables) instead of hard-coded RGBA */}
+              <stop offset="0%" stopColor={`hsl(var(--accent-400) / 0.9)`} />
+              <stop offset="100%" stopColor={`hsl(var(--success-500) / 0.8)`} />
+            </linearGradient>
+          </defs>
+          <path d="M0 60 C40 20, 80 100, 140 60 C180 20, 220 100, 260 60 L260 200 L0 200 Z" fill="url(#waveGrad)" opacity="0.9" />
+        </motion.svg>
 
-      {/* Floating Elements */}
-      <motion.div
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 4, repeat: Infinity }}
-        className="absolute top-32 left-10 text-6xl opacity-40"
-      >
-        🌊
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-        className="absolute bottom-32 right-10 text-6xl opacity-40"
-      >
-        ⛵
-      </motion.div>
+        {/* floating boat (simple SVG hull + mast) */}
+        <motion.svg
+          viewBox="0 0 64 64"
+          className="absolute right-10 bottom-20 w-40 h-40 drop-shadow-2xl"
+          animate={{ y: [0, 10, 0], rotate: [-4, 4, -4] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+          aria-hidden
+        >
+          <g transform="translate(0,6)">
+            {/* replace hard-coded colors with tokens from tokens.ts (CSS variables) */}
+            <rect x="20" y="2" width="2" height="12" fill="hsl(var(--accent-gold-500))" opacity="0.0" />
+            <path d="M8 24 C18 18, 46 18, 56 24 L48 32 L16 32 Z" fill={`hsl(var(--accent-600))`} />
+            <path d="M16 16 L32 8 L48 16 L32 12 Z" fill={`hsl(var(--success-500) / 0.85)`} opacity="0.85" />
+          </g>
+        </motion.svg>
+      </div>
     </section>
   )
 }

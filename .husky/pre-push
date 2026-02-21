@@ -1,10 +1,8 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo "🚀 Running pre-push validation..."
 echo ""
 
 # Additional validation before pushing to remote
+# (husky v10+ no longer requires sourcing _/husky.sh — removed deprecated lines)
 echo "📊 Running design system token validation..."
 npm run design-system:check-tokens 2>&1 | head -n 50
 

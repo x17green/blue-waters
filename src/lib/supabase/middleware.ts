@@ -45,8 +45,10 @@ export async function updateSession(request: NextRequest) {
     userRole = userData?.role || 'customer'
   }
 
-  // Protected routes that require authentication
-  const protectedPaths = ['/dashboard', '/checkout', '/book', '/operator', '/profile', '/admin']
+  // Protected routes that require authentication on **server** navigations.
+  // '/book' is intentionally omitted so anonymous users can browse the booking page;
+  // authentication will be enforced by the booking API when the user submits.
+  const protectedPaths = ['/dashboard', '/checkout', '/operator', '/profile', '/admin']
   const isProtectedRoute = protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
 
   // Redirect to login if accessing protected route without auth
@@ -55,6 +57,19 @@ export async function updateSession(request: NextRequest) {
     url.pathname = '/login'
     url.searchParams.set('redirectTo', request.nextUrl.pathname)
     return NextResponse.redirect(url)
+  }
+
+  // if we already know the user's role, make sure a direct hit to /dashboard
+  // sends them to the correct dashboard immediately; this prevents a
+  // cached server component from later mis‑redirecting.
+  if (user && userRole && request.nextUrl.pathname === '/dashboard') {
+    if (userRole === 'admin') {
+      return NextResponse.redirect(new URL('/admin', request.url))
+    }
+    if (['operator', 'staff'].includes(userRole)) {
+      return NextResponse.redirect(new URL('/operator/dashboard', request.url))
+    }
+    // otherwise let the customer stay on /dashboard
   }
 
   // Role-based route protection

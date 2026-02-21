@@ -15,8 +15,9 @@
  * @see docs/branding.md
  */
 
-import Image from 'next/image';
-import { cn } from '@/src/lib/utils';
+import Image from 'next/image'
+
+import { cn } from '@/src/lib/utils'
 
 /* ============================================================================
    SIZE CONFIGURATIONS
@@ -27,7 +28,7 @@ const LOGO_SIZES = {
   md: { width: 80, height: 80 },
   lg: { width: 120, height: 120 },
   xl: { width: 150, height: 150 },
-} as const;
+} as const
 
 type LogoSize = keyof typeof LOGO_SIZES;
 
@@ -57,13 +58,13 @@ interface LogoProps {
 export function BayelsaCoatOfArms({ 
   size = 'md', 
   className,
-  priority = false 
+  priority = false, 
 }: LogoProps) {
-  const dimensions = LOGO_SIZES[size];
+  const dimensions = LOGO_SIZES[size]
   
   return (
     <div 
-      className={cn("relative flex items-center justify-center", className)}
+      className={cn('relative flex items-center justify-center', className)}
       style={{ width: dimensions.width, height: dimensions.height }}
     >
       <Image
@@ -75,7 +76,7 @@ export function BayelsaCoatOfArms({
         className="object-contain"
       />
     </div>
-  );
+  )
 }
 
 /* ============================================================================
@@ -99,13 +100,13 @@ export function BayelsaCoatOfArms({
 export function MinistryBlueSeal({ 
   size = 'md', 
   className,
-  priority = false 
+  priority = false, 
 }: LogoProps) {
-  const dimensions = LOGO_SIZES[size];
+  const dimensions = LOGO_SIZES[size]
   
   return (
     <div 
-      className={cn("relative flex items-center justify-center", className)}
+      className={cn('relative flex items-center justify-center', className)}
       style={{ width: dimensions.width, height: dimensions.height }}
     >
       <Image
@@ -117,7 +118,7 @@ export function MinistryBlueSeal({
         className="object-contain"
       />
     </div>
-  );
+  )
 }
 
 /* ============================================================================
@@ -143,57 +144,60 @@ export function BlueWatersWordmark({
   size = 'lg', 
   className,
   showText = true,
+  showLogo = true,
   priority = false,
   subTextClassName,
-}: Omit<LogoProps, 'priority'> & { showText?: boolean; priority?: boolean; subTextClassName?: string }) {
-  const dimensions = LOGO_SIZES[size];
+}: Omit<LogoProps, 'priority'> & { showText?: boolean; showLogo?: boolean; priority?: boolean; subTextClassName?: string }) {
+  const dimensions = LOGO_SIZES[size]
   
   return (
     <div 
       className={cn(
-        "relative flex items-center gap-3",
-        showText ? "flex-row" : "justify-center",
-        className
+        'relative flex items-center gap-3',
+        showText ? 'flex-row' : 'justify-center',
+        className,
       )}
     >
       {/* Bayelsa Boat Club SVG Emblem */}
-      <div 
-        className="relative flex-shrink-0"
-        style={{ width: dimensions.width, height: dimensions.height }}
-      >
-        <Image
-          src="/assets/logos/blue-waters-symbol.svg"
-          alt="Bayelsa Boat Club Emblem"
-          width={dimensions.width}
-          height={dimensions.height}
-          priority={priority}
-          className="object-contain"
-        />
-      </div>
+      {showLogo && (
+        <div 
+          className="relative flex-shrink-0"
+          style={{ width: dimensions.width, height: dimensions.height }}
+        >
+          <Image
+            src="/assets/logos/ministry-blue-economy-seal.png"
+            alt="Ministry of Marine and Blue Economy Seal"
+            width={dimensions.width}
+            height={dimensions.height}
+            priority={priority}
+            className="object-contain"
+          />
+        </div>
+      )} 
       
       {/* Wordmark Text (optional) */}
       {showText && (
         <div className="flex flex-col justify-center">
           <span
             className={cn(
-              "font-extrabold text-fg tracking-tight",
-              size === 'xs' && "text-sm",
-              size === 'sm' && "text-base",
-              size === 'md' && "text-xl",
-              size === 'lg' && "text-2xl",
-              size === 'xl' && "text-3xl",
-              className // <-- forward parent className here
+              'font-extrabold text-fg tracking-tight',
+              size === 'xs' && 'text-sm',
+              size === 'sm' && 'text-base',
+              size === 'md' && 'text-xl',
+              size === 'lg' && 'text-2xl',
+              size === 'xl' && 'text-3xl',
+              className, // <-- forward parent className here
             )}
           >
             Bayelsa Boat Club
           </span>
           <span 
             className={cn(
-              "text-fg-muted font-marketing tracking-wide",
-              size === 'xs' && "text-xs",
-              size === 'sm' && "text-xs",
-              (size === 'md' || size === 'lg' || size === 'xl') && "text-sm",
-              subTextClassName // <-- forward parent subTextClassName here
+              'text-fg-muted font-marketing tracking-wide',
+              size === 'xs' && 'text-xs',
+              size === 'sm' && 'text-xs',
+              (size === 'md' || size === 'lg' || size === 'xl') && 'text-sm',
+              subTextClassName, // <-- forward parent subTextClassName here
             )}
           >
             Ministry of Marine and Blue Economy
@@ -201,7 +205,7 @@ export function BlueWatersWordmark({
         </div>
       )}
     </div>
-  );
+  )
 }
 
 /* ============================================================================
@@ -230,27 +234,27 @@ interface PartnershipLogoHeaderProps {
 export function PartnershipLogoHeader({ 
   className,
   logoSize = 'md',
-  layout = 'horizontal'
+  layout = 'horizontal',
 }: PartnershipLogoHeaderProps) {
   if (layout === 'stacked') {
     return (
-      <div className={cn("flex flex-col items-center gap-6", className)}>
+      <div className={cn('flex flex-col items-center gap-6', className)}>
         <BlueWatersWordmark size={logoSize} />
         <div className="flex items-center gap-8">
           <BayelsaCoatOfArms size={logoSize} priority />
           <MinistryBlueSeal size={logoSize} priority />
         </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div className={cn("flex items-center justify-between gap-8 w-full max-w-7xl mx-auto px-6", className)}>
+    <div className={cn('flex items-center justify-between gap-8 w-full max-w-7xl mx-auto px-6', className)}>
       <BayelsaCoatOfArms size={logoSize} priority />
       <BlueWatersWordmark size={logoSize} />
       <MinistryBlueSeal size={logoSize} priority />
     </div>
-  );
+  )
 }
 
 /* ============================================================================
@@ -270,11 +274,11 @@ interface FooterLogoSuiteProps {
 
 export function FooterLogoSuite({ className }: FooterLogoSuiteProps) {
   return (
-    <div className={cn("flex flex-col items-center gap-3", className)}>
+    <div className={cn('flex flex-col items-center gap-3', className)}>
       <MinistryBlueSeal size="sm" />
       <p className="text-xs text-fg-muted text-center max-w-xs">
         The Bayelsa Boat Club is a division of the < br /> Ministry of Marine and Blue Economy <br /> Bayelsa State - Nigeria.
       </p>
     </div>
-  );
+  )
 }

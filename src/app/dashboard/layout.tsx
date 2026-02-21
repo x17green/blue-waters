@@ -34,26 +34,8 @@ export default async function DashboardLayout({
     redirect('/login?redirectTo=/dashboard')
   }
   
-  // Server-side role check - NO RACE CONDITION
-  const { data: userData, error } = await supabase
-    .from('users')
-    .select('role')
-    .eq('id', user.id)
-    .maybeSingle()
-  
-  if (error) {
-    console.error('[Dashboard Layout] Error fetching user role:', error)
-  }
-  
-  const userRole = userData?.role || 'customer'
-  
-  // Redirect based on role BEFORE any client code runs
-  if (userRole === 'admin') {
-    redirect('/admin')
-  } else if (['operator', 'staff'].includes(userRole)) {
-    redirect('/operator/dashboard')
-  }
-  
-  // Only customers reach this point
+  // role-based redirection is handled in middleware, so we can
+  // assume any request reaching this layout is authorized for the
+  // customer dashboard.
   return <UserDashboardLayout>{children}</UserDashboardLayout>
 }

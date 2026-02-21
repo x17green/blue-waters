@@ -40,9 +40,21 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   }
 });
 
-const ADMIN_EMAIL = 'admin@bluewaters.ng';
-const ADMIN_PASSWORD = 'Admin123!';
-const ADMIN_FULL_NAME = 'Admin User';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const ADMIN_FULL_NAME = process.env.ADMIN_FULL_NAME || 'Admin User';
+
+if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+  console.error('❌ Missing required admin credentials:');
+  console.error('   ADMIN_EMAIL:', ADMIN_EMAIL ? '✅ Set' : '❌ Missing');
+  console.error('   ADMIN_PASSWORD:', ADMIN_PASSWORD ? '✅ Set' : '❌ Missing');
+  console.error('');
+  console.error('🔐 For security, admin credentials must be explicitly set via environment variables.');
+  console.error('   Add to your .env.local file:');
+  console.error('   ADMIN_EMAIL=your-admin@example.com');
+  console.error('   ADMIN_PASSWORD=your-secure-password');
+  process.exit(1);
+}
 
 async function createUserWithRetry(payload, attempts = 3) {
   for (let i = 0; i < attempts; i++) {
